@@ -1,0 +1,29 @@
+# Personal bash config
+### Purpose: export globals, make aliases, source project .cfg files 
+### Symlink this file to ~/.jayrc
+### Add conditional to .bash_profile that sources the .jayrc if present
+
+
+
+##### EXPORT GLOBALS ######
+
+export WORKSPACE=${HOME}/src
+export JAYCI_USER=${USER}
+
+
+
+
+##### ALIASES ######
+
+
+
+
+
+##### SOURCE PROJECT .CFG FILES ######
+
+# Find and source the .cfg file for each project repo in the workspace
+if [ -d ${WORKSPACE:?} ] && [ "$(ls -A ${WORKSPACE})" ] ; then
+    for i in $( ls -1 ${WORKSPACE}/*/*.cfg|egrep -v "nose|setup" ); do source $i ;  done
+else
+    echo "There are no repos in your WORKSPACE"
+fi
