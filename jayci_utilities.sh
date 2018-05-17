@@ -1,8 +1,10 @@
 #! /bin/bash
 
+######## TESTING TOOLS ###########
+
 # Check the source pipeline
-jayci_test () {
-  jayci_announce "jayci utility functions sourced: CHECK"
+jayci_test_source_pipeline () {
+    jayci_announce "jayci utility functions sourced: CHECK"
 }
 
 
