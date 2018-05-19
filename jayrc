@@ -23,7 +23,9 @@ export JAYCI_USER=${USER}
 
 # Find and source the .cfg file for each project repo in the workspace
 if [ -d ${WORKSPACE:?} ] && [ "$(ls -A ${WORKSPACE})" ] ; then
-    for i in $( ls -1 ${WORKSPACE}/*/*.cfg|egrep -v "nose|setup" ); do source $i ;  done
+    for i in $( ls -1 ${WORKSPACE}/*/*.cfg|egrep -v "nose|setup" );  do printf "===> %-30s .jayrc ---sources---> $i \n"; 
+         source $i ;
+         done
 else
     echo "There are no repos in your WORKSPACE"
 fi

@@ -25,3 +25,15 @@ Here's the cascade order once .bash_profile is updated and a symlink created for
 |        | sets path
 | `jayci.cfg` | ---_sources_---> `jayci_utilities.sh`
 | `jayci_utilities.sh` | repo-specific utility functions
+
+## Useful commands
+
+```
+# list function names whose prefix is 'jayci'
+compgen -A function | grep jayci
+```
+
+```
+# list my aliases
+compgen -a
+```

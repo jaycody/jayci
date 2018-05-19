@@ -4,7 +4,21 @@
 
 # Check the source pipeline
 jayci_test_source_pipeline () {
-    jayci_announce "jayci utility functions sourced: CHECK"
+    
+    # List the functions made available by this utility script
+    echo ""
+    jayci_error "Source pipeline verified..."
+    echo ""
+
+    # List functions made available by this setu
+    jayci_announce "functions from jayci_utilities.sh ===>"
+    compgen -A function | grep jayci
+    echo ""
+
+    # List aliases
+    jayci_announce "aliases===>"
+    compgen -a
+    echo ""
 }
 
 
@@ -20,10 +34,10 @@ jayci_error () {
     local LINE2=${2:-}
 
     printf "${WHITE_ON_RED}======================================================================${NORMAL}\n"
-    printf "${WHITE_ON_RED}  DSP:  %-60s  ${NORMAL}\n" "${LINE1}"
+    printf "${WHITE_ON_RED}  jayci:  %-60s  ${NORMAL}\n" "${LINE1}"
     if [ "${LINE2}" != "" ]
     then
-        printf "${WHITE_ON_RED}  DSP:  %-60s  ${NORMAL}\n" "${LINE2}"
+        printf "${WHITE_ON_RED}  jayci:  %-60s  ${NORMAL}\n" "${LINE2}"
     fi
     printf "${WHITE_ON_RED}----------------------------------------------------------------------${NORMAL}\n"
 }
@@ -36,10 +50,19 @@ jayci_announce () {
     local LINE2=${2:-}
 
     printf "${WHITE_ON_BLUE}======================================================================${NORMAL}\n"
-    printf "${WHITE_ON_BLUE}  DSP:  %-60s  ${NORMAL}\n" "${LINE1}"
+    printf "${WHITE_ON_BLUE}  jayci:  %-60s  ${NORMAL}\n" "${LINE1}"
     if [ "${LINE2}" != "" ]
     then
-        printf "${WHITE_ON_BLUE}  DSP:  %-60s  ${NORMAL}\n" "${LINE2}"
+        printf "${WHITE_ON_BLUE}  jayci:  %-60s  ${NORMAL}\n" "${LINE2}"
     fi
     printf "${WHITE_ON_BLUE}----------------------------------------------------------------------${NORMAL}\n"
 }
+
+
+
+# List the functions made available by this utility script
+echo ""
+jayci_test_source_pipeline
+#jayci_announce "Available functions:"
+#compgen -A function | grep jayci
+
