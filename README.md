@@ -39,5 +39,5 @@ compgen -a
 ```
 
 ## Verification Messages
-![console message](imgs/20180518-console_msg.png)
+![console message](imgs/20180518-console_msg.png "Verification from the console")
 
