@@ -37,3 +37,7 @@ compgen -A function | grep jayci
 # list my aliases
 compgen -a
 ```
+
+## Verification Messages
+![Console Message](/jayci/imgs/20180518-console_msg.png?raw=true "Verification from the console")
+
