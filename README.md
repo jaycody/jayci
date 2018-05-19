@@ -39,5 +39,5 @@ compgen -a
 ```
 
 ## Verification Messages
-![Console Message](/jayci/imgs/20180518-console_msg.png?raw=true "Verification from the console")
+![Console Message](jayci/imgs/20180518-console_msg.png?raw=true "Verification from the console")
 
