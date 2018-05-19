@@ -5,8 +5,9 @@ Mini CI/CD framework for my personal projects
 1. git clone this repo to `~/src`
 2. create a symlink from `~/.jayrc` pointing to `~/src/jayci/jayrc`  
      ```ln -s ~/src/jayrc ~/.jayrc```
-3. Add a conditional to the `.bash_profile` that will source `.jayrc` if `.jayrc` is present
+3. Append to the following to the `.bash_profile`
      ```
+     # Source .jayrc if .jayrc is present
      if [ -f $HOME/.jayrc ]; then
              source $HOME/.jayrc
      fi
