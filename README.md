@@ -2,9 +2,6 @@
 > Mini CI/CD framework for my personal projects
 __________________
 
-
-## who gets the diff?
-
 ## Setup:
 1. Clone `jayci` repo to `~/jaycody` and `cd jayci`
 2. Symlink `jayci/jayrc` to `~/.jayrc`  
@@ -52,6 +49,7 @@ git push
 # delete feature branch
 git branch -d <feature_branch>
 ```
+______________________________
 
 ## Sourcing Cascade Order
 Here's the cascade order once .bash_profile is updated and a symlink created for .jayrc:
