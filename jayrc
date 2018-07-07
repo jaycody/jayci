@@ -1,26 +1,69 @@
-# Personal bash config
-### Purpose: export globals, make aliases, source project .cfg files 
-### Symlink this file to ~/.jayrc
-### Add conditional to .bash_profile that sources the .jayrc if present
+# context-agnostic configuration file for my Bourne Again SHell adventures 
+
+######################################
+### Capabilities: 
+#	set prompt, export globals, ammend paths, make aliases, source config and scipt files 
+
+### To install:
+#	0. Clone jayci repo to ${HOME}/jaycody
+		## git clone git@github.com:jaycody/jayci.git
+#	1. Symlink this file to ${HOME}/.jayrc
+		## ln -s $HOME/jaycody/jayci/jayrc $HOME/.jayrc
+#	2. Append .bash_profile with instructions to source $HOME/.jayrc
+		## append this to .bash_profile		
+		## # Source .jayrc if .jayrc is present
+		## if [ -f $HOME/.jayrc ]; then
+        	## source $HOME/.jayrc
+		## fi
+
+### To update: 
+#	git checkout master
+#	git pull
+#	git checkout -b <feature_branch> master
+#       git push -u origin <feature_branch>
+#       magic
+#	git add -A
+#       git commit -m 'wittiness-o-rama'
+# 	git push
+#       submit MR on github - healthy git hygiene
+#	pull master and verify changes
+#       delete feature branch
 
 
+########################################
 
-##### EXPORT GLOBALS ######
+### GLOBALS ############################
 
 export JAYCI_WORKSPACE=${HOME}/jaycody 
 export JAYCI_USER=${USER}
+export JAYCI_HOME=${HOME}
+
+
+
+### ALIAS ##############################
+### >>> LOCATIONS <<< ##################
+alias jaycody='cd ${JAYCI_WORKSPACE}; ll'
+alias jayci='cd ${JAYCI_WORKSPACE}/jayci; ll'
+
+
+
+### ALIAS ##############################
+### >>> EDIT CONFIGS <<< ###############
+alias vimjrc='vim ${JAYCI_WORKSPACE}/jayci/jayrc'
+alias vimbrc='vim ${HOME}/.bashrc'
+alias vimarc='vim ${HOME}/.amyrisrc'
+alias vimsh='vim ${HOME}/.bash_profile'
+alias vimgit='vim ${HOME}/.gitconfig'
+alias nanosh="nano ${HOME}/.bash_profile"
+
+### >>> EDIT SCRIPTS <<< ###############
+alias vimutil='vim ${JAYCI_WORKSPACE}/jayci/scripts/jayci_utilities.sh'
 
 
 
 
-##### ALIASES ######
-alias jaycody='cd ${JAYCI_WORKSPACE}'
 
-
-
-
-
-##### SOURCE PROJECT .CFG FILES ######
+### >>> SOURCE .CFG FILES <<< ###########
 
 # Find and source the .cfg file for each project repo in the workspace
 if [ -d ${JAYCI_WORKSPACE:?} ] && [ "$(ls -A ${JAYCI_WORKSPACE})" ] ; then
