@@ -3,6 +3,8 @@
 __________________
 
 
+## who gets the diff?
+
 ## Setup:
 1. Clone `jayci` repo to `~/jaycody` and `cd jayci`
 2. Symlink `jayci/jayrc` to `~/.jayrc`  
