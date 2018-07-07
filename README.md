@@ -1,6 +1,8 @@
 # jayci
 Mini CI/CD framework for my personal projects
 
+## who gets the diff?
+
 ## Setup:
 1. git clone this repo to `~/jaycody` and cd into the jayci directory
 2. create a symlink from `~/.jayrc` pointing to `~/jaycody/jayci/jayrc`  
