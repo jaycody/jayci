@@ -4,8 +4,14 @@ __________________
 
 ## Setup:
 1. Clone `jayci` repo to `~/jaycody` and `cd jayci`
-2. Symlink `jayci/jayrc` to `~/.jayrc`  
-	ln -s $HOME/jaycody/jayci/jayrc $HOME/.jayrc
+2. Symlink the expected config locations in `~/.*` to actual config files  in `jayci/` & `jayci/configs/`(insert script here)
+```bash
+# symlink the actual `jayci/jayrc` config file to the expected location `~/.jayrc`
+ln -s $HOME/jaycody/jayci/jayrc $HOME/.jayrc
+
+# symlink htop's actual config file, `jayci/configs/htoprc` to its expected location `~/.config/htop/htoprc`
+ln -s $HOME/jaycody/jayci/configs/htoprc $HOME/.config/htop/htoprc
+```
 3. Append `.bash_profile` with instructions to source `${HOME}/.jayrc`
 ```bash
 # Source .jayrc if .jayrc is present
