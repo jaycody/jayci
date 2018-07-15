@@ -1,8 +1,10 @@
 # context-agnostic config for my Bourne Again SHell adventures 
 
-######################################## 
+################################################################ 
 # Set prompt, export globals, ammend paths, make aliases, source config and scipt files 
 # To install or update: defer to README.md
+
+
 
 
 ########################################
@@ -17,26 +19,69 @@ export JAYCI_HOME=${HOME}
 # bc it deserves its own place in history
 source ${JAYCI_WORKSPACE}/jayci/configs/jayrc-prompt
 
-### ALIAS ##############################
-### >>> LOCATIONS <<< ##################
+
+
+################################################################
+### ALIASES ####################################################
+
+### >>> ALIAS LOCATIONS <<< ####################################
 alias jaycody='cd ${JAYCI_WORKSPACE}; ll'
 alias jayci='cd ${JAYCI_WORKSPACE}/jayci; ll'
 
 
 
-### ALIAS ##############################
-### >>> EDIT CONFIGS <<< ###############
-alias vimjrc='vim ${JAYCI_WORKSPACE}/jayci/jayrc'
+### >>> ALIAS EDIT CONFIGS <<< #################################
+alias vimjrc='vim ${JAYCI_WORKSPACE}/jayci/.jayrc'
 alias vimbrc='vim ${HOME}/.bashrc'
 alias vimarc='vim ${HOME}/.amyrisrc'
-alias vimsh='vim ${HOME}/.bash_profile'
-alias vimgit='vim ${HOME}/.gitconfig'
-alias nanosh="nano ${HOME}/.bash_profile"
+alias vimsh='vim ${HOME}/.bash_profile'    # from Owen's bbsh 20130403
+alias nanosh="nano ${HOME}/.bash_profile" 
 
-### >>> EDIT SCRIPTS <<< ###############
+### >>> ALIAS EDIT SCRIPTS <<< #################################
 alias vimutil='vim ${JAYCI_WORKSPACE}/jayci/scripts/jayci_utilities.sh'
 
 
+#################################################################
+### >>> ALIAS COMMANDS <<< ######################################
+#### ADD THOSE SORTED LS COMMANDS DAN SHOWED ME
+alias l='ls -CF'
+alias la="ls -aF" #LIST --ALL
+alias lal="ls -alF"  #LIST --ALL --LONG
+alias ll="ls -alF"
+alias lsd="\ls -d */"
+
+alias resh="source ~/.bash_profile" #refresh shell shortcut
+alias edit='open -a  "Atom"'
+alias gitlog="git log --oneline"
+alias dirsize="pwd; du -ch | grep total"
+alias restart="sudo shutdown -r now"
+alias sleep="sudo shutdown -s now"
+
+### >>> SHOW COMMON COMMANDS << ###################################
+alias jay='echo     ;
+echo ;
+echo ---------frequent commands;
+echo grep:  search the file;
+echo find:  walk a File Directory;
+echo whereis:  ex. whereis python = ;
+echo rm -rf: remove directory and all files therein, without asking permission;
+echo cp -r: copy directory and all files therein;
+echo mkdir -p: make mutliptle directories;
+echo ">" :  takes output of command at left and WRITES it to file on right;
+echo -----ex  cat my.txt ">" your.txt;
+echo ----- OR write directly to a file:  cat ">" foo.txt;
+echo ;
+echo ;'
+###################################################################
+
+
+
+###################################################################
+### EXTRAS ########################################################
+
+
+# forward the Authentication Agent - from Brian at Pado
+#alias ssh="ssh -A"
 
 
 
