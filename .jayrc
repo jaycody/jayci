@@ -1,44 +1,21 @@
-# context-agnostic configuration file for my Bourne Again SHell adventures 
+# context-agnostic config for my Bourne Again SHell adventures 
 
-######################################
-### Capabilities: 
-#	set prompt, export globals, ammend paths, make aliases, source config and scipt files 
-
-### To install:
-#	0. Clone jayci repo to ${HOME}/jaycody
-		## git clone git@github.com:jaycody/jayci.git
-#	1. Symlink this file to ${HOME}/.jayrc
-		## ln -s $HOME/jaycody/jayci/jayrc $HOME/.jayrc
-#	2. Append .bash_profile with instructions to source $HOME/.jayrc
-		## append this to .bash_profile		
-		## # Source .jayrc if .jayrc is present
-		## if [ -f $HOME/.jayrc ]; then
-        	## source $HOME/.jayrc
-		## fi
-
-### To update: 
-#	git checkout master
-#	git pull
-#	git checkout -b <feature_branch> master
-#       git push -u origin <feature_branch>
-#       magic
-#	git add -A
-#       git commit -m 'wittiness-o-rama'
-# 	git push
-#       submit MR on github - healthy git hygiene
-#	pull master and verify changes
-#       delete feature branch
+######################################## 
+# Set prompt, export globals, ammend paths, make aliases, source config and scipt files 
+# To install or update: defer to README.md
 
 
 ########################################
-
 ### GLOBALS ############################
-
 export JAYCI_WORKSPACE=${HOME}/jaycody 
 export JAYCI_USER=${USER}
 export JAYCI_HOME=${HOME}
 
 
+########################################
+### SET PROMPT #########################
+# bc it deserves its own place in history
+source ${JAYCI_WORKSPACE}/jayci/configs/jayrc-prompt
 
 ### ALIAS ##############################
 ### >>> LOCATIONS <<< ##################
