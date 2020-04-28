@@ -8,11 +8,12 @@
 
 ##########################################################
 ### FONT STYLE ###########################################
+export TERM=xterm-color
 # set terminal colors to cool
 export CLICOLOR=1
 # don't remember what this one does
 export LSCOLORS=GxFxCxDxBxegedabagaced          
-
+# export LSCOLORS=ExFxCxDxBxegedabagacad
 
 ##########################################################################
 ### PROMPT : CURRENT (201806-_________) ##################################           
@@ -21,15 +22,16 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 # w/o git:  jstephens-mbp.local ~ $ 
 # w/  git:  jstephens-mbp.local jayci (master) $ 
 #
-export PS1='\[\033[0;34m\]\H \[\033[0;31m\]\W\[\033[0m\]$(__git_ps1 " (%s)") \$ '
+# export PS1="\[\033[0;34m\]\H \[\033[0;31m\]\W\[\033[0m\]$(__git_ps1 ' (%s)') \$ "
 #
+PROMPT='-->  '
 ##########################################################################
 
 
 ##########################################################################
 ### EXTRAS ###############################################################
 # display PWD in iTerm's main windown and tabs
-export PROMPT_COMMAND='echo -ne "\033]0;$PWD\007"'
+# export PROMPT_COMMAND='echo -ne "\033]0;$PWD\007"'
 
 
 
