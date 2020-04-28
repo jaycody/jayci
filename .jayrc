@@ -36,6 +36,7 @@ alias vimbrc='vim ${HOME}/.bashrc'
 alias vimarc='vim ${HOME}/.amyrisrc'
 alias vimsh='vim ${HOME}/.bash_profile'    # from Owen's bbsh 20130403
 alias nanosh="nano ${HOME}/.bash_profile" 
+alias nanozsh="nano ${HOME}/.zshrc"        # (aka z-shell, new default as of 10.15.4 osx
 
 ### >>> ALIAS EDIT SCRIPTS <<< #################################
 alias vimutil='vim ${JAYCI_WORKSPACE}/jayci/scripts/jayci_utilities.sh'
@@ -89,7 +90,8 @@ echo ;'
 
 # Find and source the .cfg file for each project repo in the workspace
 if [ -d ${JAYCI_WORKSPACE:?} ] && [ "$(ls -A ${JAYCI_WORKSPACE})" ] ; then
-    for i in $( ls -1 ${JAYCI_WORKSPACE}/*/*.cfg|egrep -v "nose|setup" );  do printf "===> %-30s .jayrc ---sources---> $i \n"; 
+    for i in $( ls -1 ${JAYCI_WORKSPACE}/*/*.cfg|egrep -v "nose|setup" );  do # printf "===> %-30s .jayrc ---sources---> $i \n";# 
+         echo "source $i"
          source $i ;
          done
 else

@@ -62,7 +62,7 @@ jayci_announce () {
 
 # List the functions made available by this utility script
 echo ""
-jayci_test_source_pipeline
+#jayci_test_source_pipeline
 #jayci_announce "Available functions:"
 #compgen -A function | grep jayci
 
