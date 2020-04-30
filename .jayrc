@@ -1,64 +1,130 @@
-# context-agnostic config for my Bourne Again SHell adventures 
+#---------------------------------------------------------------
+# >>>  .jayrc   <<<
+#---------------------------------------------------------------
+# shell config 
 
-################################################################ 
-# Set prompt, export globals, ammend paths, make aliases, source config and scipt files 
-# To install or update: defer to README.md
-
-
-
-
-########################################
-### GLOBALS ############################
-export JAYCI_WORKSPACE=${HOME}/jaycody 
-export JAYCI_USER=${USER}
-export JAYCI_HOME=${HOME}
-
-
-########################################
-### SET PROMPT #########################
-# bc it deserves its own place in history
-source ${JAYCI_WORKSPACE}/jayci/configs/jayrc-prompt
+#---------------------------------------------------------------
+echo '\n  .zshrc sources --> .jayrc'
+echo '---------------------------------------------------------------'
+echo '      .jayrc sets:\n\tpath\n\tglobals\n\taliases' 
+# globals
+# prompt
+# aliases
+# source 
 
 
+#===============================================================
+#
+###                >>>   PATH   <<<
+#
+#===============================================================
+# Path to pip, pip2, and pip2.7
+export PATH="$PATH:$HOME/Library/Python/2.7/bin"
 
-################################################################
-### ALIASES ####################################################
 
-### >>> ALIAS LOCATIONS <<< ####################################
+#===============================================================
+#
+###                  >>> GLOBALS <<<
+#
+#===============================================================
+# Decouple from local
+export JAYCI_WORKSPACE=${HOME}/jaycody # my github root 
+export JAYCI_USER=${USER}              # me
+export JAYCI_HOME=${HOME}              # ~
+
+
+
+#===============================================================
+#
+###                  >>> ALIASES <<<
+#
+#===============================================================
+
+#---------------------------------------------------------------
+#   >>>   Refresh me       <<<
+#---------------------------------------------------------------
+alias rejay='source ~/.jayrc'
+alias rejrc='source ~/.jayrc'
+alias resh='source ~/.zshrc'
+
+#---------------------------------------------------------------
+#   >>>   Take me to....    <<<
+#---------------------------------------------------------------
 alias jaycody='cd ${JAYCI_WORKSPACE}; ll'
-alias jayci='cd ${JAYCI_WORKSPACE}/jayci; ll'
+alias jayci='cd ${JAYCI_WORKSPACE}/jayci; ll; tree'
+alias ..='cd ..'
+
+# Take me to Amyris Repo
+alias repo='cd ${HOME}/repo; ll;'
 
 
-
-### >>> ALIAS EDIT CONFIGS <<< #################################
+#---------------------------------------------------------------
+#   >>>  Edit configs   <<<
+#---------------------------------------------------------------
 alias vimjrc='vim ${JAYCI_WORKSPACE}/jayci/.jayrc'
-alias vimbrc='vim ${HOME}/.bashrc'
-alias vimarc='vim ${HOME}/.amyrisrc'
-alias vimsh='vim ${HOME}/.bash_profile'    # from Owen's bbsh 20130403
-alias nanosh="nano ${HOME}/.bash_profile" 
-alias nanozsh="nano ${HOME}/.zshrc"        # (aka z-shell, new default as of 10.15.4 osx
+alias vimjconfig='vim ${JAYCI_WORKSPACE}/jayci/jayci.cfg'
+alias vimjutil='vim ${JAYCI_WORKSPACE}/jayci/scripts/jayci_utilities.sh'
+alias vimzrc='vim ${HOME}/.zshrc'
 
-### >>> ALIAS EDIT SCRIPTS <<< #################################
-alias vimutil='vim ${JAYCI_WORKSPACE}/jayci/scripts/jayci_utilities.sh'
+# >>> depracated configs #nostaliga
+# alias vimsh='vim ${HOME}/.bash_profile'    # from Owen's bbsh 20130403
+# alias vimbrc='vim ${HOME}/.bashrc'
+# alias vimarc='vim ${HOME}/.amyrisrc'
 
 
-#################################################################
-### >>> ALIAS COMMANDS <<< ######################################
-#### ADD THOSE SORTED LS COMMANDS DAN SHOWED ME
-alias l='ls -CF'
-alias la="ls -aF" #LIST --ALL
-alias lal="ls -alF"  #LIST --ALL --LONG
-alias ll="ls -alF"
-alias lsd="\ls -d */"
+#---------------------------------------------------------------
+#    >>> Safey and Convenience <<< 
+#---------------------------------------------------------------
+# Confirm first
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
 
-alias resh="source ~/.bash_profile" #refresh shell shortcut
-alias edit='open -a  "Atom"'
-alias gitlog="git log --oneline"
+# Show usage as human-readable, include total
+alias du='du -ch'    
+alias df='df -ch'    
 alias dirsize="pwd; du -ch | grep total"
-alias restart="sudo shutdown -r now"
-alias sleep="sudo shutdown -s now"
 
-### >>> SHOW COMMON COMMANDS << ###################################
+# Make dirs along path 
+alias mkdir='mkdir -p'
+
+# Show me, paint the fence
+alias h='history'                    # shell history
+alias path='echo -e ${PATH//:/\\n}'  # path as single col
+alias gitlog='git log --oneline'     # gits by single line
+
+# Please....
+alias restart='sudo shutdown -r now'
+alias sleep='sudo shutdown -s now'
+
+
+#---------------------------------------------------------------
+#     >>> the 'ls' family <<< 
+#---------------------------------------------------------------
+# List sizes as human-readable
+alias ls='ls -hF'       
+
+# Sort lists by...(show hidden, long format, exclude groups)
+alias lk='ls -AlSro'      # Sort by size, biggest last.
+alias lt='ls -Altro'      # Sort by date, most recent last.
+alias lc='ls -Altcro'     # Sort by change time, most recent last.
+
+# Show more, sort alphanumerically
+alias l='pwd; ls -A1'     # Single col, show .dot files,  show '/', '*'
+alias la='ls -A'          # Show .dot files, '/' dirs
+alias ll='ls -Alo'        # Show hidden, long format, '/' dirs, no group,
+alias lll='ls -al'        # Show hidden (and '..") long
+alias lsd='\ls -d */'     # Directories only
+
+# List recursively
+alias lr='ls -R'          # Recursively
+alias tree='tree -Csh'    # Recursively as tree 
+alias treela='tree -Csha' # As tree, include hidden
+
+
+#---------------------------------------------------------------
+#       >>> Show Common  <<<
+#---------------------------------------------------------------
 alias jay='echo     ;
 echo ;
 echo ---------frequent commands;
@@ -73,27 +139,36 @@ echo -----ex  cat my.txt ">" your.txt;
 echo ----- OR write directly to a file:  cat ">" foo.txt;
 echo ;
 echo ;'
-###################################################################
 
 
-
-###################################################################
-### EXTRAS ########################################################
-
-
+#---------------------------------------------------------------
+#       >>>  EXTRAS   <<<
+#---------------------------------------------------------------
 # forward the Authentication Agent - from Brian at Pado
-#alias ssh="ssh -A"
+# alias ssh="ssh -A"
 
 
 
-### >>> SOURCE .CFG FILES <<< ###########
 
-# Find and source the .cfg file for each project repo in the workspace
+#===============================================================
+#
+#    >>> Source configs  <<<
+#
+#===============================================================
+# Set  prompt
+echo ""
+echo ".jayrc sources --> jayci/configs/jayrc-prompt" 
+echo "    ---->  Sets prompt"
+source ${JAYCI_WORKSPACE}/jayci/configs/jayrc-prompt
+
+# Find and source .cfg for each repo in the workspace
 if [ -d ${JAYCI_WORKSPACE:?} ] && [ "$(ls -A ${JAYCI_WORKSPACE})" ] ; then
     for i in $( ls -1 ${JAYCI_WORKSPACE}/*/*.cfg|egrep -v "nose|setup" );  do # printf "===> %-30s .jayrc ---sources---> $i \n";# 
-         echo "source $i"
+         echo ""
+         echo ".jayrc sources --> $i"
          source $i ;
          done
 else
     echo "There are no repos in your JAYCI_WORKSPACE"
 fi
+#===============================================================
