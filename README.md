@@ -27,7 +27,7 @@ __________________
 git checkout master
 git pull
 
-# create feature branch from master
+# create feature branch from master [-b create <branch>]
 git checkout -b <feature_branch> master
 git push -u origin <feature_branch>
 
@@ -54,7 +54,35 @@ git push
 
 # delete feature branch
 git branch -d <feature_branch>
+
 ```
+
+## To switch to feature branch
+
+```
+
+# list branches (local and remote)
+git branch -a
+
+# then switch to local branch
+git checkout <local_branch_name>
+# or
+git switch <local_branch_name>
+
+# or switch to a remote branch:
+git fetch
+git checkout -t origin/<feature_branch> #[-t track this branch from origin]
+
+
+# To checkout a branch from a specific commit
+git log --oneline --graph  # or gitlog via alias
+git checkout -B <branch_name> <starting_point>
+
+```
+
+
+
+
 ______________________________
 
 ## Sourcing Cascade Order

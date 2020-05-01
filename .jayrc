@@ -93,7 +93,7 @@ alias mkdir='mkdir -p'
 # Show me, paint the fence
 alias h='history'                    # shell history
 alias path='echo -e ${PATH//:/\\n}'  # path as single col
-alias gitlog='git log --oneline'     # gits by single line
+alias gitlog='git log --oneline --graph'     # gits by single line
 
 # Please....
 alias restart='sudo shutdown -r now'
