@@ -4,7 +4,8 @@
 # shell config 
 
 #---------------------------------------------------------------
-echo '\n  .zshrc sources --> .jayrc'
+echo '\n  .zshrc sources --> ~/.oh-my-zsh'
+echo '\n  .zshrc sources --> ~/.jayrc'
 echo '---------------------------------------------------------------'
 echo '      .jayrc sets:\n\tpath\n\tglobals\n\taliases' 
 # globals
@@ -83,8 +84,8 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 # Show usage as human-readable, include total
-alias du='du -ch'    
-alias df='df -ch'    
+alias du='du -ch'                   # disk used plus total    
+alias df='df -h'                    # disk free
 alias dirsize="pwd; du -ch | grep total"
 
 # Make dirs along path 

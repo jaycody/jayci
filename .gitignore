@@ -1,2 +1,9 @@
 # misc
 .DS_Store
+
+
+# temp file directories
+cache/
+log/
+*.swp
+
