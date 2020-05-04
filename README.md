@@ -60,7 +60,6 @@ git branch -d <feature_branch>
 ## To switch to feature branch
 
 ```
-
 # list branches (local and remote)
 git branch -a
 
@@ -80,6 +79,28 @@ git checkout -B <branch_name> <starting_point>
 
 ```
 
+## git tags
+
+```bash
+# list local tags
+git tag
+
+# create local tag with annotations
+git tag -a <tag_name> -m "<tag_annotation>"
+
+# delete local tag
+git tag -d <tag_name>
+
+# view tag contents
+git show <tag_name>
+
+# push local tags to remote
+git push --tags
+
+# pull remote tags
+git fetch --tags
+
+```
 
 
 
