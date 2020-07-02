@@ -59,7 +59,7 @@ git branch -d <feature_branch>
 
 ## To switch to feature branch
 
-```
+```bash
 # list branches (local and remote)
 git branch -a
 
@@ -134,7 +134,7 @@ _________________________
 
 ## Useful commands
 
-```
+```bash
 # list function names whose prefix is 'jayci'
 compgen -A function | grep jayci
 
