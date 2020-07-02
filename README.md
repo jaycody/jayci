@@ -82,8 +82,8 @@ git checkout -B <branch_name> <starting_point>
 ## git tags
 
 ```bash
-# list local tags
-git tag
+# list local tags [-n for extensive]
+git tag -n
 
 # create local tag with annotations
 git tag -a <tag_name> -m "<tag_annotation>"
@@ -98,7 +98,7 @@ git show <tag_name>
 git push --tags
 
 # pull remote tags
-git fetch --tags
+git fetch --all --tags
 
 ```
 
