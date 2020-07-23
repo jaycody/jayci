@@ -46,8 +46,12 @@ git pull
 git checkout <feature_branch>
 git merge master
 
+# safely abort a merge that isn't going well
+git merge --abort
+
 # update remote feature branch with (the now current) local feature branch
 git push
+
 
 # submit MR on github - healthy git hygiene
 # pull master and verify changes
@@ -125,7 +129,7 @@ git stash drop <STASH>
 ```
 
 
-## Miscellaneous
+## `git pull` is short for `git fetch` plus `git merge`
 
 - `git merge` will always merge into the branch that is currently checked out.
 - `git rebase` will always rebase the branch that is currently checked out.
