@@ -6,8 +6,11 @@ __________________
 1. Clone `jayci` repo to `~/jaycody` and `cd jayci`
 2. Symlink the expected config locations in `~/.*` to actual config files  in `jayci/` & `jayci/configs/`(insert script here)
 ```bash
-# symlink the actual `jayci/.jayrc` config file to the expected location `~/.jayrc`
+# symlink to the actual config files from the expected locations in the home folder.
 ln -s $HOME/jaycody/jayci/.jayrc $HOME/.jayrc
+ln -s $HOME/jaycody/jayci/.vimrc $HOME/.vim/vimrc
+ln -s $HOME/jaycody/jayci/configs/htoprc $HOME/.config/htop/htoprc
+
 
 # symlink htop's actual config file, `jayci/configs/htoprc` to its expected location `~/.config/htop/htoprc`
 ln -s $HOME/jaycody/jayci/configs/htoprc $HOME/.config/htop/htoprc
@@ -19,6 +22,9 @@ if [ -f $HOME/.jayrc ]; then
 	source $HOME/.jayrc
 fi
 ```
+4. Download the colorscheme 'Tomorrow-Night' for .vimrc
+```bash
+# Add the mkdir ~/.vim/bundle
 
 ### Remember to chmod those scripts as executable
 __________________
