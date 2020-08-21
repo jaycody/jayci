@@ -17,6 +17,7 @@
 # >>>  Set Human-Readable Colors  <<<
 #---------------------------------------------------------------
 # magik here
+jayci_error "Verified: Called from jayrc-prompt config file"
 
 
 #---------------------------------------------------------------
