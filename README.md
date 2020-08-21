@@ -45,6 +45,13 @@ git clone https://github.com/Ardakilic/vim-tomorrow-night-theme.git
 
 __________________
 
+## Installs and dependencies
+* nvAlt
+* ssh keys for github
+* divvy
+* dropbox
+* Alfred
+
 
 ## Sourcing Cascade Order
 Here's the cascade order once .bash_profile is updated and a symlink created for .jayrc:
