@@ -24,10 +24,69 @@ fi
 ```
 4. Download the colorscheme 'Tomorrow-Night' for .vimrc
 ```bash
-# Add the mkdir ~/.vim/bundle
+# Add the 'colors' directory
+mkdir ~/.vim/bundle
+# then 
+git clone https://github.com/Ardakilic/vim-tomorrow-night-theme.git
+# finally, move the tomorrow-night-theme.vim to ~/.vim/colors
+# remember the symlink should be 
+~/.vim/vimrc ---> ${HOME}/jaycody/jayci/.vimrc
+```
 
-### Remember to chmod those scripts as executable
+5. Install [Homebrew][1]    
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
+
+
+6. Install `tree`    
+`~/$ brew install tree`
+
+
+### Remember to chmod those scripts in `./scripts/` as executable
+
 __________________
+
+
+## Sourcing Cascade Order
+Here's the cascade order once .bash_profile is updated and a symlink created for .jayrc:
+
+| FILE | ACTION |
+|------|--------|
+| `.bash_profile` | ---_sources_---> `.jayrc`
+| `.jayrc` | ---_sources_---> `jayci.cfg` (and any other .cfg file for projects in the workspace
+|        | exports globals (eg `export WORKSPACE=${HOME}/src`)
+|        | sets aliases
+|        | sets path
+| `jayci.cfg` | ---_sources_---> `jayci_utilities.sh`
+| `jayci_utilities.sh` | repo-specific utility functions
+| `jayci.cfg` | ---_sources_---> `.git-prompt.sh`
+| `.git-prompt.sh` | displays git repo at the prompt
+
+__________________________
+
+## `jayrc` config file
+* set prompt,
+* export globals,
+* ammend paths,
+* make aliases,
+* source config and scipt files
+
+_________________________
+
+## Useful commands
+
+```bash
+# list function names whose prefix is 'jayci'
+compgen -A function | grep jayci
+
+# list my aliases
+compgen -a
+```
+
+## Verification Messages
+![console message](imgs/20180518-console_msg.png "Verification from the console")
+
+__________________
+
 
 ## create and update a feature branch:
 ```bash
@@ -337,50 +396,15 @@ branch that you merged and then reverted the merge, you need to revert
 the revert that undid the merge, effectively re-adding the changes from
 that merge. PITA. There are some other options in the above link.
 
-
-______________________________
-
-## Sourcing Cascade Order
-Here's the cascade order once .bash_profile is updated and a symlink created for .jayrc:
-
-| FILE | ACTION |
-|------|--------|
-| `.bash_profile` | ---_sources_---> `.jayrc`
-| `.jayrc` | ---_sources_---> `jayci.cfg` (and any other .cfg file for projects in the workspace
-|        | exports globals (eg `export WORKSPACE=${HOME}/src`)
-|        | sets aliases
-|        | sets path
-| `jayci.cfg` | ---_sources_---> `jayci_utilities.sh`
-| `jayci_utilities.sh` | repo-specific utility functions
-| `jayci.cfg` | ---_sources_---> `.git-prompt.sh`
-| `.git-prompt.sh` | displays git repo at the prompt
-
-__________________________
-
-## `jayrc` config file
-* set prompt,
-* export globals,
-* ammend paths,
-* make aliases,
-* source config and scipt files
-
-_________________________
-
-## Useful commands
-
-```bash
-# list function names whose prefix is 'jayci'
-compgen -A function | grep jayci
-
-# list my aliases
-compgen -a
-```
-
-## Verification Messages
-![console message](imgs/20180518-console_msg.png "Verification from the console")
-
+_______________________________
 
 ## Miscellaneous Resources
 
   - CIA's Git
     [Hints](https://wikileaks.org/ciav7p1/cms/page_1179773.html)
+
+
+
+
+
+[1]:https://brew.sh/
