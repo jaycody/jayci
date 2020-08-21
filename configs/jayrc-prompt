@@ -17,6 +17,7 @@
 # >>>  Set Human-Readable Colors  <<<
 #---------------------------------------------------------------
 # magik here
+#jayci_error "Verified: Called from jayrc-prompt config file"
 
 
 #---------------------------------------------------------------
@@ -42,7 +43,11 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 # w/o git:  jstephens-mbp.local ~ $ 
 # w/  git:  jstephens-mbp.local jayci (master) $ 
 #
-# export PS1="\[\033[0;34m\]\H \[\033[0;31m\]\W\[\033[0m\]$(__git_ps1 ' (%s)') \$ "
+#export PS1="\[\033[0;34m\]\H \[\033[0;31m\]\W\[\033[0m\]$(__git_ps1 ' (%s)') \$ "
+
+
+
+export PS1="\[\033[0;34m\]\u@\H \[\033[0;31m\]\w\[\033[0m\] \$ "
 #
 #---------------------------------------------------------------
 

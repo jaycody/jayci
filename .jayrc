@@ -3,9 +3,16 @@
 #---------------------------------------------------------------
 # shell config 
 
+
 #---------------------------------------------------------------
-echo '\n  .zshrc sources --> ~/.oh-my-zsh'
-echo '\n  .zshrc sources --> ~/.jayrc'
+# Print to console either .bashrc path or .zshrc path
+if [ -f $HOME/.bashrc ]; then
+	echo '\n  .bashrc sources --> ~/.jayrc'
+else
+	echo '\n  .zshrc sources --> ~/.oh-my-zsh'
+	echo '\n  .zshrc sources --> ~/.jayrc'
+fi
+
 echo '---------------------------------------------------------------'
 echo '      .jayrc sets:\n\tpath\n\tglobals\n\taliases' 
 # globals
@@ -46,7 +53,14 @@ export JAYCI_HOME=${HOME}              # ~
 #---------------------------------------------------------------
 alias rejay='source ~/.jayrc'
 alias rejrc='source ~/.jayrc'
-alias resh='source ~/.zshrc'
+
+# Set resh for either .bashrc or .zshrc
+if [ -f $HOME/.bashrc ]; then
+	alias resh='source ~/.bashrc'
+else
+	alias resh='source ~/.zshrc'
+fi
+
 
 #---------------------------------------------------------------
 #   >>>   Take me to....    <<<
@@ -67,6 +81,7 @@ alias vimjconfig='vim ${JAYCI_WORKSPACE}/jayci/jayci.cfg'
 alias vimjutil='vim ${JAYCI_WORKSPACE}/jayci/scripts/jayci_utilities.sh'
 alias vimzrc='vim ${HOME}/.zshrc'
 alias vimvimrc='vim ${JAYCI_WORKSPACE}/jayci/.vimrc'
+alias vimbrc='vim ${HOME}/.bashrc'
 
 
 # >>> depracated configs #nostaliga
@@ -116,7 +131,7 @@ alias lc='ls -Altcro'     # Sort by change time, most recent last.
 alias l='pwd; ls -A1'     # Single col, show .dot files,  show '/', '*'
 alias la='ls -A'          # Show .dot files, '/' dirs
 alias ll='ls -Alo'        # Show hidden, long format, '/' dirs, no group,
-alias lll='ls -al'        # Show hidden (and '..") long
+alias lal='ls -al'        # Show hidden (and '..") long
 alias lsd='\ls -d */'     # Directories only
 
 # List recursively
@@ -126,8 +141,15 @@ alias treela='tree -Csha' # As tree, include hidden
 
 
 #---------------------------------------------------------------
-#       >>> Show Common  <<<
+#       >>> Show Common Usage  <<<
 #---------------------------------------------------------------
+# List all aliases
+alias laliases='grep alias ${JAYCI_HOME}/.jayrc'
+
+# List the 'ls' family
+alias lsls="grep 'alias l' ${JAYCI_HOME}/.jayrc"
+
+# List common usage
 alias jay='echo     ;
 echo ;
 echo ---------frequent commands;
