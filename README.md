@@ -19,6 +19,8 @@ if [ -f $HOME/.jayrc ]; then
 	source $HOME/.jayrc
 fi
 ```
+
+### Remember to chmod those scripts as executable
 __________________
 
 ## create and update a feature branch:
