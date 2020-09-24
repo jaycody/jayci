@@ -130,8 +130,11 @@ git push
 # submit MR on github - healthy git hygiene
 # pull master and verify changes
 
-# delete feature branch
+# delete local feature branch
 git branch -d <feature_branch>
+
+# delete remote feature branch
+git push origin --delete <feature_branch>
 
 ```
 
