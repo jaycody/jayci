@@ -4,26 +4,9 @@
 # shell config 
 
 
-#---------------------------------------------------------------
-# Print to console either .bashrc path or .zshrc path
-if [ -f $HOME/.bashrc ]; then
-	echo '\n  .bashrc sources --> ~/.jayrc'
-else
-	echo '\n  .zshrc sources --> ~/.oh-my-zsh'
-	echo '\n  .zshrc sources --> ~/.jayrc'
-fi
-
-echo '---------------------------------------------------------------'
-echo '      .jayrc sets:\n\tpath\n\tglobals\n\taliases' 
-# globals
-# prompt
-# aliases
-# source 
-
-
 #===============================================================
 #
-###                >>>   PATH   <<<
+###                >>> SET PATH   <<<
 #
 #===============================================================
 # Path to pip, pip2, and pip2.7
@@ -55,6 +38,7 @@ alias rejay='source ~/.jayrc'
 alias rejrc='source ~/.jayrc'
 
 # Set resh for either .bashrc or .zshrc
+### note: .zshrc sources ---> ~/.jayrc
 if [ -f $HOME/.bashrc ]; then
 	alias resh='source ~/.bashrc'
 else
@@ -65,13 +49,17 @@ fi
 #---------------------------------------------------------------
 #   >>>   Take me to....    <<<
 #---------------------------------------------------------------
+# Take me to my repos
 alias jaycody='cd ${JAYCI_WORKSPACE}; ll'
-alias jayci='cd ${JAYCI_WORKSPACE}/jayci; ll; tree'
+alias jayci='cd ${JAYCI_WORKSPACE}/jayci; ll; tree --dirsfirst -a -I .git'
+alias snapcap='cd ${JAYCI_WORKSPACE}/snapcap; ll; tree --dirsfirst -a -I .git'
+alias utiliplate='${JAYCI_WORKSPACE}/utiliplate; ll; tree --dirsfirst -a -I .git'
 alias ..='cd ..'
 
 # Take me to Amyris Repo
-alias repo='cd ${HOME}/repo; ll;'
-alias repocm='cd ${HOME}/repo/configuration-management; ll;'
+alias repo='cd ${HOME}/repo; ll; tree --dirsfirst -a -L 2'
+alias repocm='cd ${HOME}/repo/configuration-management; ll; tree --dirsfirst -a -I .git -L 2'
+alias handbook='cd ${HOME}/repo/devops-handbook; ll; tree --dirsfirst -a -I .git'
 
 #---------------------------------------------------------------
 #   >>>  Edit configs   <<<
@@ -131,8 +119,8 @@ alias lc='ls -Altcro'     # Sort by change time, most recent last.
 alias l='pwd; ls -A1'     # Single col, show .dot files,  show '/', '*'
 alias la='ls -A'          # Show .dot files, '/' dirs
 alias ll='ls -Alo'        # Show hidden, long format, '/' dirs, no group,
-alias lal='ls -al'        # Show hidden (and '..") long
-alias lsd='\ls -d */'     # Directories only
+alias lal='ls -al'        # Show hidden and long
+alias lsd='\ls -A1 -d */'     # Directories only
 
 # List recursively
 alias lr='ls -R'          # Recursively
@@ -141,30 +129,50 @@ alias treela='tree -Csha' # As tree, include hidden
 
 
 #---------------------------------------------------------------
-#       >>> Show Common Usage  <<<
+#       >>> Show Aliases and Common Usage  <<<
 #---------------------------------------------------------------
 # List all aliases
-alias laliases='grep alias ${JAYCI_HOME}/.jayrc'
+alias lalias='grep alias ${JAYCI_HOME}/.jayrc'
 
 # List the 'ls' family
 alias lsls="grep 'alias l' ${JAYCI_HOME}/.jayrc"
 
-# List common usage
+# 'jay' to list common usage 
 alias jay='echo     ;
 echo ;
-echo ---------frequent commands;
-echo grep:  search the file;
-echo find:  walk a File Directory;
+echo lalias:  \\t list aliases;
+echo lsls:    \\t\\t list the 'ls' family;
+echo ;
+echo -----------TAKE ME TO....-------------;
+echo jaycody jayci repo repocm; 
+echo code foo: open foo in VSCode;
+echo ;
+echo -----------OPEN IN VIM-------------;
+echo vimjrc, vimjconfig, vimjutil, vimvimrc, vimzrc;
+echo ;
+echo -----------INFO-------------;
+echo h=history, path, gitlog;
+echo du, df, dirsize -- disk used, disk free, dirsize;
+echo ;
+echo -----------LIST-------------;
+echo lk, lt, lc: size, date, change date, big and new last;
+echo l, la, ll, lal;
+echo lsd: dir only;
+echo lr: recursively;
+echo ;
+echo -----------FREQUENT COMMANDS-------------;
+echo grep: \\t search the file;
+echo find: \\t walk a File Directory;
 echo whereis:  ex. whereis python = ;
 echo rm -rf: remove directory and all files therein, without asking permission;
-echo cp -r: copy directory and all files therein;
-echo mkdir -p: make mutliptle directories;
-echo ">" :  takes output of command at left and WRITES it to file on right;
-echo -----ex  cat my.txt ">" your.txt;
-echo ----- OR write directly to a file:  cat ">" foo.txt;
+echo cp -r: \\t copy directory and all files therein;
+echo mkdir -p: make mutliptle directories along the path as needed;
+echo ">" : \\t  takes output of command at left and WRITES it to file on right;
+echo \\t -----ex  cat my.txt ">" your.txt;
+echo \\t ----- OR write directly to a file:  cat ">" foo.txt;
 echo ;
 echo ;'
-
+#---------------------------------------------------------------
 
 #---------------------------------------------------------------
 #       >>>  EXTRAS   <<<
@@ -177,23 +185,61 @@ echo ;'
 
 #===============================================================
 #
-#    >>> Source configs  <<<
+###                >>>   SHELL CONFIG  <<<
 #
 #===============================================================
-# Set  prompt
 echo ""
-echo ".jayrc sources --> jayci/configs/jayrc-prompt" 
-echo "    ---->  Sets prompt"
+echo ""
+echo "==============================================================="
+echo "IN jayci/.jayrc --> sect: 'SHELL CONFIG' --> do:"
+echo "==============================================================="
+# Determine and print existing config path (.bashrc or .zshrc)
+echo "----> List shell config steps:"
+echo ""
+if [ -f $HOME/.bashrc ]; then
+	echo '\t  IN ~/.bashrc --> $ source ~/.jayrc'
+else
+    echo "[1] ~/.zshrc --> do:"
+	echo '\t $ source ~/.oh-my-zsh'
+	echo '\t $ source ~/.jayrc@ -> /Users/jstephens/jaycody/jayci/.jayrc'
+fi
+echo ""
+echo '[2] jayci/.jayrc ---> do:'
+echo '\tshow config steps\n\tset PATH & GLOBALS\n\tcreate aliases'
+echo '\tenable project scripts & .cfg' 
+echo '---------------------------------------------------------------'
+
+
+#===============================================================
+#
+#    >>> ENABLE .cfg <<<
+#
+#===============================================================
+# Set prompt in jayrc-prompt 
+echo ""
+echo ""
+echo "==============================================================="
+echo "IN jayci/.jayrc --> 'ENABLE .cfg' sect --> do:"
+echo "==============================================================="
+echo "---->  Set prompt:"
+echo ""
+echo "$ source ../jayci/configs/jayrc-prompt" 
 source ${JAYCI_WORKSPACE}/jayci/configs/jayrc-prompt
+echo "---------------------------------------------------------------"
 
 # Find and source .cfg for each repo in the workspace
+echo ""
+echo "---------------------------------------------------------------"
+echo "----> Enable .cfg & scripts for all projects:"
 if [ -d ${JAYCI_WORKSPACE:?} ] && [ "$(ls -A ${JAYCI_WORKSPACE})" ] ; then
     for i in $( ls -1 ${JAYCI_WORKSPACE}/*/*.cfg|egrep -v "nose|setup" );  do # printf "===> %-30s .jayrc ---sources---> $i \n";# 
+         # Walk jaycody/ ; source each <project>/*.cfg ; let each .cfg list files they source.
          echo ""
-         echo ".jayrc sources --> $i"
-         source $i ;
+         echo "$ source $i"
+         source $i;
          done
 else
-    echo "There are no repos in your JAYCI_WORKSPACE"
+    echo "There are no .cfg files in your JAYCI_WORKSPACE repos."
 fi
+echo "---------------------------------------------------------------"
 #===============================================================
