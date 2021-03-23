@@ -185,7 +185,7 @@ echo ;'
 
 #===============================================================
 #
-###                >>>   SHELL CONFIG  <<<
+###                >>>   SHELL CONFIG STEPS <<<
 #
 #===============================================================
 echo ""
@@ -225,21 +225,22 @@ echo "---->  Set prompt:"
 echo ""
 echo "$ source ../jayci/configs/jayrc-prompt" 
 source ${JAYCI_WORKSPACE}/jayci/configs/jayrc-prompt
-echo "---------------------------------------------------------------"
+#echo "---------------------------------------------------------------"
 
 # Find and source .cfg for each repo in the workspace
 echo ""
-echo "---------------------------------------------------------------"
-echo "----> Enable .cfg & scripts for all projects:"
+echo ""
+#echo "---------------------------------------------------------------"
+echo "----> Find and enable .cfg for each project:"
 if [ -d ${JAYCI_WORKSPACE:?} ] && [ "$(ls -A ${JAYCI_WORKSPACE})" ] ; then
     for i in $( ls -1 ${JAYCI_WORKSPACE}/*/*.cfg|egrep -v "nose|setup" );  do # printf "===> %-30s .jayrc ---sources---> $i \n";# 
          # Walk jaycody/ ; source each <project>/*.cfg ; let each .cfg list files they source.
          echo ""
          echo "$ source $i"
+         echo "---------------------------------------------------------------"
          source $i;
          done
 else
     echo "There are no .cfg files in your JAYCI_WORKSPACE repos."
 fi
-echo "---------------------------------------------------------------"
 #===============================================================
