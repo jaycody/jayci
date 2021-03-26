@@ -6,15 +6,6 @@
 
 #===============================================================
 #
-###                >>> SET PATH   <<<
-#
-#===============================================================
-# Path to pip, pip2, and pip2.7
-export PATH="$PATH:$HOME/Library/Python/2.7/bin"
-
-
-#===============================================================
-#
 ###                  >>> GLOBALS <<<
 #
 #===============================================================
@@ -23,6 +14,14 @@ export JAYCI_WORKSPACE=${HOME}/jaycody # my github root
 export JAYCI_USER=${USER}              # me
 export JAYCI_HOME=${HOME}              # ~
 
+
+#===============================================================
+#
+###                >>> SET PATH   <<<
+#
+#===============================================================
+# Path to pip, pip2, and pip2.7
+export PATH="$PATH:$HOME/Library/Python/2.7/bin"
 
 
 #===============================================================
@@ -116,7 +115,7 @@ alias lt='ls -Altro'      # Sort by date, most recent last.
 alias lc='ls -Altcro'     # Sort by change time, most recent last.
 
 # Show more, sort alphanumerically
-alias l='pwd; ls -A1'     # Single col, show .dot files,  show '/', '*'
+alias l='ls -A1'     # Single col, show .dot files,  show '/', '*'
 alias la='ls -A'          # Show .dot files, '/' dirs
 alias ll='ls -Alo'        # Show hidden, long format, '/' dirs, no group,
 alias lal='ls -al'        # Show hidden and long
@@ -183,64 +182,42 @@ echo ;'
 
 
 
-#===============================================================
-#
-###                >>>   SHELL CONFIG STEPS <<<
-#
-#===============================================================
+
 echo ""
 echo ""
-echo "==============================================================="
-echo "IN jayci/.jayrc --> sect: 'SHELL CONFIG' --> do:"
-echo "==============================================================="
-# Determine and print existing config path (.bashrc or .zshrc)
-echo "----> List shell config steps:"
-echo ""
+echo "================================================================="
+echo "SHELL CONFIG STEPS"
+echo "================================================================="
 if [ -f $HOME/.bashrc ]; then
 	echo '\t  IN ~/.bashrc --> $ source ~/.jayrc'
 else
-    echo "[1] ~/.zshrc --> do:"
+    echo "[1] .zshrc ---> do:"
 	echo '\t $ source ~/.oh-my-zsh'
-	echo '\t $ source ~/.jayrc@ -> /Users/jstephens/jaycody/jayci/.jayrc'
+	echo '\t $ source ~/.jayrc@ -> JAYCI_WORKSPACE/jayci/.jayrc'
 fi
 echo ""
-echo '[2] jayci/.jayrc ---> do:'
-echo '\tshow config steps\n\tset PATH & GLOBALS\n\tcreate aliases'
-echo '\tenable project scripts & .cfg' 
-echo '---------------------------------------------------------------'
+echo '[2] .jayrc ---> do:'
+echo '\tPATH & GLOBALS\n\taliases'
+echo '\tsource proj .cfg' 
+echo '-----------------------------------------------------------------'
 
 
-#===============================================================
-#
-#    >>> ENABLE .cfg <<<
-#
-#===============================================================
-# Set prompt in jayrc-prompt 
-echo ""
-echo ""
-echo "==============================================================="
-echo "IN jayci/.jayrc --> 'ENABLE .cfg' sect --> do:"
-echo "==============================================================="
-echo "---->  Set prompt:"
-echo ""
-echo "$ source ../jayci/configs/jayrc-prompt" 
-source ${JAYCI_WORKSPACE}/jayci/configs/jayrc-prompt
-#echo "---------------------------------------------------------------"
-
-# Find and source .cfg for each repo in the workspace
-echo ""
-echo ""
-#echo "---------------------------------------------------------------"
-echo "----> Find and enable .cfg for each project:"
+#---------------------------------------------------------------
+#       >>>  SOURCE <project>.cfg   <<<
+#---------------------------------------------------------------
 if [ -d ${JAYCI_WORKSPACE:?} ] && [ "$(ls -A ${JAYCI_WORKSPACE})" ] ; then
     for i in $( ls -1 ${JAYCI_WORKSPACE}/*/*.cfg|egrep -v "nose|setup" );  do # printf "===> %-30s .jayrc ---sources---> $i \n";# 
          # Walk jaycody/ ; source each <project>/*.cfg ; let each .cfg list files they source.
          echo ""
-         echo "$ source $i"
-         echo "---------------------------------------------------------------"
+         echo ""
+         #echo "-----------------------------------------------------------------"
+         echo "================================================================="
+         echo ".jayrc --> $ source $i"
+         echo "================================================================="
          source $i;
          done
 else
     echo "There are no .cfg files in your JAYCI_WORKSPACE repos."
 fi
 #===============================================================
+
