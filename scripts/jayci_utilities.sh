@@ -15,10 +15,15 @@ jayci_test_source_pipeline () {
     compgen -A function | grep jayci
     echo ""
 
-    # List aliases
-    jayci_announce "aliases===>"
-    compgen -a
-    echo ""
+    # List aliases in .jayrc
+    #jayci_announce "aliases===>"
+        # '-E' search start of lines with word 'alias'
+        # '-i' ignore uppercase
+    #grep -Ei alias ./.jayrc 
+    
+    # list ALL aliases
+     #   compgen -a  
+    #echo ""
 }
 
 
@@ -33,13 +38,13 @@ jayci_error () {
     local LINE1=${1:-}
     local LINE2=${2:-}
 
-    printf "${WHITE_ON_RED}======================================================================${NORMAL}\n"
+    printf "${WHITE_ON_RED}========================================================================${NORMAL}\n"
     printf "${WHITE_ON_RED}  jayci:  %-60s  ${NORMAL}\n" "${LINE1}"
     if [ "${LINE2}" != "" ]
     then
         printf "${WHITE_ON_RED}  jayci:  %-60s  ${NORMAL}\n" "${LINE2}"
     fi
-    printf "${WHITE_ON_RED}----------------------------------------------------------------------${NORMAL}\n"
+    printf "${WHITE_ON_RED}------------------------------------------------------------------------${NORMAL}\n"
 }
 
 # Write something to the console in blue.
@@ -49,20 +54,26 @@ jayci_announce () {
     local LINE1=${1:-}
     local LINE2=${2:-}
 
-    printf "${WHITE_ON_BLUE}======================================================================${NORMAL}\n"
+    printf "${WHITE_ON_BLUE}========================================================================${NORMAL}\n"
     printf "${WHITE_ON_BLUE}  jayci:  %-60s  ${NORMAL}\n" "${LINE1}"
     if [ "${LINE2}" != "" ]
     then
         printf "${WHITE_ON_BLUE}  jayci:  %-60s  ${NORMAL}\n" "${LINE2}"
     fi
-    printf "${WHITE_ON_BLUE}----------------------------------------------------------------------${NORMAL}\n"
+    printf "${WHITE_ON_BLUE}------------------------------------------------------------------------${NORMAL}\n"
 }
 
 
 
 # List the functions made available by this utility script
-echo ""
-#jayci_test_source_pipeline
-#jayci_announce "Available functions:"
-#compgen -A function | grep jayci
+jayci_functions () {
+    echo""
+    jayci_announce "functions ===>"
+    compgen -A function | grep jayci
+    echo""
+    
+    jayci_announce "snapcap functions ===>"
+    compgen -A function | grep snap_
+    echo""
+}
 

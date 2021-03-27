@@ -49,16 +49,16 @@ fi
 #   >>>   Take me to....    <<<
 #---------------------------------------------------------------
 # Take me to my repos
-alias jaycody='cd ${JAYCI_WORKSPACE}; ll'
-alias jayci='cd ${JAYCI_WORKSPACE}/jayci; ll; tree --dirsfirst -a -I .git'
+alias jaycody='cd ${JAYCI_WORKSPACE}; l'
+alias jayci='cd ${JAYCI_WORKSPACE}/jayci; l; tree --dirsfirst -a -I .git'
 alias snapcap='cd ${JAYCI_WORKSPACE}/snapcap; l; tree --dirsfirst -a -I .git; . ./snapcap.cfg'
-alias utiliplate='${JAYCI_WORKSPACE}/utiliplate; ll; tree --dirsfirst -a -I .git'
+alias utiliplate='${JAYCI_WORKSPACE}/utiliplate; l; tree --dirsfirst -a -I .git'
 alias ..='cd ..'
 
 # Take me to Amyris Repo
 alias repo='cd ${HOME}/repo; ll; tree --dirsfirst -a -L 2'
 alias repocm='cd ${HOME}/repo/configuration-management; ll; tree --dirsfirst -a -I .git -L 2'
-alias handbook='cd ${HOME}/repo/devops-handbook; ll; tree --dirsfirst -a -I .git'
+alias handbook='cd ${HOME}/repo/devops-handbook; l; tree --dirsfirst -a -I .git'
 
 #---------------------------------------------------------------
 #   >>>  Edit configs   <<<
