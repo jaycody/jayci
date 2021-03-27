@@ -27,6 +27,29 @@ jayci_test_source_pipeline () {
 }
 
 
+jayci_update_repos () {
+    ########### GIT PULL to UPDATE ALL REPOS ############
+    #  <the original code comes from the Chief Engineer at Padopolis 2011>
+    #### archived repo list... 2017?
+    #repos="hci_qa hci_qa.wiki jaycodylab.com jayjaycody.github.io jayjaycody.github.io.wiki 
+            # lamp-stack lamp-stack.wiki mypy mypy.wiki nature-of-code-examples nodejs starnb.com swift 
+            # test-automation test-automation.wiki wear web-app-tests web-dev web-dev.wiki"
+
+    #DEBUG REQUIRED: How do we walk throug a list?? sounds simple enouch
+    #repos=jayci jayutil kidsPace portal-control scripts snapcap the-unix-workbench-master utiliplate
+
+    repos="jayci"
+    for i in $repos
+    do
+	    echo "*** Updating $i ***"
+	    cd "${JAYCI_WORKSPACE}/$i"
+	    git pull --no-edit
+        git status
+	    echo ""
+    done
+}
+
+
 
 
 ######### CONSOLE LOGGING UTILITIES ###########
@@ -77,3 +100,22 @@ jayci_functions () {
     echo""
 }
 
+
+
+jayci_transfer_files () {
+    # Leftovers from Padopolis 2011
+        echo"transfer_file function disabled"
+      #  if [ "$1" = hq ]
+        #then
+	#machineName=hq.machine.com
+    #else
+    #machineName=mymachine.local
+    #fi
+
+    #ssh  me@${machineName} "ls /lab/ios-releases/particles-*"
+
+    #echo "Which file to transfer? "
+    #read ans
+
+    #scp me@${machineName}:$ans ~/temp
+    }
