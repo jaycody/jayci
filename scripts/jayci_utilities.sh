@@ -37,17 +37,39 @@ jayci_update_repos () {
 
     #DEBUG REQUIRED: How do we walk throug a list?? sounds simple enouch
     #repos=jayci jayutil kidsPace portal-control scripts snapcap the-unix-workbench-master utiliplate
+    
+    # remember where you are
+    initialLocation = $(pwd)
+    echo "Current location: ${initialLocation}"
 
-    repos="jayci"
-    for i in $repos
-    do
-	    echo "*** Updating $i ***"
-	    cd "${JAYCI_WORKSPACE}/$i"
-	    git pull --no-edit
-        git status
-	    echo ""
-    done
+    # Create an array of repos
+    repos=(jayci snapcap)
+    # iterate through the array
+        # first checkout master, then git pull, THEN git status
+    for i in ${repos[@]}
+        do
+	        jayci_announce "*** Updating ${i} ***"
+	        cd "${JAYCI_WORKSPACE}/${i}"
+            git checkout master
+            git checkout main
+            git pull
+	        echo ""
+        done
+
+    for i in ${repos[@]}
+        do
+	        jayci_announce "*** Getting status on ${i} ***"
+	        cd "${JAYCI_WORKSPACE}/${i}"
+            l
+            git status
+	        echo ""
+        done
+
+    # return to initial location
+    echo "Returned to initial location:"
+    cd "${initialLocation}"
 }
+
 
 
 
