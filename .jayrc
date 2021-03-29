@@ -21,7 +21,7 @@ export JAYCI_HOME=${HOME}              # ~
 #
 #===============================================================
 # Path to pip, pip2, and pip2.7
-export PATH="$PATH:$HOME/Library/Python/2.7/bin"
+export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 
 
 #===============================================================

@@ -2,6 +2,11 @@
 > Mini CI/CD framework for my personal projects
 __________________
 
+## NOTES:
+* see [notes.md][2]
+-----------------
+
+
 ## Setup:
 1. Clone `jayci` repo to `~/jaycody` and `cd jayci`
 2. Symlink the expected config locations in `~/.*` to actual config files  in `jayci/` & `jayci/configs/`(insert script here)
@@ -418,3 +423,4 @@ _______________________________
 
 
 [1]:https://brew.sh/
+[2]:./notes.md
