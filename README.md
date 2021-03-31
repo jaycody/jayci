@@ -2,7 +2,13 @@
 > Mini CI/CD framework for my personal projects
 __________________
 
-## NOTES:
+## git quick
+![git_tags-screenshot](./imgs/git-tags.png)
+![git-feature_branch](imgs/git-feature_branch.png)
+
+----
+
+## bash NOTES:
 * see [notes.md][2]
 -----------------
 
