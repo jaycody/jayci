@@ -21,7 +21,7 @@ export JAYCI_HOME=${HOME}              # ~
 #
 #===============================================================
 # Path to pip, pip2, and pip2.7
-export PATH="$HOME/Library/Python/2.7/bin:$PATH"
+export PATH="$PATH:$HOME/Library/Python/2.7/bin"
 
 
 #===============================================================
@@ -135,6 +135,7 @@ alias lalias='grep alias ${JAYCI_HOME}/.jayrc'
 
 # List the 'ls' family
 alias lsls="grep 'alias l' ${JAYCI_HOME}/.jayrc"
+
 
 # 'jay' to list common usage 
 alias jay='echo     ;
