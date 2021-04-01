@@ -2,11 +2,29 @@
 > Mini CI/CD framework for my personal projects
 __________________
 
+
+## 'HERE' docs:
+> an easy way of echoing text to stdout. 
+```bash
+# Start a HERE doc
+cat << _EOF_
+#----> Text between the command 
+#----> and the _EOF_ 'end token' 
+#----> will display on the screen
+#----> iso ibsum loramus reximus 
+_EOF_
+```
+-------
+
+
 ## git quick
 ![git_tags-screenshot](./imgs/git-tags.png)
 ![git-feature_branch](imgs/git-feature_branch.png)
 
 ----
+
+
+
 
 ## bash NOTES:
 * see [notes.md][2]
