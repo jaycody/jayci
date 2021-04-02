@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 #---------------------------------------------------------------
 # >>>  .jayrc   <<<
@@ -7,37 +7,29 @@
 
 
 #===============================================================
-#
 ###                  >>> GLOBALS <<<
-#
 #===============================================================
-# Decouple from local
-export JAYCI_WORKSPACE=${HOME}/jaycody # my github root 
-export JAYCI_USER=${USER}              # me
-export JAYCI_HOME=${HOME}              # ~
+export JAY_SPACE=${HOME}/jaycody     # my github root 
+export JAY_USER=${USER}              # me
+export JAY_HOME=${HOME}              # ~
+export JAMYRIS=${JAYMRIS}          # my amyris proj 
 
 
 #===============================================================
-#
 ###                >>> SET PATH   <<<
-#
 #===============================================================
 # Path to pip, pip2, and pip2.7
 export PATH="$PATH:$HOME/Library/Python/2.7/bin"
 
 
 #===============================================================
-#
 ###                  >>> ALIASES <<<
-#
 #===============================================================
 
 #---------------------------------------------------------------
 #   >>>   Refresh me RESH     <<<
 #---------------------------------------------------------------
-
 # Set resh for either .bashrc or .zshrc
-### note: .zshrc sources ---> ~/.jayrc
 if [ -f $HOME/.bashrc ]; then
 	alias resh='source ~/.bashrc'
 else
@@ -48,32 +40,35 @@ fi
 #---------------------------------------------------------------
 #   >>>   Take me to....    <<<
 #---------------------------------------------------------------
-# Take me to my repos
-alias jaycody='cd ${JAYCI_WORKSPACE}; tree --dirsfirst -a -L 2 -I .get; l'
-alias jayci='cd ${JAYCI_WORKSPACE}/jayci; l; tree --dirsfirst -a -I .git'
-alias snapcap='cd ${JAYCI_WORKSPACE}/snapcap; l; tree --dirsfirst -a -I .git; . ./snapcap.cfg'
+# My repos
+alias jaycody='cd ${JAY_SPACE}; tree --dirsfirst -a -L 2 -I .get; l'
+alias jayci='cd ${JAY_SPACE}/jayci; l; tree --dirsfirst -a -I .git'
+alias snapcap='cd ${JAY_SPACE}/snapcap; l; tree --dirsfirst -a -I .git; . ./snapcap.cfg'
 alias ..='cd ..'
 
 # Take me to Amyris Repo
-alias repo='cd ${HOME}/repo; l; tree --dirsfirst -a -L 2'
-alias repocm='cd ${HOME}/repo/configuration-management; l; tree --dirsfirst -a -I .git -L 2'
-alias handbook='cd ${HOME}/repo/devops-handbook; l; tree --dirsfirst -a -I .git'
+alias repo='cd ${JAYMRIS}; l; tree --dirsfirst -a -L 2'
+alias repocm='cd ${JAYMRIS}/configuration-management; l; tree --dirsfirst -a -I .git -L 2'
+alias handbook='cd ${JAYMRIS}/devops-handbook; l; tree --dirsfirst -a -I .git'
 
 #---------------------------------------------------------------
 #   >>>  Edit configs   <<<
 #---------------------------------------------------------------
-alias vimjrc='vim ${JAYCI_WORKSPACE}/jayci/.jayrc'
-alias vimjconfig='vim ${JAYCI_WORKSPACE}/jayci/jayci.cfg'
-alias vimjutil='vim ${JAYCI_WORKSPACE}/jayci/scripts/jayci_utilities.sh'
+alias vimjrc='vim ${JAY_SPACE}/jayci/.jayrc'
+alias vimconfig='vim ${JAY_SPACE}/jayci/jayci.cfg'
+alias vimutil='vim ${JAY_SPACE}/jayci/scripts/jayci_utilities.sh'
 alias vimzrc='vim ${HOME}/.zshrc'
-alias vimvimrc='vim ${JAYCI_WORKSPACE}/jayci/.vimrc'
-alias vimbrc='vim ${HOME}/.bashrc'
+alias vimvimrc='vim ${JAY_SPACE}/jayci/.vimrc'
 
 
+#---------------------------------------------------------------
 # >>> depracated configs #nostaliga
+#---------------------------------------------------------------
 # alias vimsh='vim ${HOME}/.bash_profile'    # from Owen's bbsh 20130403
-# alias vimbrc='vim ${HOME}/.bashrc'
 # alias vimarc='vim ${HOME}/.amyrisrc'       # from Rob MacGowan
+# forward the Authentication Agent - from Brian at Pado
+# alias ssh="ssh -A"
+
 
 
 #---------------------------------------------------------------
@@ -109,16 +104,16 @@ alias sleep='sudo shutdown -s now'
 alias ls='ls -hF'       
 
 # Sort lists by...(show hidden, long format, exclude groups)
-alias lk='ls -AlSro'      # Sort by size, biggest last.
-alias lt='ls -Altro'      # Sort by date, most recent last.
-alias lc='ls -Altcro'     # Sort by change time, most recent last.
+alias lk='ls -AlSro'      # Size, biggest last.
+alias lt='ls -Altro'      # Date, most recent last.
+alias lc='ls -Altcro'     # Change, most recent last.
 
 # Show more, sort alphanumerically
-alias l='ls -A1'     # Single col, show .dot files,  show '/', '*'
+alias l='ls -A1'          # Single col, show .dot files,  show '/', '*'
 alias la='ls -A'          # Show .dot files, '/' dirs
 alias ll='ls -Alo'        # Show hidden, long format, '/' dirs, no group,
 alias lal='ls -al'        # Show hidden and long
-alias lsd='\ls -A1 -d */'     # Directories only
+alias lsd='\ls -A1 -d */' # Directories only
 
 # List recursively
 alias lr='ls -R'          # Recursively
@@ -130,10 +125,10 @@ alias treela='tree -Csha' # As tree, include hidden
 #       >>> Show Aliases and Common Usage  <<<
 #---------------------------------------------------------------
 # List all aliases
-alias lalias='grep alias ${JAYCI_HOME}/.jayrc'
+alias lalias='grep alias ${JAY_HOME}/.jayrc'
 
 # List the 'ls' family
-alias lsls="grep 'alias l' ${JAYCI_HOME}/.jayrc"
+alias lsls="grep 'alias l' ${JAY_HOME}/.jayrc"
 
 
 # 'jay' to list common usage 
@@ -173,13 +168,23 @@ echo ;
 echo ;'
 #---------------------------------------------------------------
 
-#---------------------------------------------------------------
-#       >>>  EXTRAS   <<<
-#---------------------------------------------------------------
-# forward the Authentication Agent - from Brian at Pado
-# alias ssh="ssh -A"
 
+#---------------------------------------------------------------
+#       >>>  FUNCTIONS   <<<
+#---------------------------------------------------------------
 
+#------------Jump to workspace, then jump back------------------
+# Remember where you came from, then jump to workspace
+function src () {
+    pushd . $@ > /dev/null
+    cd ${JAY_SPACE}
+}
+
+# Come right back
+function unsrc () {
+    cd ~1
+}
+#---------------------------------------------------------------
 
 
 
@@ -193,7 +198,7 @@ if [ -f $HOME/.bashrc ]; then
 else
     echo "[1] .zshrc ---> do:"
 	echo '\t $ source ~/.oh-my-zsh'
-	echo '\t $ source ~/.jayrc@ -> JAYCI_WORKSPACE/jayci/.jayrc'
+	echo '\t $ source ~/.jayrc@ -> JAY_SPACE/jayci/.jayrc'
 fi
 echo ""
 echo '[2] .jayrc ---> do:'
@@ -203,10 +208,10 @@ echo '-----------------------------------------------------------------'
 
 
 #---------------------------------------------------------------
-#       >>>  SOURCE <project>.cfg   <<<
+#       >>>  SOURCE all <project>.cfg   <<<
 #---------------------------------------------------------------
-if [ -d ${JAYCI_WORKSPACE:?} ] && [ "$(ls -A ${JAYCI_WORKSPACE})" ] ; then
-    for i in $( ls -1 ${JAYCI_WORKSPACE}/*/*.cfg|egrep -v "nose|setup" );  do # printf "===> %-30s .jayrc ---sources---> $i \n";# 
+if [ -d ${JAY_SPACE:?} ] && [ "$(ls -A ${JAY_SPACE})" ] ; then
+    for i in $( ls -1 ${JAY_SPACE}/*/*.cfg|egrep -v "nose|setup" );  do # printf "===> %-30s .jayrc ---sources---> $i \n";# 
          # Walk jaycody/ ; source each <project>/*.cfg ; let each .cfg list files they source.
          echo ""
          echo ""
@@ -217,7 +222,7 @@ if [ -d ${JAYCI_WORKSPACE:?} ] && [ "$(ls -A ${JAYCI_WORKSPACE})" ] ; then
          source $i;
          done
 else
-    echo "There are no .cfg files in your JAYCI_WORKSPACE repos."
+    echo "There are no .cfg files in your JAY_SPACE repos."
 fi
 #===============================================================
 

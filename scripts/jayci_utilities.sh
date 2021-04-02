@@ -1,6 +1,21 @@
-#! /bin/bash
+#!/bin/bash
 
 
+
+#jayhelp_pick () {
+#    echo "\nWelcome to jayhelp function. Please pick an option"
+#    read choice
+#    echo -n "You entered $choice"
+  #      case ${choice} in
+  #          
+  #          1) echo "1";; # jaylias;;
+  #          2) echo "2";; # jaygit_branch;;
+  #          3) echo "selection #4";; #jaygit_tags;;
+  #          4) echo "selection #4";;
+  #          *) echo "Not a valid choice!";;
+  #      esac
+#  exit 
+#}
 
 # Check the source pipeline
 jayci_test_source_pipeline () {
