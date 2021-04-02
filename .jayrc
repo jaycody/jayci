@@ -1,5 +1,3 @@
-#!/bin/bash
-
 #---------------------------------------------------------------
 # >>>  .jayrc   <<<
 #---------------------------------------------------------------
@@ -44,6 +42,7 @@ fi
 alias jaycody='cd ${JAY_SPACE}; tree --dirsfirst -a -L 2 -I .get; l'
 alias jayci='cd ${JAY_SPACE}/jayci; l; tree --dirsfirst -a -I .git'
 alias snapcap='cd ${JAY_SPACE}/snapcap; l; tree --dirsfirst -a -I .git; . ./snapcap.cfg'
+alias jayutil='cd ${JAY_SPACE}/jayutil; lsd'
 alias ..='cd ..'
 
 # Take me to Amyris Repo
