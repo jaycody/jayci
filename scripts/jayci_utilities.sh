@@ -22,12 +22,13 @@ jayci_update_repos () {
         jayci_announce "pulling and updating $i"
         cd $i
         
-        if [[ "${i}" == "snapcap/" ]]
+        if [[ "${i}" == "snapcap/" ]] || [[ "${i}" == "marching-squares/" ]]
         then 
             git checkout main
+        else
+            git checkout master
         fi
-        git checkout master
-        
+
         git pull
         git status
         echo "-----------------------------"
