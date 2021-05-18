@@ -10,7 +10,7 @@
 export JAY_SPACE=${HOME}/jaycody     # my github root 
 export JAY_USER=${USER}              # me
 export JAY_HOME=${HOME}              # ~
-export JAMYRIS=${JAYMRIS}          # my amyris proj 
+export JAMYRIS=${HOME}/repo          # my amyris proj 
 
 
 #===============================================================
@@ -21,8 +21,13 @@ export PATH="$PATH:$HOME/Library/Python/2.7/bin"
 
 
 #===============================================================
-###                  >>> ALIASES <<<
+###                  >>> TOOLS <<<
 #===============================================================
+# network tools
+alias mtr=/usr/local/sbin/mtr
+alias starwars="nc towel.blinkenlights.nl 23"
+alias niko="echo 'nom nom nom'"
+alias niki="for n in {1..5000}; do niko ${n}; done"
 
 #---------------------------------------------------------------
 #   >>>   Refresh me RESH     <<<
@@ -43,12 +48,13 @@ alias jaycody='cd ${JAY_SPACE}; tree --dirsfirst -a -L 2 -I .get; l'
 alias jayci='cd ${JAY_SPACE}/jayci; l; tree --dirsfirst -a -I .git'
 alias snapcap='cd ${JAY_SPACE}/snapcap; l; tree --dirsfirst -a -I .git; . ./snapcap.cfg'
 alias jayutil='cd ${JAY_SPACE}/jayutil; lsd'
+alias pshape='cd ${JAY_SPACE}/pshape-studio; l; tree --dirsfirst -a -L 2 -I .git;'
 alias ..='cd ..'
 
 # Take me to Amyris Repo
-alias repo='cd ${JAYMRIS}; l; tree --dirsfirst -a -L 2'
-alias repocm='cd ${JAYMRIS}/configuration-management; l; tree --dirsfirst -a -I .git -L 2'
-alias handbook='cd ${JAYMRIS}/devops-handbook; l; tree --dirsfirst -a -I .git'
+alias repo='cd ${JAMYRIS}; l; tree --dirsfirst -a -L 2'
+alias repocm='cd ${JAMYRIS}/configuration-management; l; tree --dirsfirst -a -I .git -L 2'
+alias handbook='cd ${JAMYRIS}/devops-handbook; l; tree --dirsfirst -a -I .git'
 
 #---------------------------------------------------------------
 #   >>>  Edit configs   <<<
@@ -65,8 +71,7 @@ alias vimvimrc='vim ${JAY_SPACE}/jayci/.vimrc'
 #---------------------------------------------------------------
 # alias vimsh='vim ${HOME}/.bash_profile'    # from Owen's bbsh 20130403
 # alias vimarc='vim ${HOME}/.amyrisrc'       # from Rob MacGowan
-# forward the Authentication Agent - from Brian at Pado
-# alias ssh="ssh -A"
+# alias ssh="ssh -A" # Forward the authentication agent (from Brian at Pado)
 
 
 
@@ -146,6 +151,7 @@ echo ;
 echo -----------INFO-------------;
 echo h=history, path, gitlog;
 echo du, df, dirsize -- disk used, disk free, dirsize;
+echo env -- show environment variables
 echo ;
 echo -----------LIST-------------;
 echo lk, lt, lc: size, date, change date, big and new last;
@@ -154,8 +160,8 @@ echo lsd: dir only;
 echo lr: recursively;
 echo ;
 echo -----------FREQUENT COMMANDS-------------;
-echo grep: \\t search the file;
-echo find: \\t walk a File Directory;
+echo grep: \\t search inside a file;
+echo find: \\t search FOR a file;
 echo whereis:  ex. whereis python = ;
 echo rm -rf: remove directory and all files therein, without asking permission;
 echo cp -r: \\t copy directory and all files therein;
@@ -164,7 +170,17 @@ echo ">" : \\t  takes output of command at left and WRITES it to file on right;
 echo \\t -----ex  cat my.txt ">" your.txt;
 echo \\t ----- OR write directly to a file:  cat ">" foo.txt;
 echo ;
+echo ----------------NETWORK----------------------;
+echo ping, ifconfig, ip addr, ip rout, dig;
+echo nmap, nikto, dnsmap;
+echo ;
+echo ----------------FILESYSTEM----------------------;
+echo cat: /etc/lsb-release  -- distribution;
+echo cat: /proc/cpuinfo     -- how many cpus;
+echo free                     -- tell me about your RAM;
+echo rsync;
 echo ;'
+
 #---------------------------------------------------------------
 
 

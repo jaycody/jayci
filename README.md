@@ -2,6 +2,28 @@
 > Mini CI/CD framework for my personal projects
 __________________
 
+## bash notes
+```bash
+# see wussup
+env
+
+# find something in 'wussup'
+env | grep something
+
+# configure bash history
+HISTCONTROL
+
+
+
+
+
+
+
+
+```
+
+
+
 
 ## 'HERE' docs:
 > an easy way of echoing text to stdout. 
