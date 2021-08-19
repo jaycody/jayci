@@ -18,6 +18,8 @@ export JAMYRIS=${HOME}/repo          # my amyris proj
 #===============================================================
 # Path to pip, pip2, and pip2.7
 export PATH="$PATH:$HOME/Library/Python/2.7/bin"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
 
 
 #===============================================================
@@ -76,7 +78,7 @@ alias vimvimrc='vim ${JAY_SPACE}/jayci/.vimrc'
 
 
 #---------------------------------------------------------------
-#    >>> Safey and Convenience <<< 
+#    >>> Safety and Convenience <<< 
 #---------------------------------------------------------------
 # Confirm first
 alias rm='rm -i'
@@ -100,6 +102,10 @@ alias gitlog='git log --oneline --graph'     # gits by single line
 alias restart='sudo shutdown -r now'
 alias sleep='sudo shutdown -s now'
 
+# Update packages
+alias update="brew update; brew upgrade; brew cu -ay; brew cleanup; pip install --upgrade `pip list --outdated | awk 'NR>2 {print $1}'`"
+### fetch newest brew; upgrade outdated packages; upgrade all casks; clean up outdated dowloads of previous package versions;
+###   output installed pip packages currently outdated and upgrade them
 
 #---------------------------------------------------------------
 #     >>> the 'ls' family <<< 
