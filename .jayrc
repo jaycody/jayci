@@ -103,7 +103,7 @@ alias restart='sudo shutdown -r now'
 alias sleep='sudo shutdown -s now'
 
 # Update packages
-update="brew update; brew upgrade; brew cleanup; 
+alias update="brew update; brew upgrade; brew cleanup; 
               pip install --upgrade `pip list --outdated | awk 'NR>2 {print $1}'`"
 ### fetch newest brew; upgrade outdated packages; upgrade all casks; clean up outdated dowloads of previous package versions;
 ###   output installed pip packages currently outdated and upgrade them
