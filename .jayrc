@@ -19,7 +19,8 @@ export JAMYRIS=${HOME}/repo          # my amyris proj
 # Path to pip, pip2, and pip2.7
 export PATH="$PATH:$HOME/Library/Python/2.7/bin"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-
+# 'gnubin' dir so I can use gsed as 'sed'
+PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
 
 #===============================================================
