@@ -58,7 +58,7 @@ alias ..='cd ..'
 alias repo='cd ${JAMYRIS}; l; tree --dirsfirst -a -L 2'
 alias repocm='cd ${JAMYRIS}/configuration-management; l; tree --dirsfirst -a -I .git -L 2'
 alias handbook='cd ${JAMYRIS}/devops-handbook; l; tree --dirsfirst -a -I .git'
-
+alias datadog='cd  ${JAMYRIS}/datadog; l; tree --dirsfirst -a -L 2'
 #---------------------------------------------------------------
 #   >>>  Edit configs   <<<
 #---------------------------------------------------------------
