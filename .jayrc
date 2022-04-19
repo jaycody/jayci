@@ -16,11 +16,23 @@ export JAMYRIS=${HOME}/repo          # my amyris proj
 #===============================================================
 ###                >>> SET PATH   <<<
 #===============================================================
+# Coming from BASH but using oh-my-zsh
+PATH="$HOME/bin:/usr/local/bin:$PATH"
+
 # Path to pip, pip2, and pip2.7
-export PATH="$PATH:$HOME/Library/Python/2.7/bin"
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+PATH="$HOME/Library/Python/2.7/bin:$PATH"
+PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
 # 'gnubin' dir so I can use gsed as 'sed'
 PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+
+# Homebrew's "sbin"
+PATH="/usr/local/sbin:$PATH"
+
+PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+PATH="/usr/local/opt/python@3.8/bin:$PATH"
+
+export PATH
 
 
 #===============================================================
@@ -59,6 +71,8 @@ alias repo='cd ${JAMYRIS}; l; tree --dirsfirst -a -L 2'
 alias repocm='cd ${JAMYRIS}/configuration-management; l; tree --dirsfirst -a -I .git -L 2'
 alias handbook='cd ${JAMYRIS}/devops-handbook; l; tree --dirsfirst -a -I .git'
 alias datadog='cd  ${JAMYRIS}/datadog; l; tree --dirsfirst -a -L 2'
+
+
 #---------------------------------------------------------------
 #   >>>  Edit configs   <<<
 #---------------------------------------------------------------
@@ -104,16 +118,17 @@ alias restart='sudo shutdown -r now'
 alias sleep='sudo shutdown -s now'
 
 # Update packages
-alias update="brew update; brew upgrade; brew cleanup; 
+alias update="brew update; brew upgrade; brew cleanup;
               pip install --upgrade `pip list --outdated | awk 'NR>2 {print $1}'`"
 ### fetch newest brew; upgrade outdated packages; upgrade all casks; clean up outdated dowloads of previous package versions;
 ###   output installed pip packages currently outdated and upgrade them
+
 
 #---------------------------------------------------------------
 #     >>> the 'ls' family <<< 
 #---------------------------------------------------------------
 # List sizes as human-readable
-alias ls='ls -hF'       
+alias ls='ls -hF'
 
 # Sort lists by...(show hidden, long format, exclude groups)
 alias lk='ls -AlSro'      # Size, biggest last.
@@ -132,6 +147,9 @@ alias lr='ls -R'          # Recursively
 alias tree='tree -Csh'    # Recursively as tree 
 alias treela='tree -Csha' # As tree, include hidden
 
+# Python3 only
+alias python=python3
+alias pip=pip3
 
 #---------------------------------------------------------------
 #       >>> Show Aliases and Common Usage  <<<
@@ -250,3 +268,9 @@ else
 fi
 #===============================================================
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Applications/google-cloud-sdk/path.zsh.inc' ]; then . '/Applications/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Applications/google-cloud-sdk/completion.zsh.inc' ]; then . '/Applications/google-cloud-sdk/completion.zsh.inc'; fi
