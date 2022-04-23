@@ -19,6 +19,8 @@ export JAMYRIS=${HOME}/repo          # my amyris proj
 # Coming from BASH but using oh-my-zsh
 PATH="$HOME/bin:/usr/local/bin:$PATH"
 
+
+
 #========
 # pyenv
 #========
@@ -33,7 +35,23 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include"
 
 # For pkg-config to find zlib you may need to set:
 export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+
+
+# We want to regularly go to our virtual environment directory
+export WORKON_HOME=~/.virtualenvs
+# If in a given virtual environment, make a virtual environment directory
+# If one does not already exist
+mkdir -p $WORKON_HOME
+# Activate the new virtual environment by calling this script
+# Note that $USER will substitute for your current user
+. ~/.pyenv/versions/3.10.3/bin/virtualenvwrapper.sh
+
 #=========
+
+
+
+
+
 
 
 # Path to pip, pip2, and pip2.7
