@@ -19,6 +19,23 @@ export JAMYRIS=${HOME}/repo          # my amyris proj
 # Coming from BASH but using oh-my-zsh
 PATH="$HOME/bin:/usr/local/bin:$PATH"
 
+#========
+# pyenv
+#========
+# set pyenv to run at every prompt to manage my python environments
+# see https://opensource.com/article/19/6/python-virtual-environments-mac
+eval "$(pyenv init -)"
+
+# zlib compression algorithm (related to pyenv) 
+## For compilers to find zlib you may need to set:
+export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/sqlite/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include"
+
+# For pkg-config to find zlib you may need to set:
+export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+#=========
+
+
 # Path to pip, pip2, and pip2.7
 PATH="$HOME/Library/Python/2.7/bin:$PATH"
 PATH="/usr/local/opt/python/libexec/bin:$PATH"
