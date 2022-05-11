@@ -26,7 +26,11 @@ PATH="$HOME/bin:/usr/local/bin:$PATH"
 #========
 # set pyenv to run at every prompt to manage my python environments
 # see https://opensource.com/article/19/6/python-virtual-environments-mac
-eval "$(pyenv init -)"
+# and see: https://opensource.com/article/19/5/python-3-default-mac
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
 
 # zlib compression algorithm (related to pyenv) 
 ## For compilers to find zlib you may need to set:
@@ -36,7 +40,9 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include"
 # For pkg-config to find zlib you may need to set:
 export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
 
-
+# virtualenvwrapper:
+VIRTUALENVWRAPPER_PYTHON=~/.pyenv/versions/3.10.3/bin/python3
+# Use virtual environments to isolate dependency management on a per-project basis
 # We want to regularly go to our virtual environment directory
 export WORKON_HOME=~/.virtualenvs
 # If in a given virtual environment, make a virtual environment directory
@@ -58,6 +64,10 @@ mkdir -p $WORKON_HOME
 PATH="$HOME/Library/Python/2.7/bin:$PATH"
 PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
+PATH="/usr/local/lib/python3.8/site-packages:$PATH"
+PATH="/usr/local/lib/python3.9/site-packages:$PATH"
+PATH="/usr/local/lib/python3.10/site-packages:$PATH"
+
 # 'gnubin' dir so I can use gsed as 'sed'
 PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
@@ -66,6 +76,8 @@ PATH="/usr/local/sbin:$PATH"
 
 PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 PATH="/usr/local/opt/python@3.8/bin:$PATH"
+PATH="/usr/local/opt/python@3.9/bin:$PATH"
+PATH="/usr/local/opt/python@3.10/bin:$PATH"
 
 export PATH
 
@@ -183,8 +195,8 @@ alias tree='tree -Csh'    # Recursively as tree
 alias treela='tree -Csha' # As tree, include hidden
 
 # Python3 only
-alias python=python3
-alias pip=pip3
+#alias python=python3
+#alias pip=pip3
 
 #---------------------------------------------------------------
 #       >>> Show Aliases and Common Usage  <<<
