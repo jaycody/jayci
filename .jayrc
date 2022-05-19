@@ -61,6 +61,7 @@ mkdir -p $WORKON_HOME
 
 
 # Path to pip, pip2, and pip2.7
+alias pip=pip3
 PATH="$HOME/Library/Python/2.7/bin:$PATH"
 PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
@@ -135,7 +136,7 @@ alias vimvimrc='vim ${JAY_SPACE}/jayci/.vimrc'
 #---------------------------------------------------------------
 # alias vimsh='vim ${HOME}/.bash_profile'    # from Owen's bbsh 20130403
 # alias vimarc='vim ${HOME}/.amyrisrc'       # from Rob MacGowan
-# alias ssh="ssh -A" # Forward the authentication agent (from Brian at Pado)
+alias ssh="ssh -A" # Forward the authentication agent (from Brian at Pado)
 
 
 
@@ -194,9 +195,6 @@ alias lr='ls -R'          # Recursively
 alias tree='tree -Csh'    # Recursively as tree 
 alias treela='tree -Csha' # As tree, include hidden
 
-# Python3 only
-#alias python=python3
-#alias pip=pip3
 
 #---------------------------------------------------------------
 #       >>> Show Aliases and Common Usage  <<<
