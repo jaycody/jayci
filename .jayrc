@@ -27,30 +27,30 @@ PATH="$HOME/bin:/usr/local/bin:$PATH"
 # set pyenv to run at every prompt to manage my python environments
 # see https://opensource.com/article/19/6/python-virtual-environments-mac
 # and see: https://opensource.com/article/19/5/python-3-default-mac
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+# if command -v pyenv 1>/dev/null 2>&1; then
+#  eval "$(pyenv init -)"
+# fi
 
 
 # zlib compression algorithm (related to pyenv) 
 ## For compilers to find zlib you may need to set:
-export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/sqlite/lib"
-export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include"
+# export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/sqlite/lib"
+# export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include"
 
 # For pkg-config to find zlib you may need to set:
-export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+# export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
 
 # virtualenvwrapper:
-VIRTUALENVWRAPPER_PYTHON=~/.pyenv/versions/3.10.3/bin/python3
+# VIRTUALENVWRAPPER_PYTHON=~/.pyenv/versions/3.10.3/bin/python3
 # Use virtual environments to isolate dependency management on a per-project basis
 # We want to regularly go to our virtual environment directory
-export WORKON_HOME=~/.virtualenvs
+# export WORKON_HOME=~/.virtualenvs
 # If in a given virtual environment, make a virtual environment directory
 # If one does not already exist
-mkdir -p $WORKON_HOME
+# mkdir -p $WORKON_HOME
 # Activate the new virtual environment by calling this script
 # Note that $USER will substitute for your current user
-. ~/.pyenv/versions/3.10.3/bin/virtualenvwrapper.sh
+#. ~/.pyenv/versions/3.10.3/bin/virtualenvwrapper.sh
 
 #=========
 
@@ -62,23 +62,23 @@ mkdir -p $WORKON_HOME
 
 # Path to pip, pip2, and pip2.7
 alias pip=pip3
-PATH="$HOME/Library/Python/2.7/bin:$PATH"
-PATH="/usr/local/opt/python/libexec/bin:$PATH"
+# PATH="$HOME/Library/Python/2.7/bin:$PATH"
+# PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
-PATH="/usr/local/lib/python3.8/site-packages:$PATH"
-PATH="/usr/local/lib/python3.9/site-packages:$PATH"
-PATH="/usr/local/lib/python3.10/site-packages:$PATH"
+# PATH="/usr/local/lib/python3.8/site-packages:$PATH"
+# PATH="/usr/local/lib/python3.9/site-packages:$PATH"
+# PATH="/usr/local/lib/python3.10/site-packages:$PATH"
 
 # 'gnubin' dir so I can use gsed as 'sed'
-PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+# PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
 # Homebrew's "sbin"
-PATH="/usr/local/sbin:$PATH"
+# PATH="/usr/local/sbin:$PATH"
 
-PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-PATH="/usr/local/opt/python@3.8/bin:$PATH"
-PATH="/usr/local/opt/python@3.9/bin:$PATH"
-PATH="/usr/local/opt/python@3.10/bin:$PATH"
+# PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+# PATH="/usr/local/opt/python@3.8/bin:$PATH"
+# PATH="/usr/local/opt/python@3.9/bin:$PATH"
+# PATH="/usr/local/opt/python@3.10/bin:$PATH"
 
 export PATH
 
@@ -315,7 +315,7 @@ fi
 
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Applications/google-cloud-sdk/path.zsh.inc' ]; then . '/Applications/google-cloud-sdk/path.zsh.inc'; fi
+# if [ -f '/Applications/google-cloud-sdk/path.zsh.inc' ]; then . '/Applications/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Applications/google-cloud-sdk/completion.zsh.inc' ]; then . '/Applications/google-cloud-sdk/completion.zsh.inc'; fi
+# if [ -f '/Applications/google-cloud-sdk/completion.zsh.inc' ]; then . '/Applications/google-cloud-sdk/completion.zsh.inc'; fi
