@@ -27,7 +27,7 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr ' *'
 zstyle ':vcs_info:*' stagedstr ' +'
 # Show branch and stage/unstage changes
-zstyle ':vcs_info:git:*' formats '%F{yellow}(%b%u%c)%f'
+zstyle ':vcs_info:git:*' formats '%F{yellow}(%b%F{red}%u%f%F{cyan}%c%f)%f'
 # When git action, show it
 zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
 
@@ -38,7 +38,4 @@ setopt PROMPT_SUBST
 PROMPT='%B%F{white}${PWD/#$HOME/~}%f ${vcs_info_msg_0_} %(!.#.>)%b '
 ##############################
 
-
-
-#RPROMPT=\$vcs_info_msg_0_
 
