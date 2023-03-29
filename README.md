@@ -13,13 +13,6 @@ env | grep something
 # configure bash history
 HISTCONTROL
 
-
-
-
-
-
-
-
 ```
 
 
@@ -60,6 +53,7 @@ _EOF_
 # symlink to the actual config files from the expected locations in the home folder.
 ln -s $HOME/jaycody/jayci/.jayrc $HOME/.jayrc
 ln -s $HOME/jaycody/jayci/.vimrc $HOME/.vim/vimrc
+ln -s $HOME/jaycody/jayci/.zshrc $HOME/.zshrc
 ln -s $HOME/jaycody/jayci/configs/htoprc $HOME/.config/htop/htoprc
 
 

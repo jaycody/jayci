@@ -62,6 +62,11 @@ PATH="$HOME/bin:/usr/local/bin:$PATH"
 
 # Path to pip, pip2, and pip2.7
 alias pip=pip3
+
+# Set PYTHON path
+PATH="/Users/jstephens/Library/Python/3.9/bin:$PATH"
+
+#### ARCHIVE PATHS #####
 # PATH="$HOME/Library/Python/2.7/bin:$PATH"
 # PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
@@ -79,6 +84,7 @@ alias pip=pip3
 # PATH="/usr/local/opt/python@3.8/bin:$PATH"
 # PATH="/usr/local/opt/python@3.9/bin:$PATH"
 # PATH="/usr/local/opt/python@3.10/bin:$PATH"
+#### ARCHIVED PATHS ####
 
 export PATH
 

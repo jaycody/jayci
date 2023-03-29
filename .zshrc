@@ -1,0 +1,3 @@
+## ZSH PROMPT CONFIGURATION ##
+PROMPT='%n:%T:~$'
+
