@@ -27,7 +27,7 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr ' *'
 zstyle ':vcs_info:*' stagedstr ' +'
 # Show branch and stage/unstage changes
-zstyle ':vcs_info:git:*' formats '%F{yellow}(%b)%f'
+zstyle ':vcs_info:git:*' formats '%F{yellow}(%b%u%c)%f'
 # When git action, show it
 zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
 
