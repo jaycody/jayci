@@ -113,6 +113,7 @@ fi
 #   >>>   Take me to....    <<<
 #---------------------------------------------------------------
 # My repos
+alias org='cd ${JAY_HOME}/Dropbox/_APPS/orgmode; lr'
 alias jaycody='cd ${JAY_SPACE}; tree --dirsfirst -a -L 2 -I .get; l'
 alias jayci='cd ${JAY_SPACE}/jayci; l; tree --dirsfirst -a -I .git'
 alias snapcap='cd ${JAY_SPACE}/snapcap; l; tree --dirsfirst -a -I .git; . ./snapcap.cfg'
