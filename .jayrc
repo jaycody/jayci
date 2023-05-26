@@ -256,7 +256,10 @@ echo ----------------FILESYSTEM----------------------;
 echo cat: /etc/lsb-release  -- distribution;
 echo cat: /proc/cpuinfo     -- how many cpus;
 echo free                     -- tell me about your RAM;
-echo rsync;
+echo pushd \\t Like 'cd' but also adds to directory stack; 
+echo pushd +0 \\t list pushd directory stack;
+echo popd \\ removes dirs from the directory stack;
+echo dirs -v \\t view pushd dir stack AND list their index. Index 0 = current location;
 echo ;'
 
 #---------------------------------------------------------------
