@@ -134,8 +134,10 @@ alias datadog='cd  ${JAMYRIS}/datadog; l; tree --dirsfirst -a -L 2'
 alias vimjrc='vim ${JAY_SPACE}/jayci/.jayrc'
 alias vimconfig='vim ${JAY_SPACE}/jayci/jayci.cfg'
 alias vimutil='vim ${JAY_SPACE}/jayci/scripts/jayci_utilities.sh'
-alias vimzrc='vim ${HOME}/.zshrc'
 alias vimvimrc='vim ${JAY_SPACE}/jayci/.vimrc'
+
+alias vimzrc='vim ${HOME}/.zshrc'
+alias vimorg='vim ${HOME}/.emacs.d/init.el'
 
 
 #---------------------------------------------------------------
