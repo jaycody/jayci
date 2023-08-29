@@ -39,7 +39,7 @@
     ("BACK" . (:foreground "grey" :slant italic :weight bold))))
 
 (setq org-agenda-skip-function-global
-    '(org-agenda-skip-entry-if 'TODO 'DONE))
+    '(org-agenda-skip-entry-if 'TODO '("DONE")))
 
 (custom-theme-set-faces 'user
   `(org-level-1 ((t (:height 1.2 :bold t :weight bold)))))
