@@ -4,6 +4,9 @@ __________________
 
 ## bash notes
 ```bash
+# list my alias helpers
+jay
+
 # see wussup
 env
 
@@ -15,24 +18,7 @@ HISTCONTROL
 
 ```
 
-
-
-
-## 'HERE' docs:
-> an easy way of echoing text to stdout. 
-```bash
-# Start a HERE doc
-cat << _EOF_
-#----> Text between the command 
-#----> and the _EOF_ 'end token' 
-#----> will display on the screen
-#----> iso ibsum loramus reximus 
-_EOF_
-```
--------
-
-
-## git quick
+## git: quick ref
 ![git_tags-screenshot](./imgs/git-tags.png)
 ![git-feature_branch](imgs/git-feature_branch.png)
 
@@ -46,21 +32,18 @@ _EOF_
 -----------------
 
 
-## Setup:
+## `jayci` setup:
 1. Clone `jayci` repo to `~/jaycody` and `cd jayci`
-2. Symlink the expected config locations in `~/.*` to actual config files  in `jayci/` & `jayci/configs/`(insert script here)
+2. Symlink the expected config locations in `~/.*` to actual config files  in `jayci/` & `jayci/configs/`
 ```bash
-# symlink to the actual config files from the expected locations in the home folder.
+# symlink to my config files in jayci repo from the expected locations in the home folder.
+# ln -s [TARGET DIRECTORY OR FILE] [SYMLINK]
 ln -s $HOME/jaycody/jayci/.jayrc $HOME/.jayrc
 ln -s $HOME/jaycody/jayci/.vimrc $HOME/.vim/vimrc
 ln -s $HOME/jaycody/jayci/.zshrc $HOME/.zshrc
-ln -s $HOME/jaycody/jayci/configs/htoprc $HOME/.config/htop/htoprc
 
-
-# symlink htop's actual config file, `jayci/configs/htoprc` to its expected location `~/.config/htop/htoprc`
-ln -s $HOME/jaycody/jayci/configs/htoprc $HOME/.config/htop/htoprc
 ```
-3. Append `.bash_profile` with instructions to source `${HOME}/.jayrc`
+3. Append `.zshrc` with instructions to source `${HOME}/.jayrc`
 ```bash
 # Source .jayrc if .jayrc is present
 if [ -f $HOME/.jayrc ]; then
@@ -99,7 +82,7 @@ __________________
 
 
 ## Sourcing Cascade Order
-Here's the cascade order once .bash_profile is updated and a symlink created for .jayrc:
+Here's the cascade order once .zshrc is updated and a symlink created for .jayrc:
 
 | FILE | ACTION |
 |------|--------|

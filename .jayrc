@@ -145,7 +145,9 @@ alias vimorg='vim ${HOME}/.emacs.d/init.el'
 #---------------------------------------------------------------
 # alias vimsh='vim ${HOME}/.bash_profile'    # from Owen's bbsh 20130403
 # alias vimarc='vim ${HOME}/.amyrisrc'       # from Rob MacGowan
-alias ssh="ssh -A" # Forward the authentication agent (from Brian at Pado)
+
+### turn this off to experiment with whether ANSIBLE can access hosts
+## alias ssh="ssh -A" # Forward the authentication agent (from Brian at Pado)
 
 
 
