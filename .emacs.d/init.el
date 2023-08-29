@@ -28,16 +28,15 @@
 
 ;;;; WORkFLOW
 (setq org-todo-keywords
-  '((sequence "TODO" "NOW->" "NEXT" "DECK" "WAIT" "BLOG" "DONE")))
+  '((sequence "NOW->" "NEXT" "DECK" "WAIT" "BACK" "DONE")))
 
 (setq org-todo-keyword-faces
-  '(("TODO" . (:foreground "grey" :weight bold))
-    ("NOW" . (:foreground "red" :weight bold))
+  '(("NOW" . (:foreground "red" :weight bold))
     ("NEXT" . (:foreground "orange" :weight bold))
     ("DECK" . (:foreground "grey" :weight bold))
     ("DONE" . (:foreground "blue" :weight bold))
     ("WAIT" . (:foreground "yellow" :background "grey" :slant italic :weight bold))
-    ("BLOG" . (:foreground "grey" :slant italic :weight bold))))
+    ("BACK" . (:foreground "grey" :slant italic :weight bold))))
 
 (setq org-agenda-skip-function-global
     '(org-agenda-skip-entry-if 'TODO 'DONE))
@@ -64,7 +63,14 @@
 ;;(org-level-8 ((t ,ol8)))
 
 ;;;; CONTEXTS and TAGS
-(setq org-tag-alist '(("@amyris" . ?a) ("@jaylab" . ?l) ("workflow" . ?f) ("garage" . ?g)))
+;; C-c C-q <tag shortcut>
+(setq org-tag-alist '(("@portal" . ?p) 
+                      ("@jira" . ?j) 
+                      ("@ops" . ?o) 
+                      ("@misti" . ?m)
+                      ("@admin" . ?a) 
+                      ("@comms" . ?c)
+                      ("@isc" . ?i)))
 
 ;;;; LAYOUT
 (setq org-startup-indented t)
