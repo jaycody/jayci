@@ -18,8 +18,10 @@
 ;; The above is the default in recent emacsen
 
 ;;;; Acitvate AGENDA
+(setq org-agenda-files '("~/Dropbox/_APPS/orgmode/done-archive.org"))
+
  (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
- ;; bind keys to invoke agenda mode 
+;; bind keys to invoke agenda mode 
  (global-set-key "\C-cl" 'org-store-link)
  (global-set-key "\C-ca" 'org-agenda)
  (global-set-key "\C-cc" 'org-capture)
@@ -28,7 +30,7 @@
 
 ;;;; WORkFLOW
 (setq org-todo-keywords
-  '((sequence "NOW->" "NEXT" "DECK" "WAIT" "BACK" "DONE")))
+  '((sequence "NOW->" "NEXT" "DECK" "WAIT" "BACK" "|" "DONE")))
 
 (setq org-todo-keyword-faces
   '(("NOW" . (:foreground "red" :weight bold))
@@ -36,10 +38,35 @@
     ("DECK" . (:foreground "grey" :weight bold))
     ("DONE" . (:foreground "blue" :weight bold))
     ("WAIT" . (:foreground "yellow" :background "grey" :slant italic :weight bold))
-    ("BACK" . (:foreground "grey" :slant italic :weight bold))))
+    ("BACK" . (:foreground "black" :slant italic :weight bold))))
 
-(setq org-agenda-skip-function-global
-    '(org-agenda-skip-entry-if 'TODO '("DONE")))
+(defun my-org-hide-done ()
+  "Hide current task if marked as DONE."
+  (when (member org-state org-done-keywords)
+    (org-flag-subtree t)))
+
+(add-hook 'org-after-todo-state-change-hook 'my-org-hide-done)
+
+;;;; Hide DONE when I collapse a heading
+;(defun my-org-hide-done (&optional pom)
+;  "Hide headline if it's marked as DONE."
+;  (save-excursion
+;    (when pom (goto-char pom))
+;    (when (looking-at org-complex-heading-regexp)
+;      (when (member (match-string 2) org-done-keywords)
+;        (org-flag-subtree t)))))
+;(add-hook 'org-cycle-hook #'my-org-hide-done)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;(defun my-org-mode-hook ()
+;  "Hide DONE tasks."
+;  (org-map-entries
+;   (lambda ()
+;     (when (member (org-get-todo-state) org-done-keywords)
+;       (org-flag-subtree t)))
+;   t 'file))
+;(add-hook 'org-mode-hook 'my-org-mode-hook)
+
 
 (custom-theme-set-faces 'user
   `(org-level-1 ((t (:height 1.2 :bold t :weight bold)))))
