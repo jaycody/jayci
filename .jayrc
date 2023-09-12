@@ -105,10 +105,6 @@ alias mkdir='mkdir -p'
 # List directories in the stack, but always use their index numbers
 alias dirs="dirs -v"
 
-# List cdpath as column
-alias cdpath="echo -e ${CDPATH// /\\n}"
-
-
 
 # Show me, paint the fence
 alias h='history'                    # shell history
@@ -126,7 +122,7 @@ alias update="brew update; brew upgrade; brew cleanup;
 ###   output installed pip packages currently outdated and upgrade them
 
 # Path to pip, pip2, and pip2.7
-alias pip=pip3
+alias pip="pip3"
 
 #---------------------------------------------------------------
 #     >>> the 'ls' family <<< 
@@ -205,14 +201,14 @@ echo ;
 echo ----------------FILESYSTEM----------------------;
 echo cat: /etc/lsb-release  -- distribution;
 echo cat: /proc/cpuinfo     -- how many cpus;
-echo free                     -- tell me about your RAM;
-echo pushd \\t W/o argument will switch the top two dirs in the stack;
-echo pushd <dir> \\t Like 'cd' but also adds to directory stack; 
-echo pushd -N \\t where 'N' is the index provided by dirs;
-echo popd \\ removes dirs from the directory stack;
-echo dirs -v \\t view pushd dir stack AND list their index. Index 0 = current location;
-echo src \\t Takes me directly to JAY_SPACE (source code);
-echo unsrc \\t Takes me right back to where I was when I sourced
+echo free:                     -- tell me about your RAM;
+echo pushd: \\t W/o argument will switch the top two dirs in the stack;
+echo pushd: dir \\t Like 'cd' but also adds to directory stack; 
+echo pushd: -N \\t where 'N' is the index provided by dirs;
+echo popd: \\t removes dirs from the directory stack;
+echo dirs: -v \\t view pushd dir stack AND list their index. Index 0 = current location;
+echo src: \\t Takes me directly to JAY_SPACE (source code);
+echo unsrc: \\t Takes me right back to where I was when I sourced;
 echo ;'
 
 #---------------------------------------------------------------
