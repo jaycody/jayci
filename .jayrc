@@ -20,7 +20,6 @@ export JAMYRIS=${HOME}/repo          # my amyris proj
 PATH="$HOME/bin:/usr/local/bin:$PATH"
 
 
-
 #========
 # pyenv
 #========
@@ -53,7 +52,6 @@ PATH="$HOME/bin:/usr/local/bin:$PATH"
 #. ~/.pyenv/versions/3.10.3/bin/virtualenvwrapper.sh
 
 #=========
-
 
 
 
@@ -164,8 +162,16 @@ alias du='du -ch'                   # disk used plus total
 alias df='df -h'                    # disk free
 alias dirsize="pwd; du -ch | grep total"
 
-# Make dirs along path 
+# Make directories along path when none exist 
 alias mkdir='mkdir -p'
+
+# List directories in the stack, but always use their index numbers
+alias dirs="dirs -v"
+
+# List cdpath as column
+alias cdpath="echo -e ${CDPATH// /\\n}"
+
+
 
 # Show me, paint the fence
 alias h='history'                    # shell history

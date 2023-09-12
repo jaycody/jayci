@@ -26,11 +26,12 @@ add-zsh-hook precmd vcs_info
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr ' *'
 zstyle ':vcs_info:*' stagedstr ' +'
+
 # Show branch and stage/unstage changes
 zstyle ':vcs_info:git:*' formats '%F{yellow}(%b%F{red}%u%f%F{cyan}%c%f)%f'
+
 # When git action, show it
 zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
-
 
 # Set up the prompt (with git branch name)
 # Set option to substitue prompts
@@ -39,3 +40,10 @@ PROMPT='%B%F{white}${PWD/#$HOME/~}%f ${vcs_info_msg_0_} %(!.#.>)%b '
 ##############################
 
 
+##############################
+#######  Set CDPATH   ########
+
+ # Make these as subdirectories from anywhere
+setopt auto_cd
+cdpath=(. ~ ~/jaycody ~/repo)
+##############################
