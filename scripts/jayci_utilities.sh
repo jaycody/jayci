@@ -11,7 +11,7 @@ jayci_test_source_pipeline () {
 
     # List functions made available by this setu
     jayci_announce "functions from jayci_utilities.sh ===>"
-    compgen -A function | grep jayci
+    jayci_functions
     echo ""
 }
 
@@ -42,7 +42,7 @@ jayci_update_repos () {
 
 
 ######### CONSOLE LOGGING UTILITIES ###########
-# Write something to the console in red.
+# Takes string and writes it to the console in red.
 jayci_error () {
     local WHITE_ON_RED="\e[7;31m"
     local NORMAL="\e[0m"
@@ -58,7 +58,7 @@ jayci_error () {
     printf "${WHITE_ON_RED}------------------------------------------------------------------------${NORMAL}\n"
 }
 
-# Write something to the console in blue.
+# Takes string and writes it to the console in blue.
 jayci_announce () {
     local WHITE_ON_BLUE="\e[7;34m"
     local NORMAL="\e[0m"
@@ -76,15 +76,15 @@ jayci_announce () {
 
 
 
-# List the functions made available by this utility script
+# List my homemade functions (defined above)
 jayci_functions () {
     echo""
     jayci_announce "functions ===>"
-    compgen -A function | grep jayci
+    print -l ${(ok)functions} | grep jayci
     echo""
     
     jayci_announce "snapcap functions ===>"
-    compgen -A function | grep snap_
+    print -l ${(ok)functions} | grep snap_
     echo""
 }
 

@@ -1,9 +1,9 @@
-#! /bin/bash
+#! /bin/zsh
 
 
 jaylias () {
     #---------Begin here document------------#
-    cat <<_EOF_ 
+    cat << EOF 
 
     ***********Aliases and Functions**********
     jaylias:  HERE doc for aliases and functions
@@ -47,12 +47,12 @@ jaylias () {
     ">" :   takes output of command at left and WRITES it to file on right
         -----ex  cat my.txt ">" your.txt
         ----- OR write directly to a file:  cat ">" foo.txt
-_EOF_
+EOF
 #---------Begin here document------------#
 }
 
 jaygit_tags () {
-    cat <<_EOF_
+    cat << EOF
 
 # list local tags [-n for extensive]
     git tag -n
@@ -72,11 +72,11 @@ jaygit_tags () {
 # pull remote tags
     git fetch --all --tags
     
-_EOF_
+EOF
 }
 
 jaygit_branch () {
-    cat <<_EOF_
+    cat << EOF
 
 # create feature branch
     git checkout -b <feature_branch> master
@@ -102,5 +102,5 @@ jaygit_branch () {
 
 
 
-_EOF_
+EOF
 }
