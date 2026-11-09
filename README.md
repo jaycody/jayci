@@ -2,6 +2,27 @@
 > Mini CI/CD framework for my personal projects
 __________________
 
+## How jayci works (diagrams)
+_(added 2026-11-09)_ Each one is drawn from the code and checked against a live shell on this Mac.
+Red dashed boxes are known quirks; orange boxes come from other repos (snapcap).
+Sources live in [docs/diagrams/](docs/diagrams/). **When you change a file, update its diagram**
+and run `bash docs/diagrams/render.sh`, or they stop being the truth.
+
+| # | Diagram | Covers |
+|---|---------|--------|
+| 1 | [Startup](docs/diagrams/1-startup.png) | Everything that runs, in order, when a terminal opens, including snapcap's files |
+| 2 | [Install](docs/diagrams/2-install.png) | What `./install.sh` does, step by step |
+| 3 | [File map](docs/diagrams/3-file-map.png) | Every repo file: linked, sourced, or unused |
+| 4 | [Aliases](docs/diagrams/4-aliases.png) | Every alias, what it runs, and which targets are missing |
+| 5 | [Functions](docs/diagrams/5-functions.png) | Every function, where it's defined, what it calls |
+| 6 | [Update repos](docs/diagrams/6-update-repos.png) | `jayci_update_repos`, step by step |
+| 7 | [PATH and variables](docs/diagrams/7-path-and-variables.png) | How PATH is built and who sets each variable |
+| 8 | [Help and prompt](docs/diagrams/8-help-and-prompt.png) | The help commands, and how the git prompt is drawn |
+
+![Startup](docs/diagrams/1-startup.png)
+
+__________________
+
 ## bash notes
 ```bash
 # list my alias helpers
@@ -33,14 +54,32 @@ HISTCONTROL
 
 
 ## `jayci` setup:
-1. Clone `jayci` repo to `~/jaycody` and `cd jayci`
+
+### Quick setup (added 2026-11-09)
+```bash
+git clone https://github.com/jaycody/jayci.git ~/jaycode/jayci
+cd ~/jaycode/jayci
+./install.sh --dry-run   # see what it will do
+./install.sh             # do it; rerun any time
+```
+`install.sh` does steps 2-6 below: links `.zshrc`, `.jayrc`, `.vimrc` and `htoprc`
+into place (backing up anything already there to `*.pre-jayci-<date>`), installs
+the tools in `Brewfile`, downloads the Tomorrow-Night vim theme, and sets Finder
+to show hidden files, file extensions, the path bar and the status bar.
+Homebrew itself needs your password, so install it first (step 5).
+To add a tool: add a line to `Brewfile` and rerun.
+
+### By hand (the original steps)
+1. Clone `jayci` repo to `~/jaycode` and `cd jayci`  
+   _(2026-11-09: was `~/jaycody`. The folder is `~/jaycode`; the GitHub user is still `jaycody`.)_
 2. Symlink the expected config locations in `~/.*` to actual config files  in `jayci/` & `jayci/configs/`
 ```bash
 # symlink to my config files in jayci repo from the expected locations in the home folder.
 # ln -s [TARGET DIRECTORY OR FILE] [SYMLINK]
-ln -s $HOME/jaycody/jayci/.jayrc $HOME/.jayrc
-ln -s $HOME/jaycody/jayci/.vimrc $HOME/.vim/vimrc
-ln -s $HOME/jaycody/jayci/.zshrc $HOME/.zshrc
+mkdir -p $HOME/.vim
+ln -s $HOME/jaycode/jayci/.jayrc $HOME/.jayrc
+ln -s $HOME/jaycode/jayci/.vimrc $HOME/.vim/vimrc
+ln -s $HOME/jaycode/jayci/.zshrc $HOME/.zshrc
 
 ```
 3. Append `.zshrc` with instructions to source `${HOME}/.jayrc`
@@ -56,13 +95,16 @@ fi
 mkdir ~/.vim/bundle
 # then 
 git clone https://github.com/Ardakilic/vim-tomorrow-night-theme.git
+# (2026-11-09: that repo is gone. install.sh downloads it from
+#  github.com/chriskempson/tomorrow-theme  vim/colors/Tomorrow-Night.vim)
 # finally, move the tomorrow-night-theme.vim to ~/.vim/colors
 # remember the symlink should be 
-~/.vim/vimrc ---> ${HOME}/jaycody/jayci/.vimrc
+~/.vim/vimrc ---> ${HOME}/jaycode/jayci/.vimrc
 ```
 
 5. Install [Homebrew][1]    
-`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`  
+   _(2026-11-09: URL is now `HEAD`, not `master`. On Apple Silicon brew installs to `/opt/homebrew`; `.jayrc` picks it up.)_
 
 
 6. Install `tree`    

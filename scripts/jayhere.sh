@@ -13,11 +13,11 @@ jaylias () {
                 # "grep 'alias l' in .jayrc"
 
     -----------TAKE ME TO....-------------
-    jaycody jayci repo repocm 
+    jaycody jayci snapcap pshape 
     code foo: open foo in VSCode
 
     -----------OPEN IN VIM-------------
-    vimjrc, vimjconfig, vimjutil, vimvimrc, vimzrc
+    vimjrc, vimconfig, vimutil, vimvimrc, vimzrc, vimorg
 
     -----------INFO-------------
     h=history, path, gitlog
@@ -104,3 +104,16 @@ jaygit_branch () {
 
 EOF
 }
+
+
+
+#===============================================================
+###            >>> FOSSIL RECORD <<<
+#===============================================================
+# Moved here 2026-11-09 (Claude, modernize-2026 branch).
+# WHY: jaylias named commands that don't exist (vimjconfig, vimjutil)
+#      or are now fossils in .jayrc (repo, repocm).
+#---------------------------------------------------------------
+#    jaycody jayci repo repocm 
+#    vimjrc, vimjconfig, vimjutil, vimvimrc, vimzrc
+#===============================================================

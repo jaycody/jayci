@@ -23,7 +23,7 @@ set history=100
 "   >>>  Format [1]   <<<
 "---------------------------------------------------------------
 set guifont=Menlo\ Regular:h18
-colorscheme Tomorrow-Night
+silent! colorscheme Tomorrow-Night  " 2026-11-09: silent! = no startup error if theme not installed yet
 "colorscheme badwolf            " [1] thx dougblack
 
 
@@ -66,7 +66,9 @@ set foldmethod=indent           " fold based on indent levels
 set foldenable                  " don't fold by default on open
 set foldlevelstart=10           " open most folds by default
 set foldnestmax=10              " 10 nested folds - max
-nnoremap <space> za             " remap <space> to open/close
+" remap <space> to open/close
+" (2026-11-09: comment moved up -- a trailing " comment on a map becomes part of the keystrokes)
+nnoremap <space> za
 
 
 
@@ -87,3 +89,14 @@ set modelines=1
 
 " for .vimrc --> fold at '{' x3 and start folds closed
 " vim:foldmethod=marker:foldlevel=0
+
+
+
+"---------------------------------------------------------------
+"   >>>   FOSSIL RECORD    <<<
+"---------------------------------------------------------------
+" Moved here 2026-11-09 (Claude, modernize-2026 branch).
+" WHY: errors on startup when the theme isn't installed yet.
+"colorscheme Tomorrow-Night
+" WHY: vim reads the trailing comment as part of the mapping.
+"nnoremap <space> za             " remap <space> to open/close

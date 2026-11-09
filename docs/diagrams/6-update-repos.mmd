@@ -1,0 +1,24 @@
+%% 6. jayci_update_repos : pull every repo in ~/jaycode.
+flowchart TD
+    A(["jayci_update_repos"]) --> B["src : remember this folder, cd JAY_SPACE"]
+    B --> C["lsd : list every folder in ~/jaycode<br/>jayci/  snapcap/  ..."]
+    C --> D{"Next folder?"}
+    D -->|none left| Z["unsrc : back to where you started"]
+    D -->|yes| E
+
+    subgraph SUB ["In a subshell ( ... ) so cd doesn't leak out"]
+        E["jayci_announce pulling and updating name"] --> F["cd into it"]
+        F --> G{"A git repo?"}
+        G -->|no| G1["not a git repo, skipping"]
+        G -->|yes| H["Ask git for the default branch:<br/>origin/HEAD, set when the repo was cloned<br/>master if git can't tell"]
+        H --> I{"Already on the<br/>default branch?"}
+        I -->|yes| J["git pull"]
+        I -->|"no, e.g. snapcap on<br/>fix/inputstreamreader-import"| J2["git fetch only<br/>never switches branches,<br/>work in progress stays put"]
+        J --> K["git status"]
+        J2 --> K
+    end
+
+    G1 --> D
+    K --> D
+    Z --> END(["done"])
+
