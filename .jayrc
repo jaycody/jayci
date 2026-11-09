@@ -6,10 +6,9 @@
 #===============================================================
 ###                  >>> GLOBALS <<<
 #===============================================================
-export JAY_SPACE=${HOME}/jaycody     # my github root 
+export JAY_SPACE=${HOME}/jaycode     # my github root  (2026-11-09: was ~/jaycody, see FOSSIL RECORD)
 export JAY_USER=${USER}              # me
 export JAY_HOME=${HOME}              # ~
-export JAMYRIS=${HOME}/repo          # my amyris proj 
 
 
 #===============================================================
@@ -17,20 +16,22 @@ export JAMYRIS=${HOME}/repo          # my amyris proj
 #===============================================================
 # Coming from BASH but using oh-my-zsh
 PATH="$HOME/bin:/usr/local/bin:$PATH"
-
-# Set PYTHON path
-PATH="/Users/jstephens/Library/Python/3.9/bin:$PATH"
 export PATH
+
+# Homebrew on Apple Silicon lives in /opt/homebrew (added 2026-11-09).
+# Sets PATH (incl. sbin, so mtr is found), MANPATH, etc. Skipped if brew isn't installed yet.
+if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 
 #===============================================================
 ###                  >>> TOOLS <<<
 #===============================================================
 # network tools
-alias mtr=/usr/local/sbin/mtr
 alias starwars="nc towel.blinkenlights.nl 23"
 alias niko="echo 'nom nom nom'"
-alias niki="for n in {1..5000}; do niko ${n}; done"
+alias niki='for n in {1..5000}; do niko ${n}; done'   # 2026-11-09: single quotes so ${n} counts at run time
 
 
 #---------------------------------------------------------------
@@ -48,19 +49,11 @@ fi
 #   >>>   Take me to....    <<<
 #---------------------------------------------------------------
 # My repos
-alias org='cd ${JAY_HOME}/Dropbox/_APPS/orgmode; lr'
-alias jaycody='cd ${JAY_SPACE}; tree --dirsfirst -a -L 2 -I .get; l'
+alias jaycody='cd ${JAY_SPACE}; tree --dirsfirst -a -L 2 -I .git; l'   # 2026-11-09: was -I .get (typo)
 alias jayci='cd ${JAY_SPACE}/jayci; l; tree --dirsfirst -a -I .git'
-alias snapcap='cd ${JAY_SPACE}/snapcap; l; tree --dirsfirst -a -I .git; . ./snapcap.cfg'
-alias jayutil='cd ${JAY_SPACE}/jayutil; lsd'
-alias pshape='cd ${JAY_SPACE}/pshape-studio; l; tree --dirsfirst -a -L 2 -I .git;'
+# snapcap: now a function (see FUNCTIONS) so it can take --help
+alias pshape='cd ${JAY_SPACE}/pshape-studio; l; tree --dirsfirst -a -L 2 -I .git;'   # clone first: git clone https://github.com/jaycody/pshape-studio.git ~/jaycode/pshape-studio
 alias ..='cd ..'
-
-# Take me to Amyris Repo
-alias repo='cd ${JAMYRIS}; l; tree --dirsfirst -a -L 2'
-alias repocm='cd ${JAMYRIS}/configuration-management; l; tree --dirsfirst -a -I .git -L 2'
-alias handbook='cd ${JAMYRIS}/devops-handbook; l; tree --dirsfirst -a -I .git'
-alias datadog='cd  ${JAMYRIS}/datadog; l; tree --dirsfirst -a -L 2'
 
 
 #---------------------------------------------------------------
@@ -72,7 +65,7 @@ alias vimutil='vim ${JAY_SPACE}/jayci/scripts/jayci_utilities.sh'
 alias vimvimrc='vim ${JAY_SPACE}/jayci/.vimrc'
 
 alias vimzrc='vim ${HOME}/.zshrc'
-alias vimorg='vim ${HOME}/.emacs.d/init.el'
+alias vimorg='vim ${JAY_SPACE}/jayci/.emacs.d/init.el'   # 2026-11-09: the repo copy; ~/.emacs.d isn't on this Mac
 
 
 #---------------------------------------------------------------
@@ -113,11 +106,10 @@ alias gitlog='git log --oneline --graph'     # gits by single line
 
 # Please....
 alias restart='sudo shutdown -r now'
-alias sleep='sudo shutdown -s now'
+alias nap='sudo shutdown -s now'      # 2026-11-09: was 'sleep', which hid the real sleep command
 
 # Update packages
-alias update="brew update; brew upgrade; brew cleanup;
-              pip install --upgrade `pip list --outdated | awk 'NR>2 {print $1}'`"
+alias update='brew update; brew upgrade; brew cleanup'   # 2026-11-09: pip half moved to FOSSIL RECORD
 ### fetch newest brew; upgrade outdated packages; upgrade all casks; clean up outdated dowloads of previous package versions;
 ###   output installed pip packages currently outdated and upgrade them
 
@@ -152,10 +144,10 @@ alias treela='tree -Csha' # As tree, include hidden
 #       >>> Show Aliases and Common Usage  <<<
 #---------------------------------------------------------------
 # List all aliases
-alias lalias='grep alias ${JAY_HOME}/.jayrc'
+alias lalias="grep -E '^alias' ${JAY_HOME}/.jayrc"   # 2026-11-09: '^alias' skips the commented-out fossils
 
 # List the 'ls' family
-alias lsls="grep 'alias l' ${JAY_HOME}/.jayrc"
+alias lsls="grep '^alias l' ${JAY_HOME}/.jayrc"   # 2026-11-09: '^' skips commented-out lines
 
 
 # 'jay' to list common usage 
@@ -165,15 +157,16 @@ echo lalias:  \\t list aliases;
 echo lsls:    \\t\\t list the 'ls' family;
 echo ;
 echo -----------TAKE ME TO....-------------;
-echo jaycody jayci repo repocm; 
+echo jaycody jayci snapcap pshape; 
+echo snapcap --help: snapcap commands, keys, settings;
 echo code foo: open foo in VSCode;
 echo ;
 echo -----------VIM-------------;
-echo vimjrc, vimjconfig, vimjutil, vimvimrc, vimzrc;
+echo vimjrc, vimconfig, vimutil, vimvimrc, vimzrc, vimorg;
 echo :StripWhitespace in vim;
 echo ;
 echo -----------INFO-------------;
-echo h=history, path, gitlog;
+echo h=history, path, gitlog, nap, restart;
 echo du, df, dirsize -- disk used, disk free, dirsize;
 echo env -- show environment variables
 echo ;
@@ -207,7 +200,7 @@ echo pushd: dir \\t Like 'cd' but also adds to directory stack;
 echo pushd: -N \\t where 'N' is the index provided by dirs;
 echo popd: \\t removes dirs from the directory stack;
 echo dirs: -v \\t view pushd dir stack AND list their index. Index 0 = current location;
-echo src: \\t Takes me directly to JAY_SPACE (source code);
+echo "src: \\t Takes me directly to JAY_SPACE (source code)";
 echo unsrc: \\t Takes me right back to where I was when I sourced;
 echo ;'
 
@@ -228,6 +221,19 @@ function src () {
 # Come right back
 function unsrc () {
     cd ~1
+}
+#---------------------------------------------------------------
+
+#------------snapcap: take me there, or show its help-----------
+# (2026-11-09: was an alias; aliases can't take --help. Old alias in FOSSIL RECORD.)
+#   snapcap          cd to snapcap, list it, re-source snapcap.cfg
+#   snapcap --help   snap_help, from snapcap.sh
+unalias snapcap 2> /dev/null     # resh: drop the old alias before defining the function
+function snapcap () {
+    case "$1" in
+        -h|--help|help) snap_help; return ;;
+    esac
+    cd ${JAY_SPACE}/snapcap; l; tree --dirsfirst -a -I .git; . ./snapcap.cfg
 }
 #---------------------------------------------------------------
 
@@ -255,8 +261,11 @@ echo '-----------------------------------------------------------------'
 #---------------------------------------------------------------
 #       >>>  SOURCE all <project>.cfg   <<<
 #---------------------------------------------------------------
-if [ -d ${JAY_SPACE:?} ] && [ "$(ls -A ${JAY_SPACE})" ] ; then
-    for i in $( ls -1 ${JAY_SPACE}/*/*.cfg|egrep -v "nose|setup" );  do # printf "===> %-30s .jayrc ---sources---> $i \n";# 
+if [ -d "${JAY_SPACE:?}" ] && [ "$(ls -A "${JAY_SPACE}")" ] ; then
+    # 2026-11-09: glob instead of parsing `ls` (safe with spaces); old loop line in FOSSIL RECORD
+    for i in "${JAY_SPACE}"/*/*.cfg;  do
+         [ -f "$i" ] || continue
+         case "$i" in *nose*|*setup*) continue ;; esac
          # Walk jaycody/ ; source each <project>/*.cfg ; let each .cfg list files they source.
          echo ""
          echo ""
@@ -264,10 +273,90 @@ if [ -d ${JAY_SPACE:?} ] && [ "$(ls -A ${JAY_SPACE})" ] ; then
          echo "================================================================="
          echo ".jayrc --> $ source $i"
          echo "================================================================="
-         source $i;
+         source "$i";
          done
 else
     echo "There are no .cfg files in your JAY_SPACE repos."
 fi
+
+# 2026-11-09: list functions AFTER every project .cfg has loaded, so snap_*
+# functions show up too. (jayci.cfg used to do this before snapcap loaded.)
+if typeset -f jayci_functions > /dev/null; then
+    jayci_functions
+fi
+#===============================================================
+
+
+
+#===============================================================
+###            >>> FOSSIL RECORD <<<
+#===============================================================
+# Moved here 2026-11-09 (Claude, modernize-2026 branch), when jayci
+# was set up on a new Apple Silicon Mac. Kept, commented out, as history.
+#---------------------------------------------------------------
+
+# WHY: projects now live in ~/jaycode on this Mac (GitHub user is still jaycody).
+# export JAY_SPACE=${HOME}/jaycody     # my github root
+
+# WHY: Amyris repos (~/repo) don't exist on this Mac. Era: ~2018-2020.
+# export JAMYRIS=${HOME}/repo          # my amyris proj
+# # Take me to Amyris Repo
+# alias repo='cd ${JAMYRIS}; l; tree --dirsfirst -a -L 2'
+# alias repocm='cd ${JAMYRIS}/configuration-management; l; tree --dirsfirst -a -I .git -L 2'
+# alias handbook='cd ${JAMYRIS}/devops-handbook; l; tree --dirsfirst -a -I .git'
+# alias datadog='cd  ${JAMYRIS}/datadog; l; tree --dirsfirst -a -L 2'
+
+# WHY: hardcoded to the old machine's user (jstephens) and Python 3.9.
+# # Set PYTHON path
+# PATH="/Users/jstephens/Library/Python/3.9/bin:$PATH"
+
+# WHY: Intel-Mac Homebrew path. On Apple Silicon, brew shellenv (above) puts
+#      /opt/homebrew/sbin on PATH, so plain `mtr` works without an alias.
+# alias mtr=/usr/local/sbin/mtr
+
+# WHY: the backticks ran `pip list --outdated` every time a shell opened (slow),
+#      and modern Homebrew/macOS Python blocks global `pip install` (PEP 668).
+# alias update="brew update; brew upgrade; brew cleanup;
+#               pip install --upgrade `pip list --outdated | awk 'NR>2 {print $1}'`"
+
+# WHY: parsing `ls` output breaks on names with spaces; replaced by a glob loop.
+#     for i in $( ls -1 ${JAY_SPACE}/*/*.cfg|egrep -v "nose|setup" );  do # printf "===> %-30s .jayrc ---sources---> $i \n";#
+
+# --- 2026-11-09, second pass (quirks found while drawing docs/diagrams) ---
+# WHY: niki's ${n} was filled in when the alias was defined (double quotes),
+#      so it never counted. jaycody's -I .get was a typo for .git.
+# alias niki="for n in {1..5000}; do niko ${n}; done"
+# alias jaycody='cd ${JAY_SPACE}; tree --dirsfirst -a -L 2 -I .get; l'
+
+# WHY: ~/Dropbox isn't on this Mac (no Dropbox desktop app). Newer Dropbox
+#      versions keep files in ~/Library/CloudStorage/Dropbox -- update the
+#      path there if the app gets installed.
+# alias org='cd ${JAY_HOME}/Dropbox/_APPS/orgmode; lr'
+
+# WHY: github.com/jaycody/jayutil isn't public (or doesn't exist) anymore.
+# alias jayutil='cd ${JAY_SPACE}/jayutil; lsd'
+
+# WHY: ~/.emacs.d isn't on this Mac and emacs isn't installed. Now opens the repo copy.
+# alias vimorg='vim ${HOME}/.emacs.d/init.el'
+
+# WHY: an alias named sleep replaces the real `sleep` command, so typing
+#      `sleep 5` put the Mac to sleep. Renamed to nap.
+# alias sleep='sudo shutdown -s now'
+
+# WHY: these matched the commented-out fossil lines too.
+# alias lalias='grep alias ${JAY_HOME}/.jayrc'
+# alias lsls="grep 'alias l' ${JAY_HOME}/.jayrc"
+
+# WHY: help text named commands that don't exist (vimjconfig, vimjutil)
+#      or are now fossils (repo, repocm).
+# echo jaycody jayci repo repocm; 
+# echo vimjrc, vimjconfig, vimjutil, vimvimrc, vimzrc;
+
+# WHY: unquoted, zsh reads (source code) as a glob qualifier and stops with
+#      'unknown sort specifier' -- so jay never printed its last two lines.
+# echo src: \\t Takes me directly to JAY_SPACE (source code);
+
+# WHY: aliases can't take options, so `snapcap --help` needed a function.
+# alias snapcap='cd ${JAY_SPACE}/snapcap; l; tree --dirsfirst -a -I .git; . ./snapcap.cfg'
 #===============================================================
 

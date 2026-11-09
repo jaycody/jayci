@@ -1,0 +1,22 @@
+%% 8. The help commands, and how the prompt is drawn.
+flowchart LR
+    subgraph HELP ["Help commands: where the text comes from"]
+        h1["jay : alias in .jayrc<br/>a long chain of echo lines"]
+        h2["jaylias : jayhere.sh<br/>heredoc: aliases + ls family"]
+        h3["jaygit_tags : jayhere.sh<br/>tag cheat sheet"]
+        h4["jaygit_branch : jayhere.sh<br/>feature-branch cheat sheet"]
+        h5["lalias : lines starting with alias in ~/.jayrc<br/>skips the commented-out fossils"]
+        h6["lsls : lines starting with alias l"]
+        h7["jayci_functions : list jayci* and snap_* functions"]
+        h8["snapcap --help : snap_help from snapcap.sh<br/>also ./snapcap.sh --help, snap_new_project --help"]
+    end
+
+
+    subgraph PROMPT ["Prompt : ~/.zshrc"]
+        p1["Before every prompt : precmd hook<br/>runs vcs_info : asks git about this folder"] --> p2{"In a git repo?"}
+        p2 -->|no| p3["~/jaycode >"]
+        p2 -->|yes| p4["~/jaycode/jayci (modernize-2026 * +) ><br/>white bold path<br/>yellow (branch)<br/>red * = unstaged changes<br/>cyan + = staged changes"]
+        p2 -->|"mid merge or rebase"| p5["(branch|merge * +)"]
+        p4 --> p6["> becomes # when root"]
+    end
+

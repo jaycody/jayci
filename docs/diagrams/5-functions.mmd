@@ -1,0 +1,60 @@
+%% 5. Every shell function, the file that defines it, and what it calls.
+flowchart LR
+    subgraph JAYRC [".jayrc"]
+        src["src<br/>pushd here, cd JAY_SPACE"]
+        unsrc["unsrc<br/>cd ~1 : back to where src started"]
+        sc["snapcap [--help]<br/>no option: cd snapcap, l, tree,<br/>re-source snapcap.cfg (prints its banner again)"]
+    end
+
+    subgraph UTIL ["scripts/jayci_utilities.sh"]
+        ann["jayci_announce text [text2]<br/>blue banner"]
+        err["jayci_error text [text2]<br/>red banner"]
+        fns["jayci_functions<br/>list jayci* and snap_* functions"]
+        test["jayci_test_source_pipeline<br/>proves the cascade loaded"]
+        upd["jayci_update_repos<br/>pull every repo: diagram 6"]
+    end
+
+    subgraph HERE ["scripts/jayhere.sh : help text, diagram 8"]
+        jl["jaylias"]
+        jt["jaygit_tags"]
+        jb["jaygit_branch"]
+    end
+
+    subgraph SNAP ["EXTERNAL: snapcap/snapcap.sh"]
+        np["snap_new_project [name] [version] [parent]<br/>version defaults to v0.0.1<br/>see snapcap docs/diagrams/new-project"]
+        hp["snap_help<br/>commands, sketch keys, settings,<br/>current snapcap release"]
+        fill["_snap_fill : copy a template,<br/>swap in name, version, release, date"]
+        ca["snap_clean_all"]
+        cf["snap_clean_frames"]
+        cs["snap_clean_snaps"]
+        cd1["_snap_clean_dir folder<br/>empty one media folder, safely"]
+        show["_snap_show : tree -Csha or ls -A"]
+    end
+
+    test --> err
+    test --> ann
+    test --> fns
+    fns --> ann
+    upd --> src
+    upd --> ann
+    upd --> unsrc
+    upd -.->|"alias lsd: list folders"| LSD(("lsd"))
+    upd -.-> GIT(("git"))
+
+    np --> fill
+    np -->|"--help"| hp
+    sc -->|"--help"| hp
+    np -.-> GIT
+    ca --> cf
+    ca --> cs
+    cf -->|"frames, frames_local"| cd1
+    cs -->|"snaps, snaps_local"| cd1
+    cd1 --> show
+
+    STARTUP(["shell startup<br/>end of .jayrc"]) --> fns
+    MAC["Also present, from /etc/zshrc_Apple_Terminal:<br/>shell_session_* and update_terminal_cwd<br/>macOS, not jayci"]
+
+    classDef ext fill:#fff4e0,stroke:#d08a00,color:#333
+    classDef sys fill:#eeeeee,stroke:#888,color:#333
+    class np,fill,ca,cf,cs,cd1,show,hp ext
+    class MAC sys

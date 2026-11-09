@@ -1,0 +1,65 @@
+%% 3. Every file in the jayci repo and where it ends up on the Mac.
+%% Solid arrow = symlink.  Dashed arrow = sourced (loaded) by.  Red = not used / quirk.
+flowchart LR
+    subgraph REPO ["~/jaycode/jayci  (the repo)"]
+        direction TB
+        zshrc[".zshrc"]
+        jayrc[".jayrc"]
+        vimrc[".vimrc"]
+        htop["configs/htoprc"]
+        cfg["jayci.cfg"]
+        util["scripts/jayci_utilities.sh"]
+        here["scripts/jayhere.sh"]
+        prompt["configs/jayrc-prompt.cfg"]
+        gitp["scripts/.git-prompt.sh"]
+        inst["install.sh"]
+        brewf["Brewfile"]
+        diag["docs/diagrams/<br/>*.mmd, *.png, render.sh"]
+        emacs[".emacs.d/<br/>init.el, SessionDesktop.el,<br/>tutorial, autosave files"]
+        docs["README.md  notes.md<br/>CODE_REVIEW.md  imgs/  LICENSE"]
+        misc[".hushlogin  _EOF_<br/>jayci.code-workspace  .gitignore"]
+    end
+
+    subgraph HOME ["~  (your home folder)"]
+        direction TB
+        hz["~/.zshrc"]
+        hj["~/.jayrc"]
+        hv["~/.vim/vimrc"]
+        hh["~/.config/htop/htoprc"]
+        hc["~/.vim/colors/Tomorrow-Night.vim<br/>downloaded by install.sh"]
+        hp["~/.zprofile<br/>brew shellenv : written by Homebrew,<br/>not part of jayci"]
+        hb["~/.zshrc.pre-jayci-DATE<br/>backup of the old .zshrc"]
+    end
+
+    subgraph EXT ["Other repos in ~/jaycode"]
+        direction TB
+        scfg["snapcap/snapcap.cfg"]
+        ssh["snapcap/snapcap.sh"]
+    end
+
+    zshrc ==>|link| hz
+    jayrc ==>|link| hj
+    vimrc ==>|link| hv
+    htop ==>|link| hh
+
+    hz -.->|sources| hj
+    hj -.->|"sources JAY_SPACE/*/*.cfg"| cfg
+    hj -.->|"sources JAY_SPACE/*/*.cfg"| scfg
+    cfg -.->|sources| util
+    cfg -.->|sources| here
+    cfg -.->|sources| prompt
+    scfg -.->|sources| ssh
+    hv -.->|colorscheme| hc
+    inst -.->|reads| brewf
+    inst -.->|makes links, backups| HOME
+
+    gitp -.- Q1["NOT loaded: hidden file, the *.sh glob skips it.<br/>Not needed: .zshrc uses zsh's vcs_info instead"]
+    emacs -.- Q2["NOT linked: emacs isn't installed.<br/>alias vimorg edits the repo copy of init.el"]
+    misc -.- Q3[".hushlogin would hide the Last login line,<br/>but only in ~ : not linked.<br/>_EOF_ is an empty file"]
+
+    classDef quirk fill:#ffecec,stroke:#c33,color:#333,stroke-dasharray: 4 3
+    classDef ext fill:#fff4e0,stroke:#d08a00,color:#333
+    classDef sys fill:#eeeeee,stroke:#888,color:#333
+    class Q1,Q2,Q3,gitp,emacs quirk
+    class scfg,ssh ext
+    class hp,hb,hc sys

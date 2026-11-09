@@ -1,0 +1,72 @@
+%% 1. What runs, in order, when a new terminal opens (zsh login shell, macOS Terminal).
+%% Verified 2026-11-09 by tracing `zsh -i` on this Mac.
+flowchart TD
+    OPEN(["Open a terminal window"]) --> Z1
+
+    subgraph MAC ["macOS system files (not in jayci)"]
+        Z1["/etc/zprofile<br/>path_helper builds the base PATH<br/>/usr/local/bin /usr/bin /bin /usr/sbin /sbin"]
+    end
+
+    Z1 --> Z2["~/.zprofile<br/>brew shellenv: puts /opt/homebrew/bin<br/>and /opt/homebrew/sbin on PATH"]
+    Z2 --> Z3
+
+    subgraph MAC2 ["macOS system files (not in jayci)"]
+        Z3["/etc/zshrc<br/>history, key bindings"] --> Z4["/etc/zshrc_Apple_Terminal<br/>shell_session_* : saves and restores<br/>sessions, prints Saving session... on exit"]
+    end
+
+    Z4 --> R1
+
+    subgraph ZSHRC ["~/.zshrc  =  link to jayci/.zshrc"]
+        R1["THIS MAC block<br/>JAVA_HOME = Processing's JDK<br/>PATH += JDK bin, ~/.local/bin, VS Code bin"]
+        R1 --> R2{"~/.jayrc exists?"}
+        R2 -->|no| R6
+        R6["Git prompt: vcs_info on every prompt<br/>setopt PROMPT_SUBST<br/>PROMPT = path (branch *+) >"]
+        R6 --> R7["setopt auto_cd<br/>cdpath = . ~ ~/jaycode"]
+    end
+
+    R2 -->|yes, source it| J1
+
+    subgraph JAYRC ["~/.jayrc  =  link to jayci/.jayrc"]
+        J1["GLOBALS<br/>JAY_SPACE=~/jaycode  JAY_USER  JAY_HOME<br/>+ SNAP_STORAGE_DIR, once snap_new_project saves it"]
+        J1 --> J2["PATH: ~/bin and /usr/local/bin in front<br/>brew shellenv again if /opt/homebrew/bin/brew exists"]
+        J2 --> J3["Aliases: tools, take-me-to, edit configs,<br/>safety, ls family, jay help<br/>see diagram 4"]
+        J3 --> J4["Functions: src, unsrc, snapcap<br/>unalias snapcap first, for resh"]
+        J4 --> J5["Print SHELL CONFIG STEPS banner"]
+        J5 --> J6{"JAY_SPACE folder exists<br/>and isn't empty?"}
+        J6 -->|no| J7["Print: There are no .cfg files"]
+        J6 -->|yes| J8["For each JAY_SPACE/*/*.cfg<br/>in ALPHABETICAL order,<br/>skipping names with nose or setup"]
+    end
+
+    J8 -->|"1st: jayci/jayci.cfg"| C1
+
+    subgraph JCFG ["jayci/jayci.cfg"]
+        C1["Source every file, in order:<br/>scripts/jayci_utilities.sh<br/>scripts/jayhere.sh<br/>configs/jayrc-prompt.cfg"]
+        C1 --> C2["jayci_announce + list scripts/ and configs/"]
+    end
+
+    C1 -.-> U1["jayci_utilities.sh defines<br/>jayci_announce jayci_error jayci_functions<br/>jayci_test_source_pipeline jayci_update_repos"]
+    C1 -.-> U2["jayhere.sh defines<br/>jaylias jaygit_tags jaygit_branch"]
+    C1 -.-> U3["jayrc-prompt.cfg exports<br/>CLICOLOR=1  LSCOLORS"]
+    C2 -->|"2nd: snapcap/snapcap.cfg"| S1
+
+    subgraph SCFG ["EXTERNAL: snapcap/snapcap.cfg"]
+        S1["Print banner, list snapcap/*.sh"] --> S2["source JAY_SPACE/snapcap/*.sh<br/>only file: snapcap.sh"]
+    end
+
+    S2 --> S3
+
+    subgraph SSH ["EXTERNAL: snapcap/snapcap.sh"]
+        S3["SNAPCAP_HOME = folder this file is in"] --> S4["Defines snap_new_project<br/>snap_clean_frames snap_clean_snaps snap_clean_all<br/>snap_help, helpers _snap_fill _snap_clean_dir _snap_show"]
+        S4 --> S5["Run-directly block: does nothing<br/>when sourced"]
+    end
+
+    S5 -->|"no more *.cfg"| J9["back in .jayrc: jayci_functions<br/>lists jayci* functions, then snap_* functions<br/>after every .cfg, so snapcap's show up"]
+    J9 --> R6
+    J7 --> R6
+    R7 --> READY(["Prompt ready"])
+
+    classDef sys fill:#eeeeee,stroke:#888,color:#333
+    classDef ext fill:#fff4e0,stroke:#d08a00,color:#333
+    classDef quirk fill:#ffecec,stroke:#c33,color:#333,stroke-dasharray: 4 3
+    class Z1,Z3,Z4 sys
+    class S1,S2,S3,S4,S5 ext

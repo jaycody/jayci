@@ -1,0 +1,52 @@
+%% 4. Every alias, grouped as in .jayrc. (snapcap defines functions, not aliases: see 5.)
+%% Red = target folder/file is missing on this Mac, or a known quirk.
+flowchart LR
+    J[".jayrc aliases"]
+
+    J --> T["TOOLS"]
+    T --> T1["starwars : nc towel.blinkenlights.nl 23"]
+    T --> T2["niko : echo nom nom nom"]
+    T --> T3["niki : niko 1 ... niko 5000"]
+    T --> T4["resh : source ~/.zshrc<br/>or ~/.bashrc if one exists"]
+
+    J --> G["TAKE ME TO"]
+    G --> G1["jaycody : cd JAY_SPACE, tree -L 2, l"]
+    G --> G2["jayci : cd jayci, l, tree"]
+    G --> G5["pshape : cd JAY_SPACE/pshape-studio"]
+    G --> G7[".. : cd .."]
+
+    J --> E["EDIT CONFIGS in vim"]
+    E --> E1["vimjrc : jayci/.jayrc"]
+    E --> E2["vimconfig : jayci/jayci.cfg"]
+    E --> E3["vimutil : jayci/scripts/jayci_utilities.sh"]
+    E --> E4["vimvimrc : jayci/.vimrc"]
+    E --> E5["vimzrc : ~/.zshrc  same file, it's a link"]
+    E --> E6["vimorg : jayci/.emacs.d/init.el"]
+
+    J --> S["SAFETY + CONVENIENCE"]
+    S --> S1["rm, cp, mv : -i ask first"]
+    S --> S2["du -ch, df -h, dirsize"]
+    S --> S3["mkdir -p, dirs -v"]
+    S --> S4["h : history<br/>path : PATH one per line<br/>gitlog : log --oneline --graph"]
+    S --> S5["restart : sudo shutdown -r now"]
+    S --> S6["nap : sudo shutdown -s now<br/>sleep is the real command"]
+    S --> S7["update : brew update, upgrade, cleanup"]
+    S --> S8["pip : pip3"]
+
+    J --> L["LS FAMILY"]
+    L --> L1["ls : ls -hF"]
+    L --> L2["lk size, lt date, lc change<br/>biggest / newest last"]
+    L --> L3["l one column, la, ll long, lal"]
+    L --> L4["lsd : directories only"]
+    L --> L5["lr : recursive<br/>tree : tree -Csh<br/>treela : tree -Csha"]
+
+    J --> H["HELP: see diagram 8"]
+    H --> H1["jay, lalias, lsls"]
+
+    G5 -.- Q3["clone it first:<br/>git clone https://github.com/jaycody/pshape-studio.git<br/>~/jaycode/pshape-studio"]
+    F["In the FOSSIL RECORD at the bottom of .jayrc:<br/>org, jayutil, sleep, repo, repocm, handbook, datadog,<br/>and the old snapcap alias : it's a function now, see 5"]
+
+    classDef quirk fill:#ffecec,stroke:#c33,color:#333,stroke-dasharray: 4 3
+    classDef sys fill:#eeeeee,stroke:#888,color:#333
+    class Q3 quirk
+    class F sys

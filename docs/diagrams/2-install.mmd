@@ -1,0 +1,48 @@
+%% 2. What ./install.sh does. Safe to rerun; --dry-run prints instead of doing.
+flowchart TD
+    A(["cd ~/jaycode/jayci<br/>./install.sh  or  ./install.sh --dry-run"]) --> B["JAYCI = folder install.sh is in<br/>STAMP = date-time, used for backups"]
+
+    subgraph S1 ["[1] Link configs: link file-in-repo  place-macOS-expects"]
+        B --> L0["For each pair:<br/>.zshrc  to  ~/.zshrc<br/>.jayrc  to  ~/.jayrc<br/>.vimrc  to  ~/.vim/vimrc<br/>configs/htoprc  to  ~/.config/htop/htoprc"]
+        L0 --> L1{"Already a link<br/>to this repo file?"}
+        L1 -->|yes| L2["ok, already linked<br/>nothing changes"]
+        L1 -->|no| L3{"Something already<br/>at that path?"}
+        L3 -->|yes| L4["Rename it to<br/>name.pre-jayci-STAMP<br/>never deleted"]
+        L3 -->|no| L5
+        L4 --> L5["mkdir -p the parent folder<br/>ln -s repo file there"]
+    end
+
+    L2 --> H0
+    L5 --> H0
+
+    subgraph S2 ["[2] Homebrew tools"]
+        H0{"/opt/homebrew/bin/brew<br/>exists?"}
+        H0 -->|yes| H1["brew shellenv<br/>brew bundle --file=Brewfile<br/>installs tree, mtr, htop if missing"]
+        H0 -->|no| H2["Print the Homebrew install command<br/>it needs your password, so you run it,<br/>then rerun ./install.sh"]
+    end
+
+    H1 --> V0
+    H2 --> V0
+
+    subgraph S3 ["[3] vim colorscheme"]
+        V0{"~/.vim/colors/<br/>Tomorrow-Night.vim exists?"}
+        V0 -->|yes| V1["ok"]
+        V0 -->|no| V2["curl it from<br/>github.com/chriskempson/tomorrow-theme<br/>vim/colors/Tomorrow-Night.vim"]
+        V2 -->|download fails| V3["Remove partial file, say so<br/>vim still works: .vimrc uses silent! colorscheme"]
+    end
+
+    V1 --> F0
+    V2 -->|ok| F0
+    V3 --> F0
+
+    subgraph S4 ["[4] Finder preferences: defaults write"]
+        F0["com.apple.finder AppleShowAllFiles = true : dot files<br/>NSGlobalDomain AppleShowAllExtensions = true : extensions<br/>com.apple.finder ShowPathbar = true<br/>com.apple.finder ShowStatusBar = true"]
+        F0 --> F1["killall Finder : restarts it to apply<br/>open Finder windows close and reopen"]
+    end
+
+    F1 --> Z(["done: open a new terminal or exec zsh"])
+
+    N1["Not done by install.sh:<br/>installing Homebrew itself (needs password)<br/>~/.zprofile brew line (Homebrew's own step)<br/>cloning other repos into ~/jaycode"]
+
+    classDef note fill:#ffecec,stroke:#c33,color:#333,stroke-dasharray: 4 3
+    class N1 note

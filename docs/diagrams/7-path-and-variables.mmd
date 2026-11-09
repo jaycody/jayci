@@ -1,0 +1,30 @@
+%% 7. How PATH is built (top runs first) and who sets each variable.
+%% Final PATH verified 2026-11-09 with a clean login shell on this Mac.
+flowchart TD
+    subgraph BUILD ["PATH, step by step"]
+        P1["/etc/zprofile : path_helper reads<br/>/etc/paths : /usr/local/bin /System/Cryptexes/App/usr/bin<br/>/usr/bin /bin /usr/sbin /sbin<br/>/etc/paths.d : cryptex paths, /pkg/env/global/bin,<br/>/opt/homebrew/bin (homebrew file)"]
+        P2["~/.zprofile : brew shellenv<br/>front += /opt/homebrew/bin /opt/homebrew/sbin"]
+        P3["~/.zshrc THIS MAC block<br/>front += JDK bin, then ~/.local/bin<br/>end += VS Code bin"]
+        P4[".jayrc<br/>front += ~/bin /usr/local/bin<br/>then brew shellenv: front += /opt/homebrew/bin, sbin"]
+        P1 --> P2 --> P3 --> P4
+    end
+
+    P4 --> FINAL["Final PATH, searched top to bottom:<br/>1 /opt/homebrew/bin : brew, tree, htop, node<br/>2 /opt/homebrew/sbin : mtr<br/>3 ~/bin : missing on this Mac, skipped<br/>4 /usr/local/bin<br/>5 ~/.local/bin : claude<br/>6 JDK bin : java from Processing<br/>7 macOS system folders : /usr/bin /bin ...<br/>8 VS Code bin : code"]
+    FINAL -.- Q1["Some folders appear twice : harmless,<br/>the first match wins"]
+
+    subgraph VARS ["Variables"]
+        V1["JAY_SPACE = ~/jaycode : .jayrc<br/>used by every take-me-to alias and the *.cfg loop"]
+        V2["JAY_HOME = ~ , JAY_USER = you : .jayrc"]
+        V3["JAVA_HOME = Processing's JDK : .zshrc"]
+        V4["CLICOLOR=1, LSCOLORS : jayrc-prompt.cfg<br/>colors for ls"]
+        V5["HOMEBREW_PREFIX etc : brew shellenv"]
+        V6["SNAPCAP_HOME = ~/jaycode/snapcap : snapcap.sh<br/>SNAP_STORAGE_DIR : top folder for media,<br/>each project gets name-media/frames and /snaps.<br/>Not set: ~/snapcap-media is offered.<br/>A typed folder can be saved in .jayrc under JAY_HOME.<br/>SNAP_PROJECTS_DIR : optional, not set"]
+        V7["TERM : set by the terminal app<br/>jayci no longer forces it"]
+    end
+
+    classDef ext fill:#fff4e0,stroke:#d08a00,color:#333
+    classDef sys fill:#eeeeee,stroke:#888,color:#333
+    classDef quirk fill:#ffecec,stroke:#c33,color:#333,stroke-dasharray: 4 3
+    class V6 ext
+    class P1,V7 sys
+    class Q1 quirk
