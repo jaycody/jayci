@@ -4,6 +4,21 @@
 ### COLOR %F{<color>} CONTENT %f
 
 
+##############################
+### THIS MAC (added 2026-11-09, copied from the pre-jayci ~/.zshrc) ####
+# Java bundled with Processing (JDK 17). Put first so it wins over the
+# /usr/bin/java stub, which fails when no other Java is installed.
+export JAVA_HOME="/Applications/Processing.app/Contents/app/resources/jdk"
+export PATH="$JAVA_HOME/bin:$PATH"
+
+# Claude Code command-line tool (installed to ~/.local/bin)
+export PATH="$HOME/.local/bin:$PATH"
+
+# VS Code's `code` command, e.g. `code ~/jaycode/snapcap`
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+##############################
+
+
 ### Source the .jayrc #######
 # Source .jayrc if .jayrc is present
 if [ -f $HOME/.jayrc ]; then
@@ -45,5 +60,14 @@ PROMPT='%B%F{white}${PWD/#$HOME/~}%f ${vcs_info_msg_0_} %(!.#.>)%b '
 
  # Make these as subdirectories from anywhere
 setopt auto_cd
-cdpath=(. ~ ~/jaycody ~/repo)
+cdpath=(. ~ ~/jaycode)     # 2026-11-09: was ~/jaycody ~/repo, see FOSSIL RECORD
+##############################
+
+
+
+##############################
+###     FOSSIL RECORD     ####
+# Moved here 2026-11-09 (Claude, modernize-2026 branch).
+# WHY: projects live in ~/jaycode on this Mac; ~/repo was the Amyris workspace.
+# cdpath=(. ~ ~/jaycody ~/repo)
 ##############################
