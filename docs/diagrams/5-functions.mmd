@@ -21,7 +21,7 @@ flowchart LR
     end
 
     subgraph SNAP ["EXTERNAL: snapcap/snapcap.sh"]
-        np["snap_new_project [name] [version] [parent]<br/>version defaults to v0.0.1<br/>see snapcap docs/diagrams/new-project"]
+        np["snap_new_project [name] [parent]<br/>always starts at v0.0.1<br/>see snapcap docs/diagrams/new-project"]
         hp["snap_help<br/>commands, sketch keys, settings,<br/>current snapcap release"]
         fill["_snap_fill : copy a template,<br/>swap in name, version, release, date"]
         rem["_snap_remember_storage folder<br/>offer to save SNAP_STORAGE_DIR<br/>in jayci .jayrc, under JAY_HOME"]
