@@ -13,7 +13,7 @@ flowchart TD
         G -->|yes| H["Ask git for the default branch:<br/>origin/HEAD, set when the repo was cloned<br/>master if git can't tell"]
         H --> I{"Already on the<br/>default branch?"}
         I -->|yes| J["git pull"]
-        I -->|"no, e.g. snapcap on<br/>fix/inputstreamreader-import"| J2["git fetch only<br/>never switches branches,<br/>work in progress stays put"]
+        I -->|"no, e.g. on a feature branch<br/>you're still working on"| J2["git fetch only<br/>never switches branches,<br/>work in progress stays put"]
         J --> K["git status"]
         J2 --> K
     end
