@@ -1,5 +1,5 @@
 %% 7. How PATH is built (top runs first) and who sets each variable.
-%% Final PATH verified 2026-11-09 with a clean login shell on this Mac.
+%% Final PATH verified 2026-11-09 (gh added 2026-11-10) with a clean login shell on this Mac.
 flowchart TD
     subgraph BUILD ["PATH, step by step"]
         P1["/etc/zprofile : path_helper reads<br/>/etc/paths : /usr/local/bin /System/Cryptexes/App/usr/bin<br/>/usr/bin /bin /usr/sbin /sbin<br/>/etc/paths.d : cryptex paths, /pkg/env/global/bin,<br/>/opt/homebrew/bin (homebrew file)"]
@@ -9,7 +9,7 @@ flowchart TD
         P1 --> P2 --> P3 --> P4
     end
 
-    P4 --> FINAL["Final PATH, searched top to bottom:<br/>1 /opt/homebrew/bin : brew, tree, htop, node<br/>2 /opt/homebrew/sbin : mtr<br/>3 ~/bin : missing on this Mac, skipped<br/>4 /usr/local/bin<br/>5 ~/.local/bin : claude<br/>6 JDK bin : java from Processing<br/>7 macOS system folders : /usr/bin /bin ...<br/>8 VS Code bin : code"]
+    P4 --> FINAL["Final PATH, searched top to bottom:<br/>1 /opt/homebrew/bin : brew, tree, htop, node, gh<br/>2 /opt/homebrew/sbin : mtr<br/>3 ~/bin : missing on this Mac, skipped<br/>4 /usr/local/bin<br/>5 ~/.local/bin : claude<br/>6 JDK bin : java from Processing<br/>7 macOS system folders : /usr/bin /bin ...<br/>8 VS Code bin : code"]
     FINAL -.- Q1["Some folders appear twice : harmless,<br/>the first match wins"]
 
     subgraph VARS ["Variables"]

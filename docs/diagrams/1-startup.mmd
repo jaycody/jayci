@@ -56,7 +56,7 @@ flowchart TD
     S2 --> S3
 
     subgraph SSH ["EXTERNAL: snapcap/snapcap.sh"]
-        S3["SNAPCAP_HOME = folder this file is in"] --> S4["Defines snap_new_project<br/>snap_clean_frames snap_clean_snaps snap_clean_all<br/>snap_help, helpers _snap_fill _snap_clean_dir _snap_show"]
+        S3["SNAPCAP_HOME = folder this file is in"] --> S4["Defines snap_new_project<br/>snap_clean_frames snap_clean_snaps snap_clean_all<br/>snap_help, helpers _snap_fill _snap_clean_dir _snap_show<br/>_snap_remember_storage"]
         S4 --> S5["Run-directly block: does nothing<br/>when sourced"]
     end
 

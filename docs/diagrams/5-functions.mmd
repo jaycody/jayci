@@ -24,6 +24,7 @@ flowchart LR
         np["snap_new_project [name] [version] [parent]<br/>version defaults to v0.0.1<br/>see snapcap docs/diagrams/new-project"]
         hp["snap_help<br/>commands, sketch keys, settings,<br/>current snapcap release"]
         fill["_snap_fill : copy a template,<br/>swap in name, version, release, date"]
+        rem["_snap_remember_storage folder<br/>offer to save SNAP_STORAGE_DIR<br/>in jayci .jayrc, under JAY_HOME"]
         ca["snap_clean_all"]
         cf["snap_clean_frames"]
         cs["snap_clean_snaps"]
@@ -42,6 +43,8 @@ flowchart LR
     upd -.-> GIT(("git"))
 
     np --> fill
+    np -->|"typed a storage folder"| rem
+    rem -.->|"adds an export line"| JAYRC
     np -->|"--help"| hp
     sc -->|"--help"| hp
     np -.-> GIT
@@ -56,5 +59,5 @@ flowchart LR
 
     classDef ext fill:#fff4e0,stroke:#d08a00,color:#333
     classDef sys fill:#eeeeee,stroke:#888,color:#333
-    class np,fill,ca,cf,cs,cd1,show,hp ext
+    class np,fill,rem,ca,cf,cs,cd1,show,hp ext
     class MAC sys

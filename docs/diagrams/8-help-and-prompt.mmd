@@ -15,7 +15,7 @@ flowchart LR
     subgraph PROMPT ["Prompt : ~/.zshrc"]
         p1["Before every prompt : precmd hook<br/>runs vcs_info : asks git about this folder"] --> p2{"In a git repo?"}
         p2 -->|no| p3["~/jaycode >"]
-        p2 -->|yes| p4["~/jaycode/jayci (modernize-2026 * +) ><br/>white bold path<br/>yellow (branch)<br/>red * = unstaged changes<br/>cyan + = staged changes"]
+        p2 -->|yes| p4["~/jaycode/jayci (master * +) ><br/>white bold path<br/>yellow (branch)<br/>red * = unstaged changes<br/>cyan + = staged changes"]
         p2 -->|"mid merge or rebase"| p5["(branch|merge * +)"]
         p4 --> p6["> becomes # when root"]
     end
