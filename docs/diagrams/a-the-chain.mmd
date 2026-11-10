@@ -1,0 +1,32 @@
+%% a. The big idea: one chain of files, each handing off to the next.
+%% Conceptual: for the step-by-step version see 1-startup.
+flowchart LR
+    OPEN(["You open<br/>a terminal"]) --> Z
+
+    Z[".zshrc<br/><i>the front door</i><br/>macOS reads this first"] -->|hands off to| J
+    J[".jayrc<br/><i>the house rules</i><br/>shortcuts, folder names,<br/>where programs live"]
+
+    J -->|"knocks on every<br/>repo in ~/jaycode"| C1
+    J --> C2
+    J -.-> C3
+
+    subgraph REPOS ["each repo plugs itself in"]
+        direction TB
+        C1["jayci/jayci.cfg"] --> S1["jayci's scripts<br/>banners, repo updater,<br/>cheat sheets"]
+        C2["snapcap/snapcap.cfg"] --> S2["snapcap's scripts<br/>new sketch project,<br/>clean up frames"]
+        C3["next-idea/next-idea.cfg"] -.-> S3["its own tools"]
+    end
+
+    S1 --> READY
+    S2 --> READY
+    S3 -.-> READY
+    READY(["Ready:<br/>every tool from<br/>every repo"])
+
+    classDef you fill:#2B2D31,stroke:#2B2D31,color:#FBF8F1
+    classDef core fill:#E8EDF3,stroke:#34506E,color:#1E2A38
+    classDef ext fill:#F6EDDA,stroke:#A9843A,color:#3D3322
+    classDef future fill:#FBF8F1,stroke:#B9B0A0,color:#7A7266,stroke-dasharray: 4 3
+    class OPEN,READY you
+    class Z,J,C1,S1 core
+    class C2,S2 ext
+    class C3,S3 future

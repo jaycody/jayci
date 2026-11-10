@@ -1,12 +1,14 @@
 #! /bin/zsh
 
 
-jaylias () {
+# 2026-11-10: renamed with the repo prefix (was jaylias, jaygit_tags,
+# jaygit_branch), so resh lists them with jayci. See FOSSIL RECORD.
+jayci_alias () {
     #---------Begin here document------------#
-    cat << EOF 
+    cat << EOF
 
     ***********Aliases and Functions**********
-    jaylias:  HERE doc for aliases and functions
+    jayci_alias:  HERE doc for aliases and functions
 
     lalias:   list aliases
     lsls:     list the 'ls' family
@@ -51,7 +53,7 @@ EOF
 #---------Begin here document------------#
 }
 
-jaygit_tags () {
+jayci_git_tags () {
     cat << EOF
 
 # list local tags [-n for extensive]
@@ -75,7 +77,7 @@ jaygit_tags () {
 EOF
 }
 
-jaygit_branch () {
+jayci_git_branch () {
     cat << EOF
 
 # create feature branch
@@ -116,4 +118,12 @@ EOF
 #---------------------------------------------------------------
 #    jaycody jayci repo repocm 
 #    vimjrc, vimjconfig, vimjutil, vimvimrc, vimzrc
+
+# --- 2026-11-10 ---
+# WHY: one prefix per repo. jayci's functions all start with jayci_, so
+#      resh lists them together and anything else stands out.
+# jaylias () {
+#     jaylias:  HERE doc for aliases and functions
+# jaygit_tags () {
+# jaygit_branch () {
 #===============================================================

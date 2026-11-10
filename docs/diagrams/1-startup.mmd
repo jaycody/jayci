@@ -30,7 +30,7 @@ flowchart TD
         J1["GLOBALS<br/>JAY_SPACE=~/jaycode  JAY_USER  JAY_HOME<br/>+ SNAP_STORAGE_DIR, once snap_new_project saves it"]
         J1 --> J2["PATH: ~/bin and /usr/local/bin in front<br/>brew shellenv again if /opt/homebrew/bin/brew exists"]
         J2 --> J3["Aliases: tools, take-me-to, edit configs,<br/>safety, ls family, jay help<br/>see diagram 4"]
-        J3 --> J4["Functions: src, unsrc, snapcap<br/>unalias snapcap first, for resh"]
+        J3 --> J4["Functions: src, unsrc, snapcap, jayci_jayhelp<br/>unalias snapcap first, for resh"]
         J4 --> J5["Print SHELL CONFIG STEPS banner"]
         J5 --> J6{"JAY_SPACE folder exists<br/>and isn't empty?"}
         J6 -->|no| J7["Print: There are no .cfg files"]
@@ -45,12 +45,12 @@ flowchart TD
     end
 
     C1 -.-> U1["jayci_utilities.sh defines<br/>jayci_announce jayci_error jayci_functions<br/>jayci_test_source_pipeline jayci_update_repos"]
-    C1 -.-> U2["jayhere.sh defines<br/>jaylias jaygit_tags jaygit_branch"]
+    C1 -.-> U2["jayhere.sh defines<br/>jayci_alias jayci_git_tags jayci_git_branch"]
     C1 -.-> U3["jayrc-prompt.cfg exports<br/>CLICOLOR=1  LSCOLORS"]
     C2 -->|"2nd: snapcap/snapcap.cfg"| S1
 
     subgraph SCFG ["EXTERNAL: snapcap/snapcap.cfg"]
-        S1["Print banner, list snapcap/*.sh"] --> S2["source JAY_SPACE/snapcap/*.sh<br/>only file: snapcap.sh"]
+        S1["Print banner, list snapcap/*.sh"] --> S2["Source every JAY_SPACE/snapcap/*.sh, in a loop<br/>only file today: snapcap.sh"]
     end
 
     S2 --> S3
@@ -60,13 +60,26 @@ flowchart TD
         S4 --> S5["Run-directly block: does nothing<br/>when sourced"]
     end
 
-    S5 -->|"no more *.cfg"| J9["back in .jayrc: jayci_functions<br/>lists jayci* functions, then snap_* functions<br/>after every .cfg, so snapcap's show up"]
+    S5 -->|"no more *.cfg"| J9["back in .jayrc: jayci_functions<br/>lists public functions grouped by repo folder<br/>jayci, snapcap, any new repo; hides _helpers"]
     J9 --> R6
     J7 --> R6
     R7 --> READY(["Prompt ready"])
 
-    classDef sys fill:#eeeeee,stroke:#888,color:#333
-    classDef ext fill:#fff4e0,stroke:#d08a00,color:#333
-    classDef quirk fill:#ffecec,stroke:#c33,color:#333,stroke-dasharray: 4 3
+    classDef sys fill:#EFEDE8,stroke:#A39E93,color:#4A4740
+    classDef ext fill:#F6EDDA,stroke:#A9843A,color:#3D3322
+    classDef quirk fill:#F7E8E5,stroke:#9B4A43,color:#4A2A27,stroke-dasharray: 4 3
     class Z1,Z3,Z4 sys
     class S1,S2,S3,S4,S5 ext
+
+%% FOSSIL RECORD
+%% 2026-11-10: jayci_ prefix renames, jay became jayci_jayhelp, snapcap.cfg
+%% loops over its scripts, and jayci_functions groups by repo.
+%%     J3 --> J4["Functions: src, unsrc, snapcap<br/>unalias snapcap first, for resh"]
+%%     C1 -.-> U2["jayhere.sh defines<br/>jaylias jaygit_tags jaygit_branch"]
+%%     S1["Print banner, list snapcap/*.sh"] --> S2["source JAY_SPACE/snapcap/*.sh<br/>only file: snapcap.sh"]
+%%     S5 -->|"no more *.cfg"| J9["back in .jayrc: jayci_functions<br/>lists jayci* functions, then snap_* functions<br/>after every .cfg, so snapcap's show up"]
+%% 2026-11-10: new shared look (theme.json, theme.css); these colors
+%% changed to match its palette.
+%%     classDef sys fill:#eeeeee,stroke:#888,color:#333
+%%     classDef ext fill:#fff4e0,stroke:#d08a00,color:#333
+%%     classDef quirk fill:#ffecec,stroke:#c33,color:#333,stroke-dasharray: 4 3

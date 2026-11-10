@@ -86,16 +86,29 @@ jayci_announce () {
 
 
 
-# List my homemade functions (defined above)
+# List my homemade functions, grouped by the repo they came from.
+# 2026-11-10: no hardcoded repos or prefixes. zsh remembers which file
+# defined each function ($functions_source), so any repo in JAY_SPACE
+# whose .cfg sources scripts shows up on its own. Names starting with _
+# are private helpers and stay hidden. Old version in FOSSIL RECORD.
 jayci_functions () {
-    echo ""     # 2026-11-09: was echo"" (missing space)
-    jayci_announce "functions ===>"
-    print -l ${(ok)functions} | grep jayci
-    echo ""     # 2026-11-09: was echo"" (missing space)
-    
-    jayci_announce "snapcap functions ===>"
-    print -l ${(ok)functions} | grep snap_
-    echo ""     # 2026-11-09: was echo"" (missing space)
+    zmodload zsh/parameter 2> /dev/null
+    local f file repo
+    local -A by_repo
+    for f in ${(ok)functions}; do
+        [[ $f == _* ]] && continue                     # private helper
+        file=${functions_source[$f]:A}                 # :A follows links, so ~/.jayrc counts as jayci
+        [[ $file == ${JAY_SPACE:A}/*/* ]] || continue  # not from a repo
+        repo=${${file#${JAY_SPACE:A}/}%%/*}              # first folder: jayci, snapcap...
+        by_repo[$repo]+="${f}"$'\n'
+    done
+
+    for repo in ${(ok)by_repo}; do
+        echo ""
+        jayci_announce "${repo} functions ===>"
+        print -n -- "${by_repo[$repo]}"
+    done
+    echo ""
 }
 
 
@@ -114,4 +127,24 @@ jayci_functions () {
 #        else
 #            git checkout master
 #        fi
+
+# --- 2026-11-10 ---
+# WHY: 'snap_' also matched private helpers like _snap_fill, so internal
+#      functions showed up in the resh list next to the ones to call.
+#    print -l ${(ok)functions} | grep jayci
+#    print -l ${(ok)functions} | grep snap_
+
+# --- 2026-11-10, later ---
+# WHY: every new repo meant adding another block here by hand. Now the
+#      list is grouped by the repo each function was defined in.
+# jayci_functions () {
+#     echo ""     # 2026-11-09: was echo"" (missing space)
+#     jayci_announce "functions ===>"
+#     print -l ${(ok)functions} | grep '^jayci'
+#     echo ""     # 2026-11-09: was echo"" (missing space)
+#
+#     jayci_announce "snapcap functions ===>"
+#     print -l ${(ok)functions} | grep '^snap_'
+#     echo ""     # 2026-11-09: was echo"" (missing space)
+# }
 #===============================================================

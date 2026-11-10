@@ -1,0 +1,35 @@
+/* Shared look for every diagram here (added 2026-11-10).
+   render.sh passes this to mermaid-cli with -C, and theme.json with -c.
+   Ivory paper, charcoal ink, hairline borders, rounded corners. */
+
+.node rect, .node polygon, .node circle, .node path {
+  stroke-width: 1px !important;
+}
+.node rect { rx: 6px; ry: 6px; }
+
+.cluster rect {
+  stroke-width: 1px !important;
+  rx: 10px; ry: 10px;
+}
+
+/* Group titles: warm brown, a touch heavier. (Small caps or letter-spacing
+   make them wider than mermaid measured, and the ends get cut off.) */
+.cluster-label, .cluster-label span, .cluster-label p {
+  font-weight: 500;
+  color: #6B5A3E !important;
+  fill: #6B5A3E !important;
+}
+
+.flowchart-link, .edgePath path {
+  stroke-width: 1.2px !important;
+}
+
+.edgeLabel, .edgeLabel span, .edgeLabel p {
+  font-style: italic;
+  font-size: 13px;
+  color: #6E665A !important;
+}
+
+.label em, .nodeLabel em, .nodeLabel i {
+  color: #6E665A;
+}

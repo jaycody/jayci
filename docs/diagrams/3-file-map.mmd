@@ -11,7 +11,7 @@ flowchart LR
         util["scripts/jayci_utilities.sh"]
         here["scripts/jayhere.sh"]
         prompt["configs/jayrc-prompt.cfg"]
-        gitp["scripts/.git-prompt.sh"]
+        gitp["archives/.git-prompt.sh"]
         inst["install.sh"]
         brewf["Brewfile"]
         diag["docs/diagrams/<br/>*.mmd, *.png, render.sh"]
@@ -53,13 +53,23 @@ flowchart LR
     inst -.->|reads| brewf
     inst -.->|makes links, backups| HOME
 
-    gitp -.- Q1["NOT loaded: hidden file, the *.sh glob skips it.<br/>Not needed: .zshrc uses zsh's vcs_info instead"]
+    gitp -.- Q1["Archived 2026-11-10: never sourced.<br/>The prompt uses zsh's vcs_info in .zshrc.<br/>History in README > Archives"]
     emacs -.- Q2["NOT linked: emacs isn't installed.<br/>alias vimorg edits the repo copy of init.el"]
     misc -.- Q3[".hushlogin would hide the Last login line,<br/>but only in ~ : not linked.<br/>_EOF_ is an empty file"]
 
-    classDef quirk fill:#ffecec,stroke:#c33,color:#333,stroke-dasharray: 4 3
-    classDef ext fill:#fff4e0,stroke:#d08a00,color:#333
-    classDef sys fill:#eeeeee,stroke:#888,color:#333
+    classDef quirk fill:#F7E8E5,stroke:#9B4A43,color:#4A2A27,stroke-dasharray: 4 3
+    classDef ext fill:#F6EDDA,stroke:#A9843A,color:#3D3322
+    classDef sys fill:#EFEDE8,stroke:#A39E93,color:#4A4740
     class Q1,Q2,Q3,gitp,emacs quirk
     class scfg,ssh ext
     class hp,hb,hc sys
+
+%% FOSSIL RECORD
+%% 2026-11-10: .git-prompt.sh moved from scripts/ to archives/.
+%%     gitp["scripts/.git-prompt.sh"]
+%%     gitp -.- Q1["NOT loaded: hidden file, the *.sh glob skips it.<br/>Not needed: .zshrc uses zsh's vcs_info instead"]
+%% 2026-11-10: new shared look (theme.json, theme.css); these colors
+%% changed to match its palette.
+%%     classDef quirk fill:#ffecec,stroke:#c33,color:#333,stroke-dasharray: 4 3
+%%     classDef ext fill:#fff4e0,stroke:#d08a00,color:#333
+%%     classDef sys fill:#eeeeee,stroke:#888,color:#333

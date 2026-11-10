@@ -1,0 +1,19 @@
+%% b. Why "source" a file instead of running it.
+flowchart TB
+    subgraph RUN ["Running a file :  ./setup.sh"]
+        direction LR
+        r1["your shell"] --> r2["starts a<br/>separate shell"] --> r3["it learns<br/>jay = my help page"] --> r4["it closes,<br/>and forgets"]
+        r4 --> r5["your shell:<br/><i>jay? never heard of it</i>"]
+    end
+
+    subgraph SRC ["Sourcing a file :  source ~/.jayrc"]
+        direction LR
+        s1["your shell"] --> s2["reads each line<br/>as if you typed it"] --> s3["it learns<br/>jay = my help page"] --> s4["jay works<br/>in this window,<br/>until you close it"]
+    end
+
+    RUN ~~~ SRC
+
+    classDef lost fill:#F7E8E5,stroke:#9B4A43,color:#4A2A27,stroke-dasharray: 4 3
+    classDef kept fill:#E8EDF3,stroke:#34506E,color:#1E2A38
+    class r5 lost
+    class s4 kept

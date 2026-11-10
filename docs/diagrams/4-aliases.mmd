@@ -41,12 +41,21 @@ flowchart LR
     L --> L5["lr : recursive<br/>tree : tree -Csh<br/>treela : tree -Csha"]
 
     J --> H["HELP: see diagram 8"]
-    H --> H1["jay, lalias, lsls"]
+    H --> H1["jay : jayci_jayhelp<br/>jaylias : jayci_alias<br/>lalias, lsls"]
 
     G5 -.- Q3["clone it first:<br/>git clone https://github.com/jaycody/pshape-studio.git<br/>~/jaycode/pshape-studio"]
-    F["In the FOSSIL RECORD at the bottom of .jayrc:<br/>org, jayutil, sleep, repo, repocm, handbook, datadog,<br/>and the old snapcap alias : it's a function now, see 5"]
+    F["In the FOSSIL RECORD at the bottom of .jayrc:<br/>org, jayutil, sleep, repo, repocm, handbook, datadog,<br/>the old snapcap alias : it's a function now, see 5,<br/>and the old echo-chain jay alias"]
 
-    classDef quirk fill:#ffecec,stroke:#c33,color:#333,stroke-dasharray: 4 3
-    classDef sys fill:#eeeeee,stroke:#888,color:#333
+    classDef quirk fill:#F7E8E5,stroke:#9B4A43,color:#4A2A27,stroke-dasharray: 4 3
+    classDef sys fill:#EFEDE8,stroke:#A39E93,color:#4A4740
     class Q3 quirk
     class F sys
+
+%% FOSSIL RECORD
+%% 2026-11-10: jay now calls the jayci_jayhelp function; jaylias calls jayci_alias.
+%%     H --> H1["jay, lalias, lsls"]
+%%     F["In the FOSSIL RECORD at the bottom of .jayrc:<br/>org, jayutil, sleep, repo, repocm, handbook, datadog,<br/>and the old snapcap alias : it's a function now, see 5"]
+%% 2026-11-10: new shared look (theme.json, theme.css); these colors
+%% changed to match its palette.
+%%     classDef quirk fill:#ffecec,stroke:#c33,color:#333,stroke-dasharray: 4 3
+%%     classDef sys fill:#eeeeee,stroke:#888,color:#333

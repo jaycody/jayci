@@ -1,0 +1,38 @@
+%% e. One prefix per repo, so every helper says where it came from.
+flowchart TB
+    subgraph JC ["jayci/   →   jayci_"]
+        direction LR
+        j1["jayci_update_repos"]
+        j2["jayci_functions"]
+        j3["jayci_alias<br/><i>short alias: jaylias</i>"]
+        j4["jayci_jayhelp<br/><i>short alias: jay</i>"]
+    end
+
+    subgraph SC ["snapcap/   →   snap_"]
+        direction LR
+        s1["snap_new_project"]
+        s2["snap_clean_all"]
+        s3["snap_help<br/><i>also: snapcap --help</i>"]
+        s4["_snap_fill<br/><i>leading _ = private,<br/>left off the list</i>"]
+    end
+
+    subgraph NX ["next-idea/   →   next_"]
+        direction LR
+        n1["next_..."]
+    end
+
+    JC --> L
+    SC --> L
+    NX -.-> L
+    L(["resh ends by listing<br/>every public helper,<br/>grouped by repo"])
+
+    classDef you fill:#2B2D31,stroke:#2B2D31,color:#FBF8F1
+    classDef core fill:#E8EDF3,stroke:#34506E,color:#1E2A38
+    classDef ext fill:#F6EDDA,stroke:#A9843A,color:#3D3322
+    classDef private fill:#EFEDE8,stroke:#A39E93,color:#6A665E,stroke-dasharray: 4 3
+    classDef future fill:#FBF8F1,stroke:#B9B0A0,color:#7A7266,stroke-dasharray: 4 3
+    class L you
+    class j1,j2,j3,j4 core
+    class s1,s2,s3 ext
+    class s4 private
+    class n1 future

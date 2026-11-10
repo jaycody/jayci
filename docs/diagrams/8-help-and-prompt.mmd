@@ -1,13 +1,13 @@
 %% 8. The help commands, and how the prompt is drawn.
 flowchart LR
     subgraph HELP ["Help commands: where the text comes from"]
-        h1["jay : alias in .jayrc<br/>a long chain of echo lines"]
-        h2["jaylias : jayhere.sh<br/>heredoc: aliases + ls family"]
-        h3["jaygit_tags : jayhere.sh<br/>tag cheat sheet"]
-        h4["jaygit_branch : jayhere.sh<br/>feature-branch cheat sheet"]
+        h1["jay : alias for jayci_jayhelp, in .jayrc<br/>my quick reference: echo lines, pipe-able"]
+        h2["jaylias : alias for jayci_alias, jayhere.sh<br/>heredoc: aliases + ls family"]
+        h3["jayci_git_tags : jayhere.sh<br/>tag cheat sheet"]
+        h4["jayci_git_branch : jayhere.sh<br/>feature-branch cheat sheet"]
         h5["lalias : lines starting with alias in ~/.jayrc<br/>skips the commented-out fossils"]
         h6["lsls : lines starting with alias l"]
-        h7["jayci_functions : list jayci* and snap_* functions"]
+        h7["jayci_functions : public functions by repo<br/>runs at the end of every resh"]
         h8["snapcap --help : snap_help from snapcap.sh<br/>also ./snapcap.sh --help, snap_new_project --help"]
     end
 
@@ -19,4 +19,12 @@ flowchart LR
         p2 -->|"mid merge or rebase"| p5["(branch|merge * +)"]
         p4 --> p6["> becomes # when root"]
     end
+
+%% FOSSIL RECORD
+%% 2026-11-10: jayci_ prefix for jayci's functions; jay and jaylias are aliases now.
+%%     h1["jay : alias in .jayrc<br/>a long chain of echo lines"]
+%%     h2["jaylias : jayhere.sh<br/>heredoc: aliases + ls family"]
+%%     h3["jaygit_tags : jayhere.sh<br/>tag cheat sheet"]
+%%     h4["jaygit_branch : jayhere.sh<br/>feature-branch cheat sheet"]
+%%     h7["jayci_functions : list jayci* and snap_* functions"]
 

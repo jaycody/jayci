@@ -149,9 +149,17 @@ alias lalias="grep -E '^alias' ${JAY_HOME}/.jayrc"   # 2026-11-09: '^alias' skip
 # List the 'ls' family
 alias lsls="grep '^alias l' ${JAY_HOME}/.jayrc"   # 2026-11-09: '^' skips commented-out lines
 
+# Aliases and functions cheat sheet (2026-11-10: the function is now jayci_alias, in jayhere.sh)
+alias jaylias='jayci_alias'
 
-# 'jay' to list common usage 
-alias jay='echo     ;
+
+# 'jay' to list common usage: my quick reference help page
+# 2026-11-10: a function now, so `jay | less` and `jay > file` work. Named
+# jayci_jayhelp to match the repo prefix; `jay` is an alias for it.
+# Same echo lines as the old alias; its first and last lines are in FOSSIL RECORD.
+alias jay='jayci_jayhelp'
+function jayci_jayhelp () {
+echo ;
 echo ;
 echo lalias:  \\t list aliases;
 echo lsls:    \\t\\t list the 'ls' family;
@@ -202,7 +210,8 @@ echo popd: \\t removes dirs from the directory stack;
 echo dirs: -v \\t view pushd dir stack AND list their index. Index 0 = current location;
 echo "src: \\t Takes me directly to JAY_SPACE (source code)";
 echo unsrc: \\t Takes me right back to where I was when I sourced;
-echo ;'
+echo ;
+}
 
 #---------------------------------------------------------------
 
@@ -358,5 +367,17 @@ fi
 
 # WHY: aliases can't take options, so `snapcap --help` needed a function.
 # alias snapcap='cd ${JAY_SPACE}/snapcap; l; tree --dirsfirst -a -I .git; . ./snapcap.cfg'
+
+# --- 2026-11-10 ---
+# WHY: as an alias, anything after `jay` (a pipe or a redirect) landed
+#      after its final `echo ;`, so `jay | less` was a parse error.
+#      The echo lines in between are unchanged in the function.
+# alias jay='echo     ;
+# ...
+# echo ;'
+# WHY: renamed jay -> jayci_jayhelp the same day (repo prefix); jay is now
+#      an alias again, so the unalias before the function isn't needed.
+# unalias jay 2> /dev/null     # resh: drop the old alias before defining the function
+# function jay () {
 #===============================================================
 

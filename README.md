@@ -2,9 +2,134 @@
 > Mini CI/CD framework for my personal projects
 __________________
 
+## What this is
+_(added 2026-11-10)_
+
+Every new terminal window starts out blank. It has no shortcuts, doesn't
+know where my projects live, and has no memory of how I like things set up.
+**jayci is how my terminal remembers me.** It's a small set of plain text
+files (settings, shortcuts, cheat sheets and small tools) that load
+themselves the moment a window opens.
+
+Think of setting up a studio before a day of work: lights on, brushes laid
+out, reference notes pinned to the wall. jayci does that for my code studio,
+in about a second, every time.
+
+Why it has its own repo:
+- **One home for how I work.** Every setting lives here, not scattered around
+  the Mac. The files macOS looks for in my home folder are just links back to here.
+- **A new computer in one step.** `./install.sh` sets up a fresh Mac the way I
+  like it. (That's how this Mac was set up, on 2026-11-09.)
+- **Projects bring their own tools.** Each repo, like snapcap (my sketch-capture
+  tool), plugs its own commands in, and jayci loads them all.
+- **A memory aid.** `jay` prints my quick reference page; git cheat sheets are
+  one command away.
+- **A record of how I've grown.** Old code isn't deleted. It moves to a
+  FOSSIL RECORD at the bottom of its file, with a date and a reason.
+
+__________________
+
+## The big ideas, in pictures
+
+### 1. The chain: each file hands off to the next
+![The chain](docs/diagrams/a-the-chain.png)
+
+Nothing loads everything at once. Each file does its part, then passes the
+baton, like a daisy chain:
+
+1. macOS only knows about one file, **`.zshrc`**. It sources `.jayrc`.
+2. **`.jayrc`** sets the house rules (shortcuts, folder names, where programs
+   live), then walks through every folder in `~/jaycode` and sources any
+   `<repo>.cfg` it finds at the top level.
+3. Each **`<repo>.cfg`** sources that repo's own scripts.
+
+Why a chain:
+- **jayci doesn't need to know about my other repos.** A repo joins by having
+  a `.cfg` file. Clone it into `~/jaycode` and its tools show up; delete the
+  folder and they're gone. There's no list to keep up to date.
+- **Tools live next to the work they serve.** snapcap's commands are in the
+  snapcap repo, not in jayci.
+- **Shared basics come first.** `.jayrc` loads before any repo, so every repo
+  can use its shortcuts and `JAY_SPACE`. Repos then load in alphabetical order.
+- **I can watch it happen.** Each link prints a banner as it loads, so if
+  something is missing I can see where the chain stopped.
+
+### 2. Why "source" anything?
+![Running vs sourcing](docs/diagrams/b-source-vs-run.png)
+
+Running a script starts a separate, temporary shell. Whatever the script sets
+up (shortcuts, folder names, functions) disappears when that shell closes.
+**Sourcing** reads the file into the shell I'm actually using, as if I'd typed
+each line myself, so everything it defines stays.
+
+Running a file is asking someone else to memorize something. Sourcing is
+memorizing it yourself. Settings and tools only stick if they're sourced.
+
+### 3. One word reloads everything: `resh`
+![resh](docs/diagrams/c-resh.png)
+
+`resh` (re-shell) is short for `source ~/.zshrc` (or `~/.bashrc` on a bash
+machine). It starts at the top of the chain, so one word reloads every link,
+in order:
+- I don't have to remember which file I changed, or which file loads it.
+- No closing and reopening windows.
+- A newly cloned repo's tools show up right away.
+- It ends by listing every helper function, grouped by repo, so I can see
+  what's loaded.
+
+`resh` refreshes the window it's typed in. Other open windows keep the old
+setup until I `resh` there too.
+
+### 4. Config files, scripts and helper functions
+![Kinds of files](docs/diagrams/d-kinds-of-files.png)
+
+| Kind | What it's for | Examples |
+|------|---------------|----------|
+| **Config files** | Settings: how the prompt looks, which shortcuts exist, where programs live, how vim and htop behave | `.zshrc` `.jayrc` `.vimrc` `configs/` |
+| **A repo's `.cfg`** | The doorway: plugs the repo into the chain and says what it brings | `jayci.cfg` `snapcap.cfg` |
+| **Scripts** | Toolboxes: files that define helper functions | `scripts/jayci_utilities.sh` `snapcap.sh` |
+| **Helper functions** | The tools: commands I type | `jayci_update_repos` `snap_new_project` |
+
+**Why config files?** Without them I'd redo the same setup every session, and
+every computer would behave a little differently. With them, how I like things
+is written down once, kept in git, and the same on any Mac.
+
+**What are scripts good for?** Anything with several steps that I do more than
+twice: pulling every repo, starting a new sketch project with the right
+folders, clearing out old frames. A function turns a dozen steps into one
+word, and does them the same way every time.
+
+### 5. Every repo brings its own helpers, and names them
+![Prefixes](docs/diagrams/e-prefixes.png)
+
+Each repo carries the helpers for its own work, so they travel with it: clone
+snapcap anywhere into `~/jaycode` and `snap_new_project` comes along.
+The naming rules keep a growing pile of commands readable:
+
+| Convention | Example | Why |
+|------------|---------|-----|
+| Each repo has a `<repo>.cfg` at its top level | `snapcap/snapcap.cfg` | `.jayrc` finds it (`~/jaycode/*/*.cfg`) and plugs the repo in |
+| The `.cfg` sources its scripts in a loop | `for f in .../*.sh` | every script loads, not just the first |
+| Public helpers start with the repo's prefix | `jayci_`, `snap_` | says where a command came from; no name clashes between repos; type `snap_` then Tab to see every snapcap tool |
+| A leading `_` marks a private helper | `_snap_fill` | used by other functions, not typed by me; left off the list |
+| Everyday commands get a short alias | `jay`, `jaylias` | quick to type; the full name still says where it lives |
+
+Adding a new repo to the chain:
+```bash
+~/jaycode/next-idea/
+    next-idea.cfg   # for f in "${JAY_SPACE}"/next-idea/*.sh; do [ -f "$f" ] && . "$f"; done
+    next-idea.sh    # next_do_thing () { ... }
+# then: resh
+```
+
+__________________
+
 ## How jayci works (diagrams)
 _(added 2026-11-09)_ Each one is drawn from the code and checked against a live shell on this Mac.
-Red dashed boxes are known quirks; orange boxes come from other repos (snapcap).
+The pictures above are the big ideas; these are the details.
+Dashed rose boxes are known quirks; ochre boxes come from other repos (snapcap);
+grey boxes are macOS's own files. _(2026-11-10: new look, old legend in FOSSIL RECORD.)_
+All diagrams share one look, set in `docs/diagrams/theme.json` and `theme.css`.
 Sources live in [docs/diagrams/](docs/diagrams/). **When you change a file, update its diagram**
 and run `bash docs/diagrams/render.sh`, or they stop being the truth.
 
@@ -135,8 +260,8 @@ Here's the cascade order once .zshrc is updated and a symlink created for .jayrc
 |        | sets path
 | `jayci.cfg` | ---_sources_---> `jayci_utilities.sh`
 | `jayci_utilities.sh` | repo-specific utility functions
-| `jayci.cfg` | ---_sources_---> `.git-prompt.sh`
-| `.git-prompt.sh` | displays git repo at the prompt
+| ~~`jayci.cfg`~~ | ~~---_sources_---> `.git-prompt.sh`~~ _(stopped 2021-03-26)_
+| ~~`.git-prompt.sh`~~ | ~~displays git repo at the prompt~~ _(archived 2026-11-10, see [Archives](#archives))_
 
 __________________________
 
@@ -483,9 +608,41 @@ _______________________________
   - CIA's Git
     [Hints](https://wikileaks.org/ciav7p1/cms/page_1179773.html)
 
+_______________________________
+
+## Archives
+Files that aren't used anymore but are part of the story. They live in
+[archives/](archives/), are never sourced, and are kept as a record.
+
+### `.git-prompt.sh` _(archived 2026-11-10)_
+The script that first put my git branch in the prompt. It's git's own
+prompt script (by Shawn O. Pearce, from the git project), copied in, not
+written here.
+
+| When | What happened |
+|------|---------------|
+| 2018-06-12 | Added to `scripts/` (`db2d7e5`, "added function to show git branch at command prompt") so my bash prompt could call `__git_ps1`: `jstephens-mbp.local jayci (master) $` |
+| 2018-07-14 | The prompt moved into its own file, [configs/jayrc-prompt.cfg](configs/jayrc-prompt.cfg) (`7daa3f0`). That bash prompt is still there, commented out. |
+| 2021-03-26 | `jayci.cfg` stopped sourcing it (`ad821c6`, "Simplify source order"). The commented-out block later moved to [notes.md](notes.md). From here on it sat in `scripts/` unloaded: the `*.sh` glob skips hidden files. |
+| 2023-03-28 | Moved to zsh. The new prompt in `.zshrc` (`60cda9d`) uses zsh's built-in `vcs_info` to show the branch and the `*` / `+` change markers, so `__git_ps1` wasn't needed. |
+| 2026-11-10 | Checked that nothing loads the file or calls its functions, then moved it from `scripts/` to `archives/`. |
+
 
 
 
 
 [1]:https://brew.sh/
 [2]:./notes.md
+
+
+
+<!--
+===============================================================
+###            >>> FOSSIL RECORD <<<
+===============================================================
+2026-11-10: diagrams moved to a shared theme (ivory paper, muted
+colors), so the legend's color names changed.
+
+Red dashed boxes are known quirks; orange boxes come from other repos (snapcap).
+===============================================================
+-->

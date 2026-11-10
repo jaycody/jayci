@@ -62,6 +62,7 @@ jayci_transfer_files () {
 #   ---> People say it be like it is but it dont <----  #
 
 # Find and source git-prompt.sh
+#      (2026-11-10: the script now lives in archives/.git-prompt.sh. See README > Archives.)
 #      (hardcoded list of .sh files? File an 'Enhancement Request Ticket')
 #if [ -f ${JAY_SPACE}/jayci/scripts/.git-prompt.sh ]; then
 #     printf '$ source ./scripts/.git-prompt.sh \n';

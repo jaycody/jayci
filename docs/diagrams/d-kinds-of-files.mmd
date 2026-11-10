@@ -1,0 +1,26 @@
+%% d. The kinds of files in the chain, and what each is for.
+flowchart LR
+    subgraph CONFIG ["config files :  settings"]
+        direction TB
+        k1["<i>how things look and behave</i><br/><br/>.zshrc  .jayrc  .vimrc<br/>htoprc  jayrc-prompt.cfg"]
+    end
+
+    subgraph DOOR ["a repo's .cfg :  the doorway"]
+        direction TB
+        k2["<i>one per repo; says what<br/>that repo brings along</i><br/><br/>jayci.cfg  snapcap.cfg"]
+    end
+
+    subgraph SCRIPTS ["scripts :  toolboxes"]
+        direction TB
+        k3["<i>files full of tools</i><br/><br/>jayci_utilities.sh  jayhere.sh<br/>snapcap.sh"]
+    end
+
+    subgraph FUNCS ["helper functions :  the tools"]
+        direction TB
+        k4["<i>verbs I type</i><br/><br/>jayci_update_repos<br/>snap_new_project"]
+    end
+
+    CONFIG -->|".jayrc opens<br/>each doorway"| DOOR -->|loads| SCRIPTS -->|define| FUNCS
+
+    classDef core fill:#E8EDF3,stroke:#34506E,color:#1E2A38
+    class k1,k2,k3,k4 core

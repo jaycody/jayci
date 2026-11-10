@@ -1,0 +1,22 @@
+%% c. resh: one word reloads the whole chain.
+flowchart LR
+    subgraph EDIT ["change anything"]
+        direction TB
+        e1["add a shortcut<br/>to .jayrc"]
+        e2["fix a function<br/>in a script"]
+        e3["clone a new repo<br/>into ~/jaycode"]
+    end
+
+    EDIT --> R(["resh"])
+    R -->|"source ~/.zshrc"| Z[".zshrc"] --> J[".jayrc"] --> C["every repo's .cfg"] --> S["every script"]
+    S --> D(["this window has<br/>every change.<br/>No restart."])
+
+    N["Starts at the top<br/>every time, so it all<br/>reloads in order.<br/><i>No need to remember<br/>which file changed.</i>"]
+    R -.- N
+
+    classDef you fill:#2B2D31,stroke:#2B2D31,color:#FBF8F1
+    classDef core fill:#E8EDF3,stroke:#34506E,color:#1E2A38
+    classDef note fill:#FBF8F1,stroke:#B9B0A0,color:#4A4740
+    class R,D you
+    class Z,J,C,S core
+    class N note
